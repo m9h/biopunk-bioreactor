@@ -1,0 +1,491 @@
+<title>OpenEvo Corrections & the Open-Bioreactor Matrix</title>
+<style>
+  :root {
+    --ground: #ECEDF0;
+    --surface: #F7F8FA;
+    --surface-2: #E0E2E7;
+    --ink: #15181D;
+    --ink-muted: #5A616C;
+    --ink-faint: #878E99;
+    --rule: #CBCFD6;
+    --accent: #3B5A8C;
+    --accent-soft: #DAE1EE;
+    --good: #2E7350;
+    --good-soft: #D5E7DC;
+    --bad: #9C332E;
+    --bad-soft: #EFD9D7;
+    --warn: #8F6210;
+    --warn-soft: #EEE2C8;
+
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --measure: 68ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+      --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+      --accent: #7FA3D6; --accent-soft: #17293F;
+      --good: #6DB78B; --good-soft: #123326;
+      --bad: #E08880; --bad-soft: #351A18;
+      --warn: #D3A24C; --warn-soft: #33280F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+    --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+    --accent: #7FA3D6; --accent-soft: #17293F;
+    --good: #6DB78B; --good-soft: #123326;
+    --bad: #E08880; --bad-soft: #351A18;
+    --warn: #D3A24C; --warn-soft: #33280F;
+  }
+  :root[data-theme="light"] {
+    --ground: #ECEDF0; --surface: #F7F8FA; --surface-2: #E0E2E7;
+    --ink: #15181D; --ink-muted: #5A616C; --ink-faint: #878E99; --rule: #CBCFD6;
+    --accent: #3B5A8C; --accent-soft: #DAE1EE;
+    --good: #2E7350; --good-soft: #D5E7DC;
+    --bad: #9C332E; --bad-soft: #EFD9D7;
+    --warn: #8F6210; --warn-soft: #EEE2C8;
+  }
+
+  body { background: var(--ground); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 82ch; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; display: flex; flex-direction: column; gap: 3rem; }
+
+  .masthead { display: flex; flex-direction: column; gap: 1.1rem; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+  .standfirst { font-size: 1.15rem; color: var(--ink-muted); max-width: var(--measure); text-wrap: pretty; }
+  .meta { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 0; text-wrap: balance; display: flex; align-items: baseline; gap: 0.7rem; }
+  h2 .num { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); font-weight: 600; flex: none; }
+  h3 { font-size: 1.02rem; font-weight: 700; margin: 0; letter-spacing: -0.005em; }
+  p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  strong { font-weight: 700; }
+  code { font-family: var(--mono); font-size: 0.85em; background: var(--surface-2); padding: 0.08em 0.36em; border-radius: 3px; }
+  ul { margin: 0; padding-left: 1.1rem; max-width: var(--measure); display: flex; flex-direction: column; gap: 0.4rem; }
+  li::marker { color: var(--ink-faint); }
+
+  /* corrections */
+  .correction { border: 1px solid var(--rule); background: var(--surface); border-left-width: 4px; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.65rem; }
+  .correction.err  { border-left-color: var(--bad); }
+  .correction.frame{ border-left-color: var(--warn); }
+  .correction.meth { border-left-color: var(--accent); }
+  .correction .label { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; display: flex; gap: 0.6rem; align-items: center; }
+  .correction.err  .label { color: var(--bad); }
+  .correction.frame .label { color: var(--warn); }
+  .correction.meth .label { color: var(--accent); }
+  .correction p { max-width: none; font-size: 0.96rem; }
+  .quote { font-family: var(--mono); font-size: 0.78rem; line-height: 1.55; background: rgba(127,127,127,0.09); padding: 0.6rem 0.8rem; border-radius: 3px; color: var(--ink); }
+  .sev { font-family: var(--mono); font-size: 0.6rem; padding: 0.15em 0.5em; border-radius: 2px; letter-spacing: 0.06em; }
+  .sev.high { background: var(--bad-soft); color: var(--bad); }
+  .sev.med  { background: var(--warn-soft); color: var(--warn); }
+  .sev.low  { background: var(--accent-soft); color: var(--accent); }
+
+  /* callout */
+  .callout { background: var(--surface); border-left: 3px solid var(--good); padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .callout .eyebrow { color: var(--good); }
+  .callout p { max-width: none; }
+
+  /* tables */
+  .scroller { overflow-x: auto; border: 1px solid var(--rule); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.8rem; min-width: 54rem; }
+  th { text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--ink); white-space: nowrap; vertical-align: bottom; }
+  th.dev { color: var(--ink); font-size: 0.72rem; }
+  td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.rowlabel { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-muted); font-weight: 600; white-space: nowrap; letter-spacing: 0.02em; background: rgba(127,127,127,0.04); }
+  .num-col { font-variant-numeric: tabular-nums; }
+  .cell-good { color: var(--good); font-weight: 600; }
+  .cell-bad  { color: var(--bad); }
+  .cell-warn { color: var(--warn); }
+
+  /* purpose chips */
+  .pchip { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; padding: 0.14em 0.5em; border-radius: 2px; letter-spacing: 0.05em; white-space: nowrap; }
+  .pchip.p1 { background: var(--good-soft); color: var(--good); }
+  .pchip.p2 { background: var(--accent-soft); color: var(--accent); }
+  .pchip.p3 { background: var(--warn-soft); color: var(--warn); }
+
+  /* device cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1rem; }
+  .card { border: 1px solid var(--rule); background: var(--surface); padding: 1.1rem 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; border-radius: 2px; }
+  .card-head { display: flex; flex-direction: column; gap: 0.3rem; }
+  .card-head .name { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; }
+  .card-head .owns { font-size: 0.85rem; color: var(--ink-muted); }
+  .card-meta { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: 0.2rem 0.7rem; }
+  .prolist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.3rem; max-width: none; }
+  .prolist li { font-size: 0.82rem; line-height: 1.4; padding-left: 1.1rem; position: relative; }
+  .prolist li::marker { content: none; }
+  .prolist li.pro::before { content: "+"; position: absolute; left: 0; color: var(--good); font-family: var(--mono); font-weight: 700; }
+  .prolist li.con::before { content: "\2212"; position: absolute; left: 0; color: var(--bad); font-family: var(--mono); font-weight: 700; }
+
+  footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; font-size: 0.78rem; color: var(--ink-muted); display: flex; flex-direction: column; gap: 0.7rem; }
+  footer p { max-width: none; font-size: 0.78rem; }
+  .caveat { font-family: var(--mono); font-size: 0.7rem; line-height: 1.55; color: var(--ink-faint); }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Technical Note · Errata + Comparison</div>
+    <h1>OpenEvo Corrections &amp; the Open-Bioreactor Matrix</h1>
+    <p class="standfirst">A fair-minded correction of the errors and overstatements in the OpenEvo preprint, followed by a like-for-like matrix of six open continuous-culture platforms — so the trade-offs are legible without re-reading six papers.</p>
+    <div class="meta">
+      <span>2026-07-10</span>
+      <span>Subject: bioRxiv 2026.07.06.735356 + field</span>
+      <span>Not peer review; a reader's audit</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="callout">
+      <div class="eyebrow">First, credit where due</div>
+      <p>OpenEvo is a real contribution and the corrections below are not a dismissal of it. Its genuine strengths: a <strong>peak-to-peak growth readout</strong> tied to hardware dilution events, which sidesteps local-maxima noise; a <strong>940 nm OD path</strong> that avoids optogenetic and ambient overlap, with an inverse model holding R² ≥ 0.98 out to OD<sub>600</sub> 6.0; a <strong>closed autoclavable vessel</strong> with better sterility than Chi.Bio's open tube; a <strong>4,000-hour remote run</strong> demonstrating real robustness; and an <strong>illustrated assembly manual validated by having an inexperienced undergraduate build a working unit</strong> — a reproducibility contribution rarer than it should be. It is the cheapest buildable three-media selection cycler in the field. The issues below are correctable and mostly concern framing and analysis, not the hardware.</p>
+    </div>
+  </section>
+
+  <!-- ============ CORRECTIONS ============ -->
+
+  <section>
+    <h2><span class="num">01</span> Corrections to the OpenEvo preprint</h2>
+    <p>Grouped by kind: verifiable <span class="cell-bad">errors</span>, <span class="cell-warn">framing / omissions</span>, and <span style="color:var(--accent)">methodological limitations</span>. Severity is this reader's judgement of impact on the paper's claims.</p>
+
+    <div class="correction err">
+      <div class="label"><span>Error 1 · Internal contradiction</span><span class="sev high">High</span></div>
+      <h3>The headline growth-rate figure disagrees with itself.</h3>
+      <div class="quote">Abstract: "Evolved cells grew <strong>55% faster</strong> than wild-type at 12% salt."<br>Results: "a doubling time of 4.9 hours versus 7.6 hours (a <strong>36% increase in growth rate</strong>)."</div>
+      <p>Both describe the same data, and the two numbers are two <em>different</em> quantities. A doubling time of 7.6 → 4.9 h is a <strong>36% reduction in doubling time</strong> but a <strong>55% increase in growth rate</strong> (rate ∝ 1/doubling time; 1/4.9 ÷ 1/7.6 = 1.55). The abstract's 55% is the correct growth-rate figure. The results sentence mislabels the 36% doubling-time reduction <em>as</em> a growth-rate increase — so the results text is internally wrong, and a reader cannot tell which claim to quote. Fix: state both explicitly — "36% shorter doubling time, equivalently a 55% higher growth rate."</p>
+    </div>
+
+    <div class="correction err">
+      <div class="label"><span>Error 2 · False claim about prior art</span><span class="sev high">High</span></div>
+      <h3>Pioreactor's hardware is open source; the paper says it is not.</h3>
+      <div class="quote">"A research-scale device called the 'Pioreactor' is available for purchase, but only the software is open source."</div>
+      <p>A public <code>Pioreactor/hardware</code> repository exists, and the Pioreactor hardware is released under the <strong>CERN Open Hardware Licence</strong> — the licence purpose-built for open hardware. The claim is used to clear competitive space for OpenEvo's novelty, and it is false. Fix: describe Pioreactor accurately as open-hardware-and-software, and distinguish it on the real axis — it is a supported product with a fleet platform, not a from-scratch build.</p>
+    </div>
+
+    <div class="correction frame">
+      <div class="label"><span>Framing 1 · Nearest prior art uncited</span><span class="sev med">Medium</span></div>
+      <h3>Chi.Bio is never cited, and it is the closest comparator that exists.</h3>
+      <p>Chi.Bio (PLOS Biology 2020) is open hardware <em>and</em> software, roughly the same ~$300, does in-situ measurement and continuous culture, and predates OpenEvo by six years. The preprint surveys eVOLVER, the Toprak morbidostat, and Pioreactor, then frames an unfilled gap — while omitting the one system that most directly occupies it. The omission makes the gap look larger than it is. Fix: cite and contrast Chi.Bio; the honest distinction is selection fluidics and buildability, not existence of a gap.</p>
+    </div>
+
+    <div class="correction frame">
+      <div class="label"><span>Framing 2 · Unsupported superlative</span><span class="sev med">Medium</span></div>
+      <h3>"The most affordable modern continuous growth system available" is not established.</h3>
+      <p>Pioreactor ships turnkey at $329 with no build, and EVE builds a triplicate system for $115–200. Against those, an unqualified affordability superlative does not hold. Fix: qualify — e.g., "among the lowest-cost <em>buildable</em> systems with three-media selection," which is defensible.</p>
+    </div>
+
+    <div class="correction frame">
+      <div class="label"><span>Framing 3 · Success overstated</span><span class="sev med">Medium</span></div>
+      <h3>The evolution campaign includes a hard failure the framing understates.</h3>
+      <p>The 9% salt step did not partially adapt — growth ceased, OD flatlined, and the run terminated at cycle 152. The adaptation claim rests entirely on a <em>single hand-picked glycerol stock</em> at cycle 145, revived and assayed offline. The result is real and worth reporting; the framing should foreground that it is one successful selection step with a failed extension, not a ladder.</p>
+    </div>
+
+    <div class="correction meth">
+      <div class="label"><span>Method 1 · No replicates</span><span class="sev high">High</span></div>
+      <h3>n = 1 forecloses causal attribution of the mutations.</h3>
+      <p>A single clone from a single population was sequenced. Without independent replicate lineages, there is no convergence signal — no way to distinguish a selected driver from a hitchhiker or a neutral passenger. The reported SNPs and two large deletions therefore cannot be attributed to the low-salt adaptation. This is the field's central inference requirement (the LTEE runs twelve populations for exactly this reason), and it is the most consequential limitation here. Fix: replicate populations, and identify mutations recurring across them.</p>
+    </div>
+
+    <div class="correction meth">
+      <div class="label"><span>Method 2 · Wrong variant caller</span><span class="sev med">Medium</span></div>
+      <h3>Structural variants were called with a default read mapper, not <code>breseq</code>.</h3>
+      <div class="quote">"…mapped to the DS2 genome using Geneious's default mapper with low-medium sensitivity for 5 iterations."</div>
+      <p>The key finding — a ~110 kb pHV4 deletion with "sparse read mapping … primarily transposon-associated elements" — is IS-mediated structural rearrangement, precisely the case a default short-read mapper handles worst. <code>breseq</code> exists for microbial-evolution resequencing including IS mobilisation, and its author, Jeffrey Barrick, is cited five times in this very paper. Fix: re-call with <code>breseq</code>; the deletion boundaries and IS junctions need it, and long-read confirmation (which the authors already flag) would settle the pHV4 structure.</p>
+    </div>
+
+    <div class="correction meth">
+      <div class="label"><span>Method 3 · No systematic archiving</span><span class="sev low">Low</span></div>
+      <h3>One manual glycerol stock is not a fossil record.</h3>
+      <p>The paper cites Barrick 2023 — "Daily Transfers, <em>Archiving Populations</em>, and Measuring Fitness" — as motivation, then implements neither archiving nor fitness measurement in the automated system. Head-to-head ancestor-vs-descendant competition, the gold standard the cited work describes, is impossible without a time-series archive. Fix: even manual periodic stocks at fixed cycle intervals would materially strengthen future runs.</p>
+    </div>
+  </section>
+
+  <!-- ============ SPEC MATRIX ============ -->
+
+  <section>
+    <h2><span class="num">02</span> The matrix — six platforms, like for like</h2>
+    <p>Attributes down the side, devices across the top. Purpose codes: <span class="pchip p1">P1 characterise</span> <span class="pchip p2">P2 evolve</span> <span class="pchip p3">P3 scale-out</span>.</p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th class="dev">Chi.Bio</th>
+            <th class="dev">OpenEvo</th>
+            <th class="dev">Pioreactor</th>
+            <th class="dev">eVOLVER</th>
+            <th class="dev">EVE</th>
+            <th class="dev">Morbidostat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rowlabel">Primary purpose</td>
+            <td><span class="pchip p1">P1</span></td>
+            <td><span class="pchip p2">P2</span></td>
+            <td><span class="pchip p3">P3</span></td>
+            <td><span class="pchip p3">P3</span></td>
+            <td><span class="pchip p2">P2</span></td>
+            <td><span class="pchip p2">P2</span></td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Reference</td>
+            <td>PLOS Biol 2020</td>
+            <td>bioRxiv 2026</td>
+            <td class="cell-bad">none</td>
+            <td>Nat Biotech 2018</td>
+            <td>eLife 2022</td>
+            <td>Nat Protoc 2013</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Parallelism</td>
+            <td class="cell-good">8 / 1 computer</td>
+            <td class="cell-bad">1 chamber</td>
+            <td class="cell-good">cluster (N)</td>
+            <td class="cell-good">16 vials</td>
+            <td>≥3 replicates</td>
+            <td>few</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Working volume</td>
+            <td class="num-col">12–25 mL</td>
+            <td class="num-col">~20 mL</td>
+            <td class="num-col">20 / 40 mL</td>
+            <td class="num-col">~40 mL</td>
+            <td class="num-col">~12 mL</td>
+            <td class="num-col">~10 mL</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">OD source</td>
+            <td>650 nm laser</td>
+            <td>940 nm IR</td>
+            <td>900 nm IR</td>
+            <td>LED/photodiode</td>
+            <td>LED/photodiode</td>
+            <td>LED/photodiode</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Rich sensing</td>
+            <td class="cell-good">spectrometer + 7-LED</td>
+            <td class="cell-bad">OD only</td>
+            <td class="cell-warn">plugin (AS7341)</td>
+            <td class="cell-warn">configurable</td>
+            <td class="cell-bad">OD only</td>
+            <td class="cell-bad">OD only</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Culture contact</td>
+            <td class="cell-good">non-contact</td>
+            <td>closed, contact OK</td>
+            <td>contact</td>
+            <td>contact</td>
+            <td>contact</td>
+            <td>contact</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Sterility / vessel</td>
+            <td class="cell-warn">open to atmosphere</td>
+            <td class="cell-good">closed, autoclavable</td>
+            <td>autoclavable vial</td>
+            <td>autoclavable vial</td>
+            <td>3D-printed</td>
+            <td>glass</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Selection fluidics</td>
+            <td>2+2 pumps</td>
+            <td class="cell-good">3 media + waste</td>
+            <td>pumps (plugin)</td>
+            <td class="cell-good">configurable</td>
+            <td>drug line</td>
+            <td class="cell-good">drug gradient</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Control law</td>
+            <td class="cell-good">PID + MPC</td>
+            <td>threshold</td>
+            <td>Kalman GR</td>
+            <td>configurable</td>
+            <td>threshold</td>
+            <td>drug titration</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Archiving</td>
+            <td class="cell-bad">none</td>
+            <td class="cell-bad">manual, 1×</td>
+            <td class="cell-bad">none</td>
+            <td class="cell-bad">none</td>
+            <td class="cell-bad">none</td>
+            <td class="cell-bad">none</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Open HW / SW</td>
+            <td class="cell-good">both</td>
+            <td class="cell-good">both</td>
+            <td class="cell-good">both (CERN-OHL)</td>
+            <td class="cell-good">both</td>
+            <td class="cell-good">both</td>
+            <td>protocol</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Cost / unit</td>
+            <td class="num-col">~$300 +PCB</td>
+            <td class="num-col">~$300</td>
+            <td class="num-col">$329–389</td>
+            <td class="num-col cell-warn">&lt;$2k (16)</td>
+            <td class="num-col cell-good">$115–200</td>
+            <td class="num-col">mid</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Build effort</td>
+            <td class="cell-warn">PCB fab</td>
+            <td class="cell-good">manual, guided</td>
+            <td class="cell-good">buy turnkey</td>
+            <td class="cell-bad">machine shop</td>
+            <td>moderate</td>
+            <td class="cell-warn">bespoke</td>
+          </tr>
+          <tr>
+            <td class="rowlabel">Independent use</td>
+            <td>ReacSight, others</td>
+            <td class="cell-warn">too new</td>
+            <td class="cell-warn">community only</td>
+            <td class="cell-good">ePACE, base editors</td>
+            <td>teaching</td>
+            <td class="cell-good">widely adapted</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caveat">Green = notable strength, red = notable weakness, amber = qualified. Cells reflect the platform as published/shipped, not what a motivated builder could add. "Independent use" = peer-reviewed work by groups other than the originators.</p>
+  </section>
+
+  <!-- ============ PROS/CONS CARDS ============ -->
+
+  <section>
+    <h2><span class="num">03</span> Pros and cons, per platform</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-head"><span class="name">Chi.Bio</span><span class="owns">P1 · in-situ measurement density</span></div>
+        <div class="card-meta"><span>PLOS Biol 2020</span><span>~$300 +PCB</span><span>8-way</span></div>
+        <ul class="prolist">
+          <li class="pro">Only platform with a real in-situ spectrometer + 7-colour actuation</li>
+          <li class="pro">Non-contact; tubes hot-swap, sterilisation trivial</li>
+          <li class="pro">PID + MPC; OD held ~2% of setpoint</li>
+          <li class="con">Vessel open to atmosphere — no gas control</li>
+          <li class="con">Needs PCB fabrication; not a from-manual build</li>
+          <li class="con">No archiving; no DO/pH</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="name">OpenEvo</span><span class="owns">P2 · cheap buildable selection cycler</span></div>
+        <div class="card-meta"><span>bioRxiv 2026</span><span>~$300</span><span>1 chamber</span></div>
+        <ul class="prolist">
+          <li class="pro">Three-media selection cycling, native</li>
+          <li class="pro">Closed autoclavable vessel; standalone firmware</li>
+          <li class="pro">Best assembly manual in the field</li>
+          <li class="con">Single chamber — no replicates, no convergence</li>
+          <li class="con">No archiving; no rich sensing</li>
+          <li class="con">Validation is n = 1; see §1</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="name">Pioreactor</span><span class="owns">P3 · turnkey fleet operation</span></div>
+        <div class="card-meta"><span>no paper</span><span>$329–389</span><span>cluster</span></div>
+        <ul class="prolist">
+          <li class="pro">Buy and run — no build, supported, maintained</li>
+          <li class="pro">Leader/worker cluster + plugin ecosystem</li>
+          <li class="pro">CERN-OHL hardware, MIT software</li>
+          <li class="con">No peer-reviewed reference — hard to cite</li>
+          <li class="con">Rich sensing only via plugins</li>
+          <li class="con">Not evolution- or characterisation-optimised</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="name">eVOLVER</span><span class="owns">P3 · max-config research fleet</span></div>
+        <div class="card-meta"><span>Nat Biotech 2018</span><span>&lt;$2k / 16</span><span>16 vials</span></div>
+        <ul class="prolist">
+          <li class="pro">16 vials, arbitrary per-vial control</li>
+          <li class="pro">Proven base for independent work (ePACE)</li>
+          <li class="pro">Modular, deeply extensible</li>
+          <li class="con">Machine shop + 3D printer to build</li>
+          <li class="con">Highest setup/cleanup burden</li>
+          <li class="con">Overkill for small or simple studies</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="name">EVE</span><span class="owns">P2 · low-cost evolution + teaching</span></div>
+        <div class="card-meta"><span>eLife 2022</span><span>$115–200</span><span>≥3</span></div>
+        <ul class="prolist">
+          <li class="pro">Cheapest replicate-capable system</li>
+          <li class="pro">Morbidostat / chemostat / turbidostat modes</li>
+          <li class="pro">Explicit educational design + full build docs</li>
+          <li class="con">OD only; no rich sensing</li>
+          <li class="con">3D-printed vessel; modest sterility</li>
+          <li class="con">No archiving</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><span class="name">Toprak morbidostat</span><span class="owns">P2 · drug-gradient selection</span></div>
+        <div class="card-meta"><span>Nat Protoc 2013</span><span>mid</span><span>few</span></div>
+        <ul class="prolist">
+          <li class="pro">The canonical antibiotic-resistance device</li>
+          <li class="pro">Continuous drug titration to constant inhibition</li>
+          <li class="pro">Widely adapted and cited</li>
+          <li class="con">Dated build; not a modern platform</li>
+          <li class="con">Low throughput; bespoke assembly</li>
+          <li class="con">Protocol, not maintained hardware/software</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ ADOPTION ============ -->
+
+  <section>
+    <h2><span class="num">04</span> Independent use — the credibility signal</h2>
+    <p>For a platform with no methods paper, third-party <em>use</em> is the only external validation. The picture is uneven, and it tracks each platform's age and purpose.</p>
+    <ul>
+      <li><strong>Chi.Bio</strong> — integrated by external tooling such as <strong>ReacSight</strong> (Nat Commun 2022) for bioreactor-array control, and cited across optogenetic feedback work. Established.</li>
+      <li><strong>eVOLVER</strong> — the strongest independent record: continuous-evolution systems including <strong>ePACE</strong>, mammalian long-term evolution, and evolved base editors are built on it by groups other than Khalil's.</li>
+      <li><strong>Toprak morbidostat</strong> — a decade of adaptation; the reference design that later devices (including EVE and OpenEvo) position themselves against.</li>
+      <li><strong>Pioreactor</strong> — broad hobbyist, classroom, and workshop adoption (e.g. CSM 2025), but <strong>no indexed peer-reviewed methods citations</strong>. Its credibility is commercial and community, not bibliographic — a real consideration if you need to cite your instrument.</li>
+      <li><strong>EVE</strong> — primarily educational uptake to date; younger and narrower than eVOLVER.</li>
+      <li><strong>OpenEvo</strong> — days old at this writing; no independent use yet. Too new to judge.</li>
+    </ul>
+  </section>
+
+  <!-- ============ BOTTOM LINE ============ -->
+
+  <section>
+    <h2><span class="num">05</span> Bottom line, by what you actually need</h2>
+    <ul>
+      <li><strong>Characterise a strain or circuit</strong> (reporters, physiology, feedback): <strong>Chi.Bio</strong>, decisively — nothing else has the in-situ optics.</li>
+      <li><strong>Run reliable parallel cultures now, minimal fuss</strong>: <strong>Pioreactor</strong> if turnkey and supported matters; <strong>eVOLVER</strong> if you need 16 vials of arbitrary per-vial control and have a machine shop.</li>
+      <li><strong>Evolve on a teaching or shoestring budget</strong>: <strong>EVE</strong> — cheapest replicate-capable, full docs.</li>
+      <li><strong>Antibiotic-resistance / drug-gradient evolution</strong>: a <strong>morbidostat</strong> lineage device.</li>
+      <li><strong>Three-media selection cycling in one cheap closed vessel</strong>: <strong>OpenEvo</strong> — its real niche, once §1's analysis gaps are addressed.</li>
+      <li><strong>Rigorous ALE that produces evidence</strong>: none as shipped. It needs replicates + archiving + <code>breseq</code> — the argument of the companion build proposal.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>Verified this session:</strong> OpenEvo full text; Chi.Bio full text; Pioreactor specs, pricing, CERN-OHL hardware repo, and absence of a reference paper; eVOLVER (16 vials, 40 mL, &lt;$2k, open); EVE ($115–200, 12 mL, eLife 2022, open). <strong>From prior literature, not re-verified this session:</strong> Toprak morbidostat details; ReacSight and ePACE adoption specifics.</p>
+    <p class="caveat">Companion document: "Two Instruments, One Ecosystem" — the build proposal for a best-in-class characterisation instrument and a best-in-class evolution machine, and the argument for sharing parts rather than merging. This note is the evidence base; that one is the plan.</p>
+  </footer>
+
+</div>

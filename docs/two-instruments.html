@@ -1,0 +1,693 @@
+<title>Two Instruments, One Ecosystem</title>
+<style>
+  :root {
+    --ground: #EEEFF1;
+    --surface: #F8F9FA;
+    --surface-2: #E4E6EA;
+    --ink: #14171C;
+    --ink-muted: #5E6570;
+    --ink-faint: #8A909A;
+    --rule: #CFD3D9;
+    --accent: #0B6E75;
+    --accent-soft: #D6E7E8;
+    --violet: #4B3B87;
+    --violet-soft: #E0DBF0;
+    --amber: #A6690E;
+    --amber-soft: #F0E4CE;
+    --crimson: #97302C;
+    --crimson-soft: #EFDAD8;
+
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+    --measure: 68ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #101317;
+      --surface: #171B21;
+      --surface-2: #1F242C;
+      --ink: #E4E7EA;
+      --ink-muted: #99A1AC;
+      --ink-faint: #6B7280;
+      --rule: #2C333C;
+      --accent: #45B4BA;
+      --accent-soft: #103336;
+      --violet: #A99AE0;
+      --violet-soft: #211A3D;
+      --amber: #D3A048;
+      --amber-soft: #33280F;
+      --crimson: #D4756C;
+      --crimson-soft: #351A18;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #101317;
+    --surface: #171B21;
+    --surface-2: #1F242C;
+    --ink: #E4E7EA;
+    --ink-muted: #99A1AC;
+    --ink-faint: #6B7280;
+    --rule: #2C333C;
+    --accent: #45B4BA;
+    --accent-soft: #103336;
+    --violet: #A99AE0;
+    --violet-soft: #211A3D;
+    --amber: #D3A048;
+    --amber-soft: #33280F;
+    --crimson: #D4756C;
+    --crimson-soft: #351A18;
+  }
+
+  :root[data-theme="light"] {
+    --ground: #EEEFF1;
+    --surface: #F8F9FA;
+    --surface-2: #E4E6EA;
+    --ink: #14171C;
+    --ink-muted: #5E6570;
+    --ink-faint: #8A909A;
+    --rule: #CFD3D9;
+    --accent: #0B6E75;
+    --accent-soft: #D6E7E8;
+    --violet: #4B3B87;
+    --violet-soft: #E0DBF0;
+    --amber: #A6690E;
+    --amber-soft: #F0E4CE;
+    --crimson: #97302C;
+    --crimson-soft: #EFDAD8;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 78ch;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.25rem;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-bottom: 2.25rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.08;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .standfirst {
+    font-size: 1.2rem;
+    color: var(--ink-muted);
+    max-width: var(--measure);
+    text-wrap: pretty;
+  }
+
+  .meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- sections ---------- */
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  h2 {
+    font-size: 1.55rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin: 0;
+    text-wrap: balance;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  h2 .num {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    flex: none;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.5rem 0 0;
+    letter-spacing: -0.005em;
+  }
+
+  p {
+    margin: 0;
+    max-width: var(--measure);
+    text-wrap: pretty;
+  }
+
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  strong { font-weight: 700; }
+
+  code, .part {
+    font-family: var(--mono);
+    font-size: 0.86em;
+    background: var(--surface-2);
+    padding: 0.08em 0.36em;
+    border-radius: 3px;
+  }
+
+  ul { margin: 0; padding-left: 1.15rem; max-width: var(--measure); display: flex; flex-direction: column; gap: 0.55rem; }
+  li::marker { color: var(--ink-faint); }
+
+  /* ---------- part banners ---------- */
+
+  .part-banner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.75rem;
+    border-radius: 2px;
+  }
+  .part-banner.charact { background: var(--accent-soft); border-left: 4px solid var(--accent); }
+  .part-banner.evolve  { background: var(--violet-soft); border-left: 4px solid var(--violet); }
+  .part-banner.verdict { background: var(--surface); border-left: 4px solid var(--ink); }
+
+  .part-banner .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .part-banner.charact .tag { color: var(--accent); }
+  .part-banner.evolve  .tag { color: var(--violet); }
+  .part-banner.verdict .tag { color: var(--ink-muted); }
+
+  .part-banner h2 { font-size: 1.7rem; display: block; }
+  .part-banner p { max-width: none; }
+
+  .purpose {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--ink);
+    padding: 0.85rem 1rem;
+    background: rgba(127,127,127,0.08);
+    border-radius: 2px;
+  }
+  .purpose b { color: inherit; }
+
+  /* ---------- thesis / callout ---------- */
+
+  .callout {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .callout.violet { border-left-color: var(--violet); }
+  .callout p { max-width: none; }
+  .callout .eyebrow.v { color: var(--violet); }
+
+  /* ---------- tables ---------- */
+
+  .scroller { overflow-x: auto; border: 1px solid var(--rule); background: var(--surface); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 0.88rem; min-width: 40rem; }
+
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--ink);
+    white-space: nowrap;
+  }
+
+  td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  td.num-col { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 0.82rem; }
+  td.src { font-family: var(--mono); font-size: 0.76rem; white-space: nowrap; color: var(--ink-muted); }
+
+  /* ---------- status chips ---------- */
+
+  .chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    padding: 0.22em 0.55em;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .chip.adopt  { background: var(--accent-soft);  color: var(--accent); }
+  .chip.defer  { background: var(--amber-soft);   color: var(--amber); }
+  .chip.reject { background: var(--crimson-soft); color: var(--crimson); }
+  .chip.keep   { background: var(--surface-2);    color: var(--ink-muted); }
+
+  /* ---------- phase / build ---------- */
+
+  .phases { display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
+
+  .phase { display: grid; grid-template-columns: 5rem 1fr; gap: 1.25rem; padding: 1.35rem 0; border-bottom: 1px solid var(--rule); }
+
+  .phase-id { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; font-weight: 600; padding-top: 0.32rem; }
+  .phase-id.c { color: var(--accent); }
+  .phase-id.e { color: var(--violet); }
+
+  .phase-body { display: flex; flex-direction: column; gap: 0.5rem; }
+  .phase-body h3 { margin: 0; }
+  .phase-body p { font-size: 0.95rem; color: var(--ink-muted); }
+
+  @media (max-width: 34rem) {
+    .phase { grid-template-columns: 1fr; gap: 0.5rem; }
+    .phase-id { padding-top: 0; }
+  }
+
+  /* ---------- finding ---------- */
+
+  .finding {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .finding .eyebrow { color: var(--violet); }
+  .finding p { max-width: none; }
+
+  /* ---------- questions ---------- */
+
+  .qlist { counter-reset: q; display: flex; flex-direction: column; gap: 1.4rem; list-style: none; padding: 0; }
+  .qlist li { counter-increment: q; display: grid; grid-template-columns: 2.25rem 1fr; gap: 0.9rem; }
+  .qlist li::before {
+    content: "Q" counter(q);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    padding-top: 0.28rem;
+    letter-spacing: 0.05em;
+  }
+  .qlist li::marker { content: none; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.75rem;
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  footer p { max-width: none; font-size: 0.82rem; }
+  .caveat { font-family: var(--mono); font-size: 0.72rem; line-height: 1.6; color: var(--ink-faint); }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Instrument Proposal · Open Hardware</div>
+    <h1>Two Instruments, One Ecosystem</h1>
+    <p class="standfirst">Chi.Bio and OpenEvo serve different purposes, so the right move is to build the best machine for each purpose first — and only then ask whether one machine can do both. This is that argument, in three parts. The short answer: build two, share the parts.</p>
+    <div class="meta">
+      <span>Rev. B · 2026-07-10</span>
+      <span>Sources: PLOS Biol 18:e3000794 · bioRxiv 2026.07.06.735356 · Pioreactor / eVOLVER / EVE</span>
+      <span>Status: pre-decisional</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="callout">
+      <div class="eyebrow">The two purposes, stated cleanly</div>
+      <p><strong>Purpose 1 — Characterisation.</strong> Hold a culture in a defined, unchanging state and measure it richly, in situ, in real time, while closing feedback loops around it. You want <em>signal density per reactor</em> and a handful of reactors running different conditions in parallel. This is Chi.Bio's purpose.</p>
+      <p><strong>Purpose 2 — Evolution.</strong> Push a culture through selection regimes unattended for weeks, and produce <em>evidence</em> that adaptation occurred and which mutation caused it. You want cheap chambers in numbers, archiving, and long-run robustness. This is OpenEvo's purpose.</p>
+      <p>These purposes pull hardware in opposite directions. A machine optimised for one is actively worse at the other — which is the whole reason Part 3 is a real question and not a foregone conclusion.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 1 ============ -->
+
+  <section>
+    <div class="part-banner charact">
+      <div class="tag">Part 1 · Purpose: Characterisation</div>
+      <h2>The best in-situ characterisation instrument</h2>
+      <p>Start from Chi.Bio, because its architecture is already correct for this purpose. The upgrades sharpen what it is; none of them compromise the one property that makes it work.</p>
+    </div>
+
+    <div class="purpose"><b>Design law:</b> non-contact is inviolable. Every Chi.Bio subsystem but the heat plate is non-contact, which is why tubes hot-swap and sterilisation is trivial. Any sensor added to this machine must read <em>through the vessel wall</em> — optical, not immersed. The moment you put an electrode in the culture, you have built the other machine.</p></div>
+
+    <h3>What to keep, unchanged</h3>
+    <ul>
+      <li><strong>The non-contact discipline</strong> — the crown jewel, and the constraint every addition below respects.</li>
+      <li><strong>PID + model-predictive control</strong> — OD held within ~2% of setpoint, temperature to a defined path, plus the dithering mode for growth-rate estimation at near-constant density.</li>
+      <li><strong>Eight reactors, one control computer</strong> — for characterisation, parallelism means eight <em>richly instrumented</em> reactors running eight conditions. This is the right kind of parallelism for this purpose (contrast Part 2).</li>
+      <li><strong>Chemostat / turbidostat flexibility</strong> — same hardware, either mode. Pin growth rate to study physiology, or pin density to study rate.</li>
+    </ul>
+
+    <h3>Upgrades, in order of value to the purpose</h3>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Upgrade</th><th>Hardware</th><th>Why it serves characterisation</th><th></th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Dissolved oxygen + pH</td>
+            <td class="src">Optode spots + AS7341</td>
+            <td>Ratiometric fluorescence spots read through the wall by LEDs and a detector the machine already has. Non-contact, so the design law holds. DO and pH are core physiology — you cannot claim to characterise a culture's state without them.</td>
+            <td><span class="chip adopt">Adopt</span></td>
+          </tr>
+          <tr>
+            <td>Dispersive spectrometry</td>
+            <td class="src"><span class="part">C12880MA</span></td>
+            <td>Continuous 340–850 nm replaces eight fixed ~20 nm filter bands. This is the direct upgrade to the instrument's core job: resolve a shifted peak, separate two fluorophores in one band, see past 680 nm. Keep the <span class="part">AS7341</span> alongside it for fast multi-band ratios.</td>
+            <td><span class="chip adopt">Adopt</span></td>
+          </tr>
+          <tr>
+            <td>Controlled atmosphere</td>
+            <td class="src">Sealed lid + gas port</td>
+            <td>Closes the one gap Chi.Bio's own supplement flags: the vessel is open to atmosphere, so no defined-gas or micro-aerobic characterisation. An airtight closure with a gas inlet makes O₂/CO₂ a controlled variable rather than an uncontrolled one.</td>
+            <td><span class="chip adopt">Adopt</span></td>
+          </tr>
+          <tr>
+            <td>Expanded excitation</td>
+            <td class="src">IO Rodeo LED modules</td>
+            <td>A pluggable UV–NIR catalogue (255–730 nm) widens the excitation/emission grid for multiplexed reporters and adds tunable UV-C. Verify a 730 nm part exists — PhyB photoswitching needs it.</td>
+            <td><span class="chip defer">Conditional</span></td>
+          </tr>
+          <tr>
+            <td>Viable cell density</td>
+            <td class="src">β-dispersion, immersed</td>
+            <td>The one modality this machine <em>wants</em> but cannot cleanly have: it needs electrodes in the culture, which breaks the design law. Leave it to Part 2's machine, which tolerates contact. Noted here only to mark the boundary.</td>
+            <td><span class="chip reject">Wrong machine</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caveat">Net result: a Chi.Bio that measures DO, pH, and a full spectrum in a gas-controlled vessel, still non-contact, still eight-way parallel. That is the best characterisation instrument on this page — and it has no evolution-specific hardware on it at all.</p>
+  </section>
+
+  <!-- ============ PART 2 ============ -->
+
+  <section>
+    <div class="part-banner evolve">
+      <div class="tag">Part 2 · Purpose: Evolution</div>
+      <h2>The best automated evolution machine</h2>
+      <p>Start from OpenEvo, because its virtues — cheap, closed, buildable, standalone — are exactly right for long unattended runs. But OpenEvo as published cannot produce the evidence an evolution experiment exists to produce. Fixing that, not adding sensors, is the work.</p>
+    </div>
+
+    <div class="purpose"><b>Design law:</b> cheap × many, and resist sensing bloat. The output of this machine is not a rich time series — it is an <em>archived, sequenced, replicated</em> record of adaptation. Every dollar spent instrumenting a single chamber is a dollar not spent on the second chamber. Loading it with characterisation sensing does not make it a better evolution machine; it makes it a worse one, and invites the category error of treating a $300 turbidostat as a bioprocess reactor.</p></div>
+
+    <h3>The two things OpenEvo is missing, and neither is a sensor</h3>
+
+    <div class="finding">
+      <div class="eyebrow">Fix I · Replicate populations</div>
+      <h3>n = 1 is not a throughput limit. It is a failure of causal inference.</h3>
+      <p>The LTEE runs twelve populations because you cannot separate a driver mutation from a hitchhiker in a single lineage — convergence <em>across independent replicates</em> is the only evidence you have that a mutation was selected rather than merely present. OpenEvo sequenced one clone from one population, so its SNPs and two deletions carry no such evidence; nobody, including the authors, can say which one did the work.</p>
+      <p><strong>The build:</strong> not one richly-instrumented reactor, but <em>eight cheap chambers</em> under one coordinating interface — OpenEvo's own suggested workaround, made first-class. This is the opposite of Part 1's parallelism: minimal instrumentation per chamber, many chambers. It is also why the two machines do not share a reactor design even though both are "eight-way parallel."</p>
+    </div>
+
+    <div class="finding">
+      <div class="eyebrow">Fix II · Archiving</div>
+      <h3>The LTEE's real innovation was the freezer, not the flask.</h3>
+      <p>A sample to −80 °C every 500 generations means any ancestor can be revived and raced head-to-head against any descendant in the same medium — which is what makes fitness <em>measured</em> rather than inferred. OpenEvo took one glycerol stock, by hand, at cycle 145. That single stock is the entire evidentiary basis for its adaptation claim.</p>
+      <p>Sharper still: OpenEvo cites <strong>Barrick 2023 — "Daily Transfers, Archiving Populations, and Measuring Fitness"</strong> as its proof that manual passaging is the bottleneck. The paper it cites as the problem contains the two methods it omitted.</p>
+      <p><strong>The build:</strong> an automated chilled fraction collector on the existing waste line. It already pumps culture out on every dilution; divert a programmable fraction, on a generation-count schedule, into a chilled glycerol archive. As far as I can find, nobody has built this, and it is the single highest-value addition to an evolution machine.</p>
+    </div>
+
+    <h3>Upgrades, in order of value to the purpose</h3>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Upgrade</th><th>Hardware</th><th>Why it serves evolution</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Replicate parallelism</td><td class="src">8× cheap chamber</td><td>Fix I. Turns anecdote into convergence evidence.</td><td><span class="chip adopt">Adopt</span></td></tr>
+          <tr><td>Automated archive</td><td class="src">Chilled fraction collector</td><td>Fix II. Turns a claim into a measurable fitness assay.</td><td><span class="chip adopt">Adopt</span></td></tr>
+          <tr>
+            <td>Batch excursion mode</td><td class="src">Firmware only</td>
+            <td>On a schedule, suspend dilution, run to stationary phase, record final density, resume. Recovers <em>carrying capacity</em> — a phenotype axis a turbidostat structurally cannot see. This is how the LTEE caught Cit⁺, and OpenEvo's own cycle-145 data already shows a carrying-capacity difference it could only measure offline.</td>
+            <td><span class="chip adopt">Adopt</span></td>
+          </tr>
+          <tr>
+            <td>Conductivity</td><td class="src">2–4 electrode cell</td>
+            <td>Verifies the media switch actually happened — and OpenEvo's selection media differ by <em>salt</em>, exactly what a conductivity cell reads. Electrodes are fine here: the closed autoclavable vessel tolerates contact. Closes the "no custom media mixes" gap from the sensing side.</td>
+            <td><span class="chip adopt">Adopt</span></td>
+          </tr>
+          <tr>
+            <td>Variant-calling pipeline</td><td class="src"><code>breseq</code></td>
+            <td>OpenEvo used a default short-read mapper; its own result — a ~110 kb deletion, "primarily transposon-associated elements" — is IS-mediated rearrangement, which is precisely what <code>breseq</code> exists for, and which its most-cited author wrote.</td>
+            <td><span class="chip adopt">Adopt</span></td>
+          </tr>
+          <tr>
+            <td>Electrical resistance tomography</td><td class="src">OpenEIT Spectra</td>
+            <td>Mixing verification after a media switch, and wall-biofilm detection. Electrodes tolerated here. Chi.Bio's stirring-off settle window is a free acquisition gate. Publishable on its own — nobody has instrumented a turbidostat this way.</td>
+            <td><span class="chip defer">Research</span></td>
+          </tr>
+          <tr>
+            <td>Viable cell density</td><td class="src">Spectra, high-power</td>
+            <td>The β-dispersion modality Part 1 could not have. It belongs here, on the machine that already tolerates immersed electrodes. Gated on Q1.</td>
+            <td><span class="chip defer">Research</span></td>
+          </tr>
+          <tr>
+            <td>Rich spectrometry / DO / pH</td><td class="src">—</td>
+            <td>Resist. Characterisation sensing on an evolution machine is cost without purpose and pushes toward the bioprocess category error. If a specific experiment needs DO (aerobic selection), borrow the shared optode module — do not make it standard.</td>
+            <td><span class="chip reject">Resist</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout violet">
+      <div class="eyebrow v">The trap the ALE literature exists to prevent</div>
+      <p>ALE selects for growth, and making product costs growth. Run naive selection on a production strain and you build a machine that finds the mutant which deleted your pathway — fast. The field's answer is <strong>growth-coupled design first</strong>: engineer a strain where product formation is stoichiometrically obligatory for growth, then select. Read in that light, OpenEvo's negative-selection media line is a hardware stab at the counterselection that growth-coupling achieves in metabolism. Right instinct; build on it.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 3 ============ -->
+
+  <section>
+    <div class="part-banner verdict">
+      <div class="tag">Part 3 · The actual question</div>
+      <h2>Should you combine them into one machine?</h2>
+      <p>Mostly no. Build two instruments, and share the ecosystem beneath them. Here is the reasoning, not just the verdict.</p>
+    </div>
+
+    <p>The two optimal machines from Parts 1 and 2 diverge on every axis that matters. A single machine forced to satisfy both columns is dominated by each specialist at its own job.</p>
+
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Axis</th><th>Characterisation wants</th><th>Evolution wants</th></tr></thead>
+        <tbody>
+          <tr><td>Reactor economics</td><td>Few, richly instrumented</td><td>Many, minimally instrumented</td></tr>
+          <tr><td>Culture contact</td><td>Non-contact, inviolable</td><td>Immersed electrodes fine</td></tr>
+          <tr><td>Culture state</td><td>Held at defined steady state</td><td>Free to run to stationary phase</td></tr>
+          <tr><td>Run length</td><td>Hours to days</td><td>Weeks to months, unattended</td></tr>
+          <tr><td>Primary output</td><td>Dense real-time signal</td><td>Archived, sequenced, replicated record</td></tr>
+          <tr><td>Sensing philosophy</td><td>More is better</td><td>Less is better</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Notice the tension resolves itself cleanly rather than requiring compromise: <strong>the sensor modalities sort by contact.</strong> Optode DO/pH and dispersive spectrometry are optical and non-contact, so they land on the characterisation machine. Conductivity, ERT, and β-dispersion viable-cell-density all need immersed electrodes, so they land on the evolution machine — whose closed autoclavable vessel welcomes them. There is almost no sensor that both machines want and only one can have. That is the strongest evidence that these are two instruments, not one.</p>
+
+    <h3>What the two machines <em>do</em> share — the ecosystem</h3>
+    <p>Combining is right at the level of the platform, wrong at the level of the product. Four shared layers give you most of the benefit of a merge with none of the compromise:</p>
+    <ul>
+      <li><strong>A module footprint.</strong> Adopt IO Rodeo's 25.4 × 20 mm / dual-JST-SH standard for both. Both papers gesture at modularity — OpenEvo's "magnetic bay", Chi.Bio's "expansion port" — and neither defines a footprint. One standard, one parts catalogue, both machines.</li>
+      <li><strong>The sensor module designs.</strong> A DO optode reader is the same board whether it reads a characterisation vessel through the wall or gets borrowed for an aerobic-selection run. Design each sensor once; deploy on either chassis.</li>
+      <li><strong>The firmware / interface framework.</strong> One control-and-logging codebase, two hardware profiles. OpenEvo's remote-access GUI and Chi.Bio's custom-program Python framework are converging on the same thing already.</li>
+      <li><strong>The calibration reference.</strong> One open-source colorimeter on the bench calibrates the OD path of both machines. Shared, not embedded.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="eyebrow">The one honest exception</div>
+      <p>If you only ever intend to do <em>ALE with fitness measurement</em> and never pure characterisation, there is a single-machine case: the evolution machine from Part 2, built on eight cheap chambers with archiving, is genuinely close to complete, and bolting the characterisation sensing onto it would be waste. The merge tempts only in the reverse direction — a characterisation lab that occasionally evolves a strain — and even there, a second cheap chamber is less money and less compromise than making every reactor do both. When in doubt: two machines, shared parts.</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 4 ============ -->
+
+  <section>
+    <div class="part-banner verdict">
+      <div class="tag">Part 4 · The wider landscape</div>
+      <h2>Where Pioreactor and the others fit — and the third purpose they reveal</h2>
+      <p>Two purposes turn out to be an undercount. Pioreactor is best-of-breed, but for neither of them — it owns a third axis that Chi.Bio and OpenEvo, both build-it-yourself research artifacts, never optimise for: <strong>reliability and fleet operation as a product</strong>.</p>
+    </div>
+
+    <div class="purpose"><b>Purpose 3 — Scale-out operation.</b> Run N reliable reactors <em>now</em>, with minimal build effort, a maintained software platform, cluster management, and support. The value is not signal density (Purpose 1) or archived evidence (Purpose 2) — it is reproducibility, uptime, and not having to build anything. This axis is orthogonal to the other two.</p></div>
+
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Device</th><th>Best for</th><th>The corner it owns</th><th>Open?</th><th>Scale · cost</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Chi.Bio</strong></td>
+            <td class="num-col" style="color:var(--accent)">P1</td>
+            <td>In-situ measurement density. Spectrometer + seven-colour LED + MPC, all non-contact. The characterisation champion.</td>
+            <td class="src">HW + SW</td>
+            <td class="num-col">8 / ~$300ea</td>
+          </tr>
+          <tr>
+            <td><strong>Pioreactor</strong></td>
+            <td class="num-col" style="color:var(--amber)">P3</td>
+            <td>Turnkey reliability + fleet. Leader/worker cluster, plugin marketplace, distributor, support. The one you buy, not build.</td>
+            <td class="src">CERN-OHL + MIT</td>
+            <td class="num-col">cluster / $329–389</td>
+          </tr>
+          <tr>
+            <td><strong>eVOLVER</strong></td>
+            <td class="num-col" style="color:var(--amber)">P3</td>
+            <td>Maximal-configurability scale-out. 16 vials, arbitrary per-vial control via "sleeves." The research-grade fleet — powerful, costly, complex to build and run.</td>
+            <td class="src">HW + SW</td>
+            <td class="num-col">16 / high</td>
+          </tr>
+          <tr>
+            <td><strong>Toprak morbidostat</strong></td>
+            <td class="num-col" style="color:var(--violet)">P2</td>
+            <td>Drug-gradient selection. The canonical device for antibiotic-resistance evolution; titrates inhibitor to hold constant growth suppression. Older, harder to build.</td>
+            <td class="src">HW + SW</td>
+            <td class="num-col">few / mid</td>
+          </tr>
+          <tr>
+            <td><strong>EVE</strong></td>
+            <td class="num-col" style="color:var(--violet)">P2</td>
+            <td>Low-cost evolution + teaching. Morbidostat/chemostat/turbidostat modes; OpenEvo's closest direct comparator, published with an explicit educational remit.</td>
+            <td class="src">HW + SW</td>
+            <td class="num-col">few / low</td>
+          </tr>
+          <tr>
+            <td><strong>OpenEvo</strong></td>
+            <td class="num-col" style="color:var(--violet)">P2</td>
+            <td>Cheapest buildable selection cycler. Three-media fluidics + closed autoclavable vessel + illustrated manual. Aspires to P2; missing the archiving and replicates that make it evidence (see Part 2).</td>
+            <td class="src">HW + SW</td>
+            <td class="num-col">1 / ~$300</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout violet">
+      <div class="eyebrow v">The uncomfortable implication for the evolution machine</div>
+      <p>Part 2's fix for OpenEvo's n = 1 problem — "eight cheap chambers under one coordinating interface" — is a description of <strong>Pioreactor's leader/worker cluster</strong>, already productised. So the best P2 machine may be <em>Pioreactor + an archiving plugin + a batch-excursion automation</em>, not a scaled-up OpenEvo. OpenEvo's genuine remaining edge shrinks to two things Pioreactor lacks: the three-media selection fluidics and the closed autoclavable vessel. Both are addable to a Pioreactor; the cluster, the platform, and the plugin ecosystem are not easily addable to an OpenEvo.</p>
+    </div>
+
+    <p class="caveat">Correction to the record: OpenEvo's introduction states Pioreactor is "available for purchase, but only the software is open source." A public <code>Pioreactor/hardware</code> repository exists and the hardware is under CERN-OHL — the licence purpose-built for open hardware. The dismissal is not accurate, and it is the same paper that never cites Chi.Bio and under-uses <code>breseq</code>. Weigh its competitive framing accordingly.</p>
+  </section>
+
+  <!-- ============ BUILD ============ -->
+
+  <section>
+    <h2><span class="num">05</span> Build order, two tracks</h2>
+    <p>Shared foundation first, then the tracks diverge. <span style="color:var(--accent);font-weight:700">C</span> = characterisation, <span style="color:var(--violet);font-weight:700">E</span> = evolution.</p>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-id c" style="color:var(--ink-muted)">S0</div>
+        <div class="phase-body">
+          <h3>Shared foundation</h3>
+          <p>Build one stock Chi.Bio and one stock OpenEvo. Adopt the module footprint and a common firmware framework. Stand up the shared calibration reference and cross-calibrate the 650 nm and 940 nm OD paths on one culture across OD<sub>600</sub> 0.2–6.0. Nothing forks until both baselines agree.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-id c">C1</div>
+        <div class="phase-body"><h3>Characterisation · optode DO + pH</h3><p>Non-contact fluorescence spots read through the wall. The first real physiology upgrade, and it proves the shared sensor-module path.</p></div>
+      </div>
+      <div class="phase">
+        <div class="phase-id c">C2</div>
+        <div class="phase-body"><h3>Characterisation · dispersive spectrometer + atmosphere</h3><p>C12880MA alongside the AS7341, and a sealed gas-controlled lid. This is now the best in-situ characterisation instrument on the page.</p></div>
+      </div>
+      <div class="phase">
+        <div class="phase-id e">E1</div>
+        <div class="phase-body"><h3>Evolution · archive + batch excursion + conductivity</h3><p>The two findings plus the media-verification sensor. All firmware-and-cheap-hardware; this is what turns OpenEvo's output into evidence.</p></div>
+      </div>
+      <div class="phase">
+        <div class="phase-id e">E2</div>
+        <div class="phase-body"><h3>Evolution · eight-chamber replicate array + breseq</h3><p>Replicates under one interface, and the variant-calling pipeline that makes convergence legible. This is now the best automated evolution machine on the page.</p></div>
+      </div>
+      <div class="phase">
+        <div class="phase-id e">E3</div>
+        <div class="phase-body"><h3>Evolution · ERT, then viable-cell-density (research)</h3><p>Spectra for mixing/biofilm at 80 kHz, gated to the settle window; then β-dispersion viable biomass, gated entirely on Q1.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUESTIONS ============ -->
+
+  <section>
+    <h2><span class="num">06</span> Open questions for Jean Rintoul</h2>
+    <p>These bear on the evolution machine's E3 research tier — mixing verification and viable-cell-density. Q1 is load-bearing; nothing else on the page depends on it.</p>
+
+    <ol class="qlist">
+      <li><div><strong>Is Spectra's 80 kHz ceiling silicon or firmware?</strong> AN-1271 specs the <span class="part">ADuCM350</span>'s DFT impedance excitation to 200 kHz, with 80 kHz being the <code>HSDACCON</code> low-power/high-power crossover — which reads as configuration, not hardware. Was 80 kHz a power, noise, thermal, or patient-safety call? Does firmware expose high-power mode, and if pushed to 200 kHz, what degrades first — SNR, DFT settling, or excitation-DAC flatness? The β-dispersion starts at exactly 100 kHz, so this bit is the difference between "off the curve" and "on its lower foot" — and viable-cell-density on yeast (f<sub>c</sub> ≈ 1–2 MHz) becomes real if it clears.</div></li>
+      <li><div><strong>Did the 32-electrode Spectra land true tetrapolar drive?</strong> The <code>EIT_EE</code> README notes the 8-electrode board was not tetrapolar and that tetrapolar differential was intended. Is "differential referencing" narrower than that? Does it follow AN-1302's 4-wire bioisolated config? We would measure into archaeal media at 12–18% w/v salt, where electrode polarisation is brutal at the low end of the band.</div></li>
+      <li><div><strong>Has Spectra ever imaged a vessel rather than a body?</strong> A ~2.5 cm glass tube of brine is not a thorax; GREIT's priors assume a thorax-shaped domain and physiological conductivity. Does reconstruction hold at that geometry, and is 32 electrodes around that circumference over- or under-determined?</div></li>
+    </ol>
+  </section>
+
+  <!-- ============ RISKS ============ -->
+
+  <section>
+    <h2><span class="num">07</span> Risks, and what this is not</h2>
+    <ul>
+      <li><strong>Electrodes cost the evolution machine its hot-swap.</strong> Immersed electrodes foul, polarise, drift, and need autoclaving. A flex circuit laminated to the <em>outside</em> of the glass — capacitively coupled, lossy — preserves hot-swap; the <code>8_electrode_flex</code> directory in the OpenEIT repo suggests this is not novel.</li>
+      <li><strong>Wall biofilm is both signal and noise for ERT.</strong> EIT's boundary sensitivity is highest exactly where biofilm grows — the reason it can detect biofilm is the reason biofilm corrupts the conductivity reading you wanted for mixing. Separating them is not obvious.</li>
+      <li><strong>A mutagenesis controller can hill-climb into meltdown.</strong> Both papers float UV-driven feedback mutagenesis. Six of twelve LTEE populations became hypermutators via mismatch-repair defects, and some later re-lowered their mutation rate. A controller that cranks mutagenesis whenever adaptation stalls needs a model, not a threshold.</li>
+      <li><strong>Neither machine, however upgraded, is a bioprocess instrument.</strong> Both stay ~20 mL benchtop research devices — no gas sparging at scale, no fed-batch, no CIP/SIP. They live at the discovery end; the strain then goes to a real instrumented bioreactor. The evolution machine's added sensing makes the category error easier, not harder — which is the deeper reason Part 2 says resist.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><strong>Verified costs:</strong> Chi.Bio ~$300/device + PCB fab; OpenEvo ~$300 first unit, ~$200 subsequent; Rodeostat $240; IO Rodeo LED boards $7–$72. <strong>Not verified against datasheets:</strong> OpenEIT Spectra, Red Pitaya STEMlab, C12880MA, and the AN-1271/AN-1302 register details in Q1–Q2. Confirm before budgeting or grant-writing.</p>
+    <p class="caveat">OpenEvo is a preprint, not peer-reviewed. Two flags for its authors: (1) the abstract's "55% faster" and the results' "36% increase in growth rate" describe the same cycle-145 data — 36% is the doubling-time reduction, 55% the rate increase; the results text mislabels one. (2) Variant calling used Geneious's default mapper at low-medium sensitivity; the IS-mediated ~110 kb deletion it found is a textbook <code>breseq</code> case.</p>
+  </footer>
+
+</div>
