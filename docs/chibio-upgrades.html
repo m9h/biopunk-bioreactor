@@ -148,9 +148,9 @@
     <h2><span class="num">01</span> Control computer &amp; connectivity — highest impact, <em>not</em> lowest effort</h2>
 
     <div class="upgrade">
-      <div class="tags"><span class="tag effort-high">Effort: high</span><span class="tag adopt">Adopt · budget HAL rewrite</span></div>
+      <div class="tags"><span class="tag effort-med">Effort: medium</span><span class="tag adopt">Adopt · mostly a board respin</span></div>
       <h3>BeagleBone Black → Raspberry Pi (Zero 2 W, 4, or 5)</h3>
-      <p>The BBB is single-core with no onboard wireless; a Pi Zero 2 W is quad-core with WiFi + BT, and Pi 4/5 add compute for logging, deconvolution, and web-UI responsiveness — plus broader supply and community. But Chi.Bio's I/O layer is BeagleBone-specific (<code>Adafruit_BBIO</code>, the PRU/PWM/GPIO mapping, the cape form factor). A Pi port means rewriting the hardware abstraction layer and respinning the interface board — the biggest single change here, worth it but not a swap.</p>
+      <p>The BBB is single-core with no onboard wireless; a Pi Zero 2 W is quad-core with WiFi + BT, and Pi 4/5 add compute for logging, deconvolution, and web-UI responsiveness — plus broader supply and community. Reading the ChiBio OS (<code>app.py</code>, master) settles the usual fear: Chi.Bio does <strong>all</strong> sensing and actuation over I²C behind a <code>0x74</code> multiplexer — AS7341 (<code>0x39</code>), thermometers (<code>0x18</code>/<code>0x1b</code>/<code>0x5a</code>), two PCA9685 PWM chips (<code>0x60</code>/<code>0x61</code>), a laser DAC (<code>0x48</code>) — and <strong>never uses the BeagleBone's onboard ADC or hardware PWM</strong>, so the Pi's lack of an ADC is a non-issue. The BBB-specific surface is tiny: <code>Adafruit_BBIO.GPIO</code> for three pins (<code>P8_11</code> watchdog, <code>P8_15</code> mux reset, <code>P8_17</code> latch), a hardcoded I²C bus (2 → the Pi's 1), and Debian-on-BBB assumptions in <code>setup.sh</code>. The real work is the <strong>carrier board</strong> (a BBB cape → a Pi 40-pin HAT breaking out I²C + those three GPIO + power) and <strong>bench-validating Pi I²C</strong> (its controller is historically touchy with clock-stretching). See the feasibility appendix.</p>
     </div>
 
     <div class="upgrade">
@@ -231,12 +231,51 @@
           <tr><td class="rowlabel">REST / MQTT API</td><td class="cell-good">High (integration)</td><td class="cell-warn">Med</td><td>Adopt</td></tr>
           <tr><td class="rowlabel">Stepper pumps</td><td>Med–high (precision)</td><td class="cell-warn">Med</td><td>Adopt selectively</td></tr>
           <tr><td class="rowlabel">Peltier heat+cool</td><td class="cell-good">High (new regimes)</td><td class="cell-warn">Med</td><td>Adopt (variant)</td></tr>
-          <tr><td class="rowlabel">BeagleBone → Raspberry Pi</td><td class="cell-good">High (compute + WiFi)</td><td class="cell-bad">High</td><td>Adopt, budget HAL rewrite</td></tr>
+          <tr><td class="rowlabel">BeagleBone → Raspberry Pi</td><td class="cell-good">High (compute + WiFi)</td><td class="cell-warn">Med (respin + I²C)</td><td>Adopt</td></tr>
           <tr><td class="rowlabel">Discrete LED footprints</td><td>Med (customisation)</td><td class="cell-bad">High</td><td>Variant only</td></tr>
           <tr><td class="rowlabel">Dispersive spectrometer</td><td class="cell-good">High (see Part 1)</td><td class="cell-bad">High</td><td>Defer to two-instruments</td></tr>
         </tbody>
       </table>
     </div>
+  </section>
+
+  <section>
+    <h2><span class="num">A</span> Feasibility — BeagleBone Black → Raspberry Pi Zero 2 W</h2>
+    <div class="callout">
+      <div class="eyebrow">Verdict</div>
+      <p><strong>Feasible, medium effort — mostly a simple carrier-board respin, not a software rewrite.</strong> Grounded in reading the ChiBio OS (<code>app.py</code>, master). The usual blocker — the Pi's missing ADC and thinner hardware-PWM — <strong>does not apply</strong>, because Chi.Bio uses neither: every sensor and actuator is an I²C device behind a <code>0x74</code> multiplexer.</p>
+    </div>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>I²C addr</th><th>Device</th><th>Role</th><th>Pi i²c-1?</th></tr></thead>
+        <tbody>
+          <tr><td class="rowlabel">0x74</td><td>TCA9548A-class mux</td><td>selects module M0–M7</td><td class="cell-good">✓</td></tr>
+          <tr><td class="rowlabel">0x39</td><td>ams AS7341</td><td>OD + spectrum ("OD chip")</td><td class="cell-good">✓</td></tr>
+          <tr><td class="rowlabel">0x18 / 0x1b</td><td>digital thermometers</td><td>temp sense (int / ext)</td><td class="cell-good">✓</td></tr>
+          <tr><td class="rowlabel">0x5a</td><td>MLX90614-class IR</td><td>non-contact temp</td><td class="cell-good">✓</td></tr>
+          <tr><td class="rowlabel">0x48</td><td>DAC</td><td>650 nm laser (OD source)</td><td class="cell-good">✓</td></tr>
+          <tr><td class="rowlabel">0x60</td><td>PCA9685 PWM</td><td>LEDs / stirrer / heater / UV</td><td class="cell-good">✓</td></tr>
+          <tr><td class="rowlabel">0x61</td><td>PCA9685 PWM</td><td>4 peristaltic pumps</td><td class="cell-good">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>No <code>Adafruit_BBIO.ADC</code>, no <code>Adafruit_BBIO.PWM</code>, no PRU, no device-tree cape, no <code>config-pin</code>; the <code>serial</code> import is dead code. So no external ADS1115 is needed.</p>
+    <h3>The entire BBB-specific surface to port</h3>
+    <ul>
+      <li><strong>I²C bus number.</strong> Hardcoded bus 2 (<code>get_i2c_device(addr, 2)</code>, <code>smbus.SMBus(bus=2)</code>) → the Pi's <code>i2c-1</code>. A mechanical find-replace.</li>
+      <li><strong>Three GPIO lines.</strong> <code>P8_11</code> (watchdog — toggled every second; the hardware powers down the reactor if it <em>stops</em>, so safety-critical), <code>P8_15</code> (mux reset), <code>P8_17</code> (D-latch enable). Swap <code>Adafruit_BBIO.GPIO</code> for <code>RPi.GPIO</code>/<code>gpiozero</code> and map to Pi BCM pins; replicate the watchdog timing.</li>
+      <li><strong>I²C wrapper.</strong> <code>Adafruit_GPIO.I2C</code> → a Pi-friendly wrapper, or reimplement the tiny <code>get_i2c_device</code> helper over <code>smbus2</code> (already imported).</li>
+      <li><strong><code>setup.sh</code> for Raspberry Pi OS.</strong> Drop the Cloud9 systemd service, the <code>debian</code> user / <code>/home/debian</code> paths, the <code>192.168.7.x</code> USB-gadget subnet, and the Gunicorn bind <code>192.168.7.2:5000</code>. Enable I²C via <code>raspi-config</code>; bind to <code>wlan0</code>/<code>usb0</code>.</li>
+    </ul>
+    <h3>The hardware, and does the Zero 2 W fit</h3>
+    <p>Chi.Bio's interface board is a <strong>BBB cape</strong> (2×46 P8/P9 headers); the Pi has a 40-pin header, so the carrier needs a respin — but electrically trivial: route SDA/SCL, the three GPIO, and 3.3 V / 5 V / GND. The reactor electronics (all on the per-module boards) are unchanged. The <strong>Pi Zero 2 W</strong> fits: quad-core Cortex-A53 @1 GHz (vs the BBB's single A8), 512 MB RAM (matches the BBB — Flask + Gunicorn + numpy already run there), onboard WiFi + BT (the headline win). It keeps a <strong>micro-USB</strong> OTG port and has no Ethernet, so WiFi/USB-gadget replaces the BBB's wired link — the USB-C point in §1 is about the reactor link, not this board.</p>
+    <h3>Risks to bench-check first</h3>
+    <ul>
+      <li><strong>Pi I²C clock-stretching.</strong> The Broadcom hardware-I²C block is historically buggy with clock-stretching peripherals; the whole design rides one bus. AS7341/PCA9685 generally do not stretch — but verify. Fallbacks: lower the baud rate, software I²C (<code>i2c-gpio</code>), or prototype on a <strong>Pi 4</strong> and shrink to the Zero 2 W.</li>
+      <li><strong>Patched BBB kernel.</strong> The README notes the V2 image adjusts the base kernel; confirm nothing beyond I²C/GPIO timing depends on it.</li>
+      <li><strong>Watchdog fidelity.</strong> Because <code>P8_11</code> powers down the reactor if toggling stops, get its Pi equivalent's timing and boot behaviour right or you get spurious shutdowns.</li>
+    </ul>
+    <p><strong>Rough effort:</strong> software ~1–2 days for someone familiar with the code; the carrier HAT (design → fab → bring-up) a week-plus with iteration; I²C validation ~a day. A focused week or two, not a rewrite — hence <strong>medium</strong>, not high. <strong>Recommendation:</strong> target the Zero 2 W for the shipping form factor, but do the first port on a Pi 4 to de-risk the I²C, then shrink.</p>
   </section>
 
   <section>
