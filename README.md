@@ -17,6 +17,7 @@ field-wide comparison plus a build plan.
 | [`docs/two-instruments.md`](docs/two-instruments.md) | A design proposal: the best characterisation instrument, the best evolution machine, and the argument for sharing a component ecosystem rather than merging into one machine. **The plan.** |
 | [`docs/education.md`](docs/education.md) | The educational materials each platform serves — classroom-validated uses, curricula, and a cross-platform concepts ladder. |
 | [`docs/datasheet-verification.md`](docs/datasheet-verification.md) | A primary-source pass resolving the open items above: confirms the sensor/impedance/platform specs, corrects four (incl. Pioreactor's hardware licence), and answers the "silicon or firmware?" half of Open Question 1. **The receipts.** |
+| [`docs/chibio-upgrades.md`](docs/chibio-upgrades.md) | A platform-modernisation note for Chi.Bio: base-platform upgrades (compute, connectivity, pumps, thermal, software architecture) anchored to the verified BOM/code baseline — including a correction that Chi.Bio *already* ships the AS7341. Complements `two-instruments.md` Part 1 (sensing). |
 | `docs/*.html` | Rendered, self-contained versions of the same documents (theme-aware, no external assets). |
 
 ## Core argument, in one paragraph

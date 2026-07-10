@@ -8,6 +8,14 @@ a claim was taken from a secondary source or product page rather than a primary 
 - **Chi.Bio** — Steel H, Habgood R, Kelly CL, Papachristodoulou A. "In situ characterisation
   and manipulation of biological systems with Chi.Bio." *PLoS Biology* 18(7):e3000794 (2020).
   https://doi.org/10.1371/journal.pbio.3000794 — full text read.
+  Hardware baseline (verified 2026-07-10 for `docs/chibio-upgrades.md`): tech-specs
+  https://chi.bio/tech-specs/ · hardware/BOM package `BOM13.zip` from https://chi.bio/hardware/ ·
+  control OS (Flask/Python, `Adafruit_BBIO`) https://github.com/HarrisonSteel/ChiBio. Confirmed
+  from BOM + code (not the paper): BeagleBone Black Rev C; micro-USB reactor link; 3 W resistive
+  heater, passive cooling; PWM-driven brushed-DC peristaltic pumps; **ams AS7341** spectral
+  sensor (`SensorBreakoutAS7341`, I²C 0x39) — already the baseline optical part, not an upgrade;
+  650 nm laser diode `ADL65052TL` for OD. Exact seven-colour emitter part/footprint not in the
+  fabrication-level BOM (unverified).
 
 - **OpenEvo** — Cocioba SS, Huang P-C, Mallon J, Chan Z, Geremew AW, Bisson A, Kyriakakis P.
   "OpenEvo: An Open-Source Platform for Automated Evolution and Analysis." *bioRxiv*

@@ -1,0 +1,258 @@
+<title>Chi.Bio — Platform-Modernisation Upgrades</title>
+<style>
+  :root {
+    --ground: #ECEDF0;
+    --surface: #F7F8FA;
+    --surface-2: #E0E2E7;
+    --ink: #15181D;
+    --ink-muted: #5A616C;
+    --ink-faint: #878E99;
+    --rule: #CBCFD6;
+    --accent: #3B5A8C;
+    --accent-soft: #DAE1EE;
+    --good: #2E7350;
+    --good-soft: #D5E7DC;
+    --bad: #9C332E;
+    --bad-soft: #EFD9D7;
+    --warn: #8F6210;
+    --warn-soft: #EEE2C8;
+
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --measure: 68ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+      --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+      --accent: #7FA3D6; --accent-soft: #17293F;
+      --good: #6DB78B; --good-soft: #123326;
+      --bad: #E08880; --bad-soft: #351A18;
+      --warn: #D3A24C; --warn-soft: #33280F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+    --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+    --accent: #7FA3D6; --accent-soft: #17293F;
+    --good: #6DB78B; --good-soft: #123326;
+    --bad: #E08880; --bad-soft: #351A18;
+    --warn: #D3A24C; --warn-soft: #33280F;
+  }
+  :root[data-theme="light"] {
+    --ground: #ECEDF0; --surface: #F7F8FA; --surface-2: #E0E2E7;
+    --ink: #15181D; --ink-muted: #5A616C; --ink-faint: #878E99; --rule: #CBCFD6;
+    --accent: #3B5A8C; --accent-soft: #DAE1EE;
+    --good: #2E7350; --good-soft: #D5E7DC;
+    --bad: #9C332E; --bad-soft: #EFD9D7;
+    --warn: #8F6210; --warn-soft: #EEE2C8;
+  }
+
+  body { background: var(--ground); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 82ch; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; display: flex; flex-direction: column; gap: 3rem; }
+
+  .masthead { display: flex; flex-direction: column; gap: 1.1rem; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+  .standfirst { font-size: 1.15rem; color: var(--ink-muted); max-width: var(--measure); text-wrap: pretty; }
+  .meta { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 0; text-wrap: balance; display: flex; align-items: baseline; gap: 0.7rem; }
+  h2 .num { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); font-weight: 600; flex: none; }
+  h3 { font-size: 1.02rem; font-weight: 700; margin: 0; letter-spacing: -0.005em; }
+  p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  strong { font-weight: 700; }
+  code { font-family: var(--mono); font-size: 0.85em; background: var(--surface-2); padding: 0.08em 0.36em; border-radius: 3px; }
+  ul { margin: 0; padding-left: 1.1rem; max-width: var(--measure); display: flex; flex-direction: column; gap: 0.4rem; }
+  li::marker { color: var(--ink-faint); }
+
+  /* callout */
+  .callout { background: var(--surface); border-left: 3px solid var(--good); padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .callout .eyebrow { color: var(--good); }
+  .callout p { max-width: none; }
+  .callout.warn { border-left-color: var(--warn); }
+  .callout.warn .eyebrow { color: var(--warn); }
+
+  /* upgrade blocks */
+  .upgrade { border: 1px solid var(--rule); background: var(--surface); border-left-width: 4px; border-left-color: var(--accent); padding: 1.2rem 1.5rem; display: flex; flex-direction: column; gap: 0.55rem; }
+  .upgrade h3 { font-size: 0.98rem; }
+  .upgrade p { max-width: none; font-size: 0.94rem; }
+  .tags { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.06em; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { padding: 0.14em 0.5em; border-radius: 2px; text-transform: uppercase; font-weight: 600; }
+  .tag.effort-low  { background: var(--good-soft); color: var(--good); }
+  .tag.effort-med  { background: var(--warn-soft); color: var(--warn); }
+  .tag.effort-high { background: var(--bad-soft); color: var(--bad); }
+  .tag.adopt { background: var(--accent-soft); color: var(--accent); }
+
+  /* tables */
+  .scroller { overflow-x: auto; border: 1px solid var(--rule); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.8rem; min-width: 44rem; }
+  th { text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--ink); white-space: nowrap; vertical-align: bottom; }
+  td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.rowlabel { font-weight: 600; color: var(--ink); }
+  td.src { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-muted); }
+  .cell-good { color: var(--good); font-weight: 600; }
+  .cell-bad  { color: var(--bad); }
+  .cell-warn { color: var(--warn); }
+
+  footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; font-size: 0.78rem; color: var(--ink-muted); display: flex; flex-direction: column; gap: 0.7rem; }
+  footer p { max-width: none; font-size: 0.78rem; }
+  .caveat { font-family: var(--mono); font-size: 0.7rem; line-height: 1.55; color: var(--ink-faint); }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Design Note · Platform Modernisation</div>
+    <h1>Chi.Bio — Platform-Modernisation Upgrades</h1>
+    <p class="standfirst">Low-hanging modernisation of an exceptionally well-engineered platform — the base compute, connectivity, actuation, thermal range, and software architecture — each proposal anchored to what Chi.Bio actually ships today.</p>
+    <div class="meta">
+      <span>2026-07-10</span>
+      <span>Baseline: Steel et al. 2020 + tech-specs + BOM13 + ChiBio OS</span>
+      <span>A design note, not an endorsement of any part number</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="callout warn">
+      <div class="eyebrow">Read this first — one correction</div>
+      <p>Chi.Bio <strong>already uses the ams AS7341</strong> 11-channel spectral sensor — the BOM board is literally <code>SensorBreakoutAS7341</code>, and the OS instantiates <code>AS7341</code> at I²C <code>0x39</code>, reading eight bands plus Clear/NIR. So "upgrade the 8-band array to an AS7341" is not an upgrade; it is the current part. §4 covers what a real optical upgrade would be. This note is the base-platform axis; the companion <a href="two-instruments.html">two-instruments</a> Part 1 covers new <em>sensing modalities</em> (DO/pH optodes, dispersive spectrometry, atmosphere) and this note defers to it on optics.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">00</span> The verified baseline — what Chi.Bio actually ships</h2>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Subsystem</th><th>Current part / design</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td class="rowlabel">Control computer</td><td><strong>BeagleBone Black Rev C</strong> — single-core AM335x Cortex-A8 @1 GHz, 10/100 Ethernet, <strong>no onboard WiFi</strong></td><td class="src">tech-specs + BOM (<code>BBB01-SC-505</code>) + code (<code>Adafruit_BBIO</code>)</td></tr>
+          <tr><td class="rowlabel">Reactor ↔ computer</td><td><strong>micro-USB</strong> (data); reactor powered separately by a 12 V 3 A supply, not bus-powered</td><td class="src">paper + tech-specs + BOM</td></tr>
+          <tr><td class="rowlabel">Heating / thermal</td><td><strong>resistive PCB heat-plate</strong>, 3 W, up to 2.0 °C·min⁻¹; <strong>heat-only, passive cooling</strong> (no Peltier)</td><td class="src">paper + tech-specs + BOM (<code>Heater3</code>)</td></tr>
+          <tr><td class="rowlabel">Pumps</td><td>up to 4× <strong>brushed-DC peristaltic</strong>, speed by <strong>PWM duty-cycle</strong>, direction by H-bridge, ≤1 mL·s⁻¹</td><td class="src">paper + BOM + code (PWM 0x60/0x61)</td></tr>
+          <tr><td class="rowlabel">Spectral sensor</td><td><strong>ams AS7341</strong> — 11-channel (8 spectral + Clear + NIR + flicker); Chi.Bio reads 8 bands + Clear</td><td class="src">BOM (<code>SensorBreakoutAS7341</code>) + code (0x39)</td></tr>
+          <tr><td class="rowlabel">Excitation source</td><td>one <strong>multi-die "seven-colour" emitter</strong> behind focusing optics + 650 nm laser diode (OD) + UV LED</td><td class="src">paper + tech-specs + BOM (<code>ADL65052TL</code>)</td></tr>
+          <tr><td class="rowlabel">Software</td><td><strong>Python / Flask</strong> backend + HTML/JS web UI; <strong>native</strong> BeagleBone install (no Docker); no formal REST/MQTT API</td><td class="src">paper + tech-specs + code (<code>app.py</code>)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caveat">The paper does not name the AS7341, the SBC model, or the emitter part; those are BOM- and code-verified, not paper-verified — flagged per the repo's no-laundering rule.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">01</span> Control computer &amp; connectivity — highest impact, <em>not</em> lowest effort</h2>
+
+    <div class="upgrade">
+      <div class="tags"><span class="tag effort-high">Effort: high</span><span class="tag adopt">Adopt · budget HAL rewrite</span></div>
+      <h3>BeagleBone Black → Raspberry Pi (Zero 2 W, 4, or 5)</h3>
+      <p>The BBB is single-core with no onboard wireless; a Pi Zero 2 W is quad-core with WiFi + BT, and Pi 4/5 add compute for logging, deconvolution, and web-UI responsiveness — plus broader supply and community. But Chi.Bio's I/O layer is BeagleBone-specific (<code>Adafruit_BBIO</code>, the PRU/PWM/GPIO mapping, the cape form factor). A Pi port means rewriting the hardware abstraction layer and respinning the interface board — the biggest single change here, worth it but not a swap.</p>
+    </div>
+
+    <div class="upgrade">
+      <div class="tags"><span class="tag effort-low">Effort: low</span><span class="tag adopt">Adopt</span></div>
+      <h3>micro-USB → USB-C on the reactor link</h3>
+      <p>micro-USB ports are the classic mechanical failure point under lab handling; USB-C is more durable and unlocks better power-delivery options. The link is data-only (power is already separate), so this is a connector + cable change.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span> Liquid handling &amp; pumping</h2>
+
+    <div class="upgrade">
+      <div class="tags"><span class="tag effort-med">Effort: medium</span><span class="tag adopt">Adopt selectively</span></div>
+      <h3>Brushed-DC peristaltic → stepper-driven peristaltic</h3>
+      <p>Chi.Bio meters low flow by PWM-duty-cycling brushed-DC pumps, which pulses the flow. Stepper heads give smooth, pulsation-free micro-metering of media and inducers, with repeatable volume per step. New drivers + firmware and more cost per channel — adopt where metering precision matters; keep DC for coarse waste.</p>
+    </div>
+
+    <div class="upgrade">
+      <div class="tags"><span class="tag effort-med">Effort: low–med</span><span class="tag adopt">Adopt for longevity</span></div>
+      <h3>Brushed → brushless DC (if staying DC)</h3>
+      <p>Brushless motors remove the brush-wear failure mode that kills pumps mid-run on multi-week continuous cultures.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span> Thermal management</h2>
+
+    <div class="upgrade">
+      <div class="tags"><span class="tag effort-med">Effort: medium</span><span class="tag adopt">Adopt (variant)</span></div>
+      <h3>Resistive heater → Peltier (thermoelectric) module</h3>
+      <p>Chi.Bio's 3 W resistive plate with passive cooling can only hold <em>above</em> ambient. A Peltier heats <em>and</em> actively cools, enabling psychrophilic organisms and precise cold-shock / cold-inducible optogenetic protocols. Costs a heatsink/fan, an H-bridge driver, and more power budget — and watch condensation on the optical path. A real capability gain, not just a spec bump.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span> Optics — read the correction first</h2>
+
+    <div class="upgrade">
+      <div class="tags"><span class="tag effort-low">In-family: low</span><span class="tag effort-high">Step-change: high</span></div>
+      <h3>The premise correction, then two real options</h3>
+      <p>Chi.Bio <strong>already has</strong> the AS7341 (11 channels), so "upgrade to an AS7341" is a no-op. Two real options exist: <em>in-family</em>, the <strong>ams AS7343 (14-channel)</strong> is a near-drop-in for a few more bands and marginally cleaner GFP/YFP/mCherry deconvolution (low effort, modest payoff); <em>step-change</em>, a <strong>dispersive micro-spectrometer (Hamamatsu C12880MA)</strong> replaces fixed filter bands with a continuous 340–850 nm spectrum — the higher-value optical upgrade, already specced in <a href="two-instruments.html">two-instruments</a> Part 1, so defer there.</p>
+    </div>
+
+    <div class="upgrade">
+      <div class="tags"><span class="tag effort-high">Effort: high</span><span class="tag adopt">Variant only</span></div>
+      <h3>Discrete, standard-footprint excitation LEDs</h3>
+      <p>Chi.Bio's excitation is one multi-die seven-colour emitter behind focusing optics — powerful, but <em>not</em> a set of swappable discrete LEDs. Re-laying the optical PCB with discrete <strong>Star/MCPCB or 3535</strong> footprints would let users populate their own excitation wavelengths (e.g. a specific optogenetic driver line) from off-the-shelf parts. It trades the integrated emitter's focusing and co-alignment for modularity — a redesign, not a swap. Worthwhile for an optogenetics-focused variant; know the trade.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span> Software &amp; integration architecture</h2>
+
+    <div class="upgrade">
+      <div class="tags"><span class="tag effort-med">Effort: low–med</span><span class="tag adopt">Adopt</span></div>
+      <h3>Containerise the backend (Docker)</h3>
+      <p>Chi.Bio installs natively on the BeagleBone via shell scripts, with no Dockerfile; Python-dependency drift is a real setup pain. A container makes install one command and pins the stack. Note the current armv7/32-bit target — a Pi move (§1) eases this.</p>
+    </div>
+
+    <div class="upgrade">
+      <div class="tags"><span class="tag effort-med">Effort: medium</span><span class="tag adopt">Adopt · biggest integration win</span></div>
+      <h3>Add a REST or MQTT layer</h3>
+      <p>The Flask UI exposes JSON endpoints for its own front-end but no documented external API; automation today means editing the Python app. A small REST/MQTT surface makes Chi.Bio composable with cloud-lab schedulers and liquid-handling robots (Opentrons, etc.).</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span> Effort vs. impact, at a glance</h2>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Upgrade</th><th>Impact</th><th>Effort</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td class="rowlabel">micro-USB → USB-C</td><td>Low–med</td><td class="cell-good">Low</td><td>Adopt</td></tr>
+          <tr><td class="rowlabel">Brushless DC pumps</td><td>Med (reliability)</td><td class="cell-good">Low–med</td><td>Adopt</td></tr>
+          <tr><td class="rowlabel">Docker packaging</td><td>Med</td><td class="cell-good">Low–med</td><td>Adopt</td></tr>
+          <tr><td class="rowlabel">AS7341 → AS7343</td><td>Low</td><td class="cell-good">Low</td><td>Optional</td></tr>
+          <tr><td class="rowlabel">REST / MQTT API</td><td class="cell-good">High (integration)</td><td class="cell-warn">Med</td><td>Adopt</td></tr>
+          <tr><td class="rowlabel">Stepper pumps</td><td>Med–high (precision)</td><td class="cell-warn">Med</td><td>Adopt selectively</td></tr>
+          <tr><td class="rowlabel">Peltier heat+cool</td><td class="cell-good">High (new regimes)</td><td class="cell-warn">Med</td><td>Adopt (variant)</td></tr>
+          <tr><td class="rowlabel">BeagleBone → Raspberry Pi</td><td class="cell-good">High (compute + WiFi)</td><td class="cell-bad">High</td><td>Adopt, budget HAL rewrite</td></tr>
+          <tr><td class="rowlabel">Discrete LED footprints</td><td>Med (customisation)</td><td class="cell-bad">High</td><td>Variant only</td></tr>
+          <tr><td class="rowlabel">Dispersive spectrometer</td><td class="cell-good">High (see Part 1)</td><td class="cell-bad">High</td><td>Defer to two-instruments</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span> Already present — do <em>not</em> propose these</h2>
+    <p>Verified against the BOM and control code, so an "upgrade" list should not include them:</p>
+    <ul>
+      <li><strong>ams AS7341 11-channel spectral sensor</strong> — already the baseline optical part.</li>
+      <li><strong>Independent per-pump speed control</strong> — already done via PWM (the issue is pulsation, not lack of control).</li>
+      <li><strong>Per-colour excitation control</strong> — the seven-colour emitter already drives each band independently.</li>
+      <li><strong>Python + web UI</strong> — already the stack; the gap is packaging and an external API, not the UI.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Companion documents: <a href="two-instruments.html">Two Instruments, One Ecosystem</a> (Part 1 covers Chi.Bio sensing modalities) · <a href="corrections-and-matrix.html">OpenEvo Corrections &amp; the Open-Bioreactor Matrix</a> · <a href="datasheet-verification.html">Datasheet Verification Pass</a>.</p>
+    <p class="caveat"><strong>Paper-verified:</strong> heater rate (2.0 °C·min⁻¹), PWM pump drive, seven-colour emitter, Python/web-UI stack. <strong>BOM/site/code-verified (not in the paper):</strong> BeagleBone Black Rev C; micro-USB link; 3 W heater; AS7341 identity; native-install / no-Docker / no-API status. <strong>Not verified from a primary source:</strong> the exact seven-colour emitter part/footprint (consistent with an LED Engin LZ7-series part, but inference until the schematic confirms); the BBB single-core / no-WiFi detail is from the SBC datasheet, not a Chi.Bio document. See <a href="../SOURCES.md">SOURCES.md</a>.</p>
+  </footer>
+
+</div>
