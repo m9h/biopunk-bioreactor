@@ -49,8 +49,8 @@ growth-rate increase. **Fix:** "36% shorter doubling time, equivalently a 55% hi
 > "A research-scale device called the 'Pioreactor' is available for purchase, but only the
 > software is open source."
 
-A public `Pioreactor/hardware` repository exists and the hardware is released under the
-**CERN Open Hardware Licence**. The claim is used to clear competitive space and is false.
+A public `Pioreactor/hardware` repository exists and the hardware is released under
+**CC BY-SA 4.0** (per its `LICENSE` file). The claim is used to clear competitive space and is false.
 **Fix:** describe Pioreactor as open-hardware-and-software; distinguish it on the real axis —
 a supported product with a fleet platform, not a from-scratch build.
 
@@ -117,7 +117,7 @@ Confidence markers in cells: ✓ strength, ✗ weakness, ~ qualified.
 | Primary purpose | P1 | P2 | P3 | P3 | P2 | P2 |
 | Reference | PLOS Biol 2020 | bioRxiv 2026 | ✗ none | Nat Biotech 2018 | eLife 2022 | Nat Protoc 2013 |
 | Parallelism | ✓ 8 / 1 computer | ✗ 1 chamber | ✓ cluster (N) | ✓ 16 vials | ≥3 replicates | few |
-| Working volume | 12–25 mL | ~20 mL | 20 / 40 mL | ~40 mL | ~12 mL | ~10 mL |
+| Working volume | 12–25 mL | ~20 mL | 20 / 40 mL | ~40 mL | ~12 mL | ~12 mL |
 | OD source | 650 nm laser | 940 nm IR | 900 nm IR | LED/photodiode | LED/photodiode | LED/photodiode |
 | Rich sensing | ✓ spectrometer + 7-LED | ✗ OD only | ~ plugin (AS7341) | ~ configurable | ✗ OD only | ✗ OD only |
 | Culture contact | ✓ non-contact | closed, contact OK | contact | contact | contact | contact |
@@ -125,7 +125,7 @@ Confidence markers in cells: ✓ strength, ✗ weakness, ~ qualified.
 | Selection fluidics | 2+2 pumps | ✓ 3 media + waste | pumps (plugin) | ✓ configurable | drug line | ✓ drug gradient |
 | Control law | ✓ PID + MPC | threshold | Kalman GR | configurable | threshold | drug titration |
 | Archiving | ✗ none | ✗ manual, 1× | ✗ none | ✗ none | ✗ none | ✗ none |
-| Open HW / SW | ✓ both | ✓ both | ✓ both (CERN-OHL) | ✓ both | ✓ both | protocol |
+| Open HW / SW | ✓ both | ✓ both | ✓ both (CC BY-SA 4.0) | ✓ both | ✓ both | protocol |
 | Cost / unit | ~$300 +PCB | ~$300 | $329–389 | ~ <$2k (16) | ✓ $115–200 | mid |
 | Build effort | ~ PCB fab | ✓ manual, guided | ✓ buy turnkey | ✗ machine shop | moderate | ~ bespoke |
 | Independent use | ReacSight, others | ~ too new | ~ community only | ✓ ePACE, base editors | teaching | ✓ widely adapted |
@@ -156,7 +156,7 @@ Confidence markers in cells: ✓ strength, ✗ weakness, ~ qualified.
 **Pioreactor** — *P3 · turnkey fleet operation* · no paper · $329–389 · cluster
 - ✓ Buy and run — no build, supported, maintained
 - ✓ Leader/worker cluster + plugin ecosystem
-- ✓ CERN-OHL hardware, MIT software
+- ✓ CC BY-SA 4.0 hardware, MIT software
 - ✗ No peer-reviewed reference — hard to cite
 - ✗ Rich sensing only via plugins
 - ✗ Not evolution- or characterisation-optimised
@@ -217,7 +217,7 @@ For a platform with no methods paper, third-party *use* is the only external val
 
 ---
 
-*Verified this session: OpenEvo and Chi.Bio full text; Pioreactor specs, pricing, CERN-OHL
-hardware, and absence of a reference paper; eVOLVER and EVE headline specs. From prior
-literature, not re-verified: Toprak morbidostat; ReacSight and ePACE adoption specifics. See
-[`../SOURCES.md`](../SOURCES.md).*
+*Verified this session: OpenEvo and Chi.Bio full text; Pioreactor specs, pricing, CC BY-SA 4.0
+hardware, and absence of a reference paper; eVOLVER and EVE headline specs. Sensor, impedance,
+and adoption specs confirmed against datasheets and primary papers in
+[`datasheet-verification.md`](datasheet-verification.md). See [`../SOURCES.md`](../SOURCES.md).*

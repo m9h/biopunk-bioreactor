@@ -580,7 +580,7 @@
             <td><strong>Pioreactor</strong></td>
             <td class="num-col" style="color:var(--amber)">P3</td>
             <td>Turnkey reliability + fleet. Leader/worker cluster, plugin marketplace, distributor, support. The one you buy, not build.</td>
-            <td class="src">CERN-OHL + MIT</td>
+            <td class="src">CC BY-SA 4.0 + MIT</td>
             <td class="num-col">cluster / $329–389</td>
           </tr>
           <tr>
@@ -620,7 +620,7 @@
       <p>Part 2's fix for OpenEvo's n = 1 problem — "eight cheap chambers under one coordinating interface" — is a description of <strong>Pioreactor's leader/worker cluster</strong>, already productised. So the best P2 machine may be <em>Pioreactor + an archiving plugin + a batch-excursion automation</em>, not a scaled-up OpenEvo. OpenEvo's genuine remaining edge shrinks to two things Pioreactor lacks: the three-media selection fluidics and the closed autoclavable vessel. Both are addable to a Pioreactor; the cluster, the platform, and the plugin ecosystem are not easily addable to an OpenEvo.</p>
     </div>
 
-    <p class="caveat">Correction to the record: OpenEvo's introduction states Pioreactor is "available for purchase, but only the software is open source." A public <code>Pioreactor/hardware</code> repository exists and the hardware is under CERN-OHL — the licence purpose-built for open hardware. The dismissal is not accurate, and it is the same paper that never cites Chi.Bio and under-uses <code>breseq</code>. Weigh its competitive framing accordingly.</p>
+    <p class="caveat">Correction to the record: OpenEvo's introduction states Pioreactor is "available for purchase, but only the software is open source." A public <code>Pioreactor/hardware</code> repository exists and the hardware is under CC BY-SA 4.0 (per its <code>LICENSE</code> file) — openly licensed. The dismissal is not accurate, and it is the same paper that never cites Chi.Bio and under-uses <code>breseq</code>. Weigh its competitive framing accordingly.</p>
   </section>
 
   <!-- ============ BUILD ============ -->
@@ -667,7 +667,7 @@
     <p>These bear on the evolution machine's E3 research tier — mixing verification and viable-cell-density. Q1 is load-bearing; nothing else on the page depends on it.</p>
 
     <ol class="qlist">
-      <li><div><strong>Is Spectra's 80 kHz ceiling silicon or firmware?</strong> AN-1271 specs the <span class="part">ADuCM350</span>'s DFT impedance excitation to 200 kHz, with 80 kHz being the <code>HSDACCON</code> low-power/high-power crossover — which reads as configuration, not hardware. Was 80 kHz a power, noise, thermal, or patient-safety call? Does firmware expose high-power mode, and if pushed to 200 kHz, what degrades first — SNR, DFT settling, or excitation-DAC flatness? The β-dispersion starts at exactly 100 kHz, so this bit is the difference between "off the curve" and "on its lower foot" — and viable-cell-density on yeast (f<sub>c</sub> ≈ 1–2 MHz) becomes real if it clears.</div></li>
+      <li><div><strong>Is Spectra's 80 kHz ceiling silicon or firmware?</strong> AN-1271 specs the <span class="part">ADuCM350</span>'s DFT impedance excitation to 200 kHz, with 80 kHz being the <code>HSDACCON</code> low-power/high-power crossover — which reads as configuration, not hardware. Was 80 kHz a power, noise, thermal, or patient-safety call? Does firmware expose high-power mode, and if pushed to 200 kHz, what degrades first — SNR, DFT settling, or excitation-DAC flatness? The β-dispersion starts at exactly 100 kHz, so this bit is the difference between "off the curve" and "on its lower foot" — and viable-cell-density on yeast (f<sub>c</sub> ≈ 2–3 MHz) becomes real if it clears.</div></li>
       <li><div><strong>Did the 32-electrode Spectra land true tetrapolar drive?</strong> The <code>EIT_EE</code> README notes the 8-electrode board was not tetrapolar and that tetrapolar differential was intended. Is "differential referencing" narrower than that? Does it follow AN-1302's 4-wire bioisolated config? We would measure into archaeal media at 12–18% w/v salt, where electrode polarisation is brutal at the low end of the band.</div></li>
       <li><div><strong>Has Spectra ever imaged a vessel rather than a body?</strong> A ~2.5 cm glass tube of brine is not a thorax; GREIT's priors assume a thorax-shaped domain and physiological conductivity. Does reconstruction hold at that geometry, and is 32 electrodes around that circumference over- or under-determined?</div></li>
     </ol>
@@ -686,7 +686,7 @@
   </section>
 
   <footer>
-    <p><strong>Verified costs:</strong> Chi.Bio ~$300/device + PCB fab; OpenEvo ~$300 first unit, ~$200 subsequent; Rodeostat $240; IO Rodeo LED boards $7–$72. <strong>Not verified against datasheets:</strong> OpenEIT Spectra, Red Pitaya STEMlab, C12880MA, and the AN-1271/AN-1302 register details in Q1–Q2. Confirm before budgeting or grant-writing.</p>
+    <p><strong>Verified costs:</strong> Chi.Bio ~$300/device + PCB fab; OpenEvo ~$300 first unit, ~$200 subsequent; Rodeostat $240; IO Rodeo LED boards $7–$72. <strong>Since confirmed against datasheets</strong> in <a href="datasheet-verification.html">datasheet-verification</a>: C12880MA (340–850 nm, 15 nm max FWHM), AS7341, IO Rodeo footprint + 730 nm part, Red Pitaya (125 MS/s, impedance sweep to 60 MHz), AD5933, and the ADuCM350 (DFT to 200 kHz; 80 kHz is the <code>HSDACCON</code> power-mode threshold, not a silicon ceiling). The ADI PDFs were not re-pulled at page level; confirm before budgeting or grant-writing.</p>
     <p class="caveat">OpenEvo is a preprint, not peer-reviewed. Two flags for its authors: (1) the abstract's "55% faster" and the results' "36% increase in growth rate" describe the same cycle-145 data — 36% is the doubling-time reduction, 55% the rate increase; the results text mislabels one. (2) Variant calling used Geneious's default mapper at low-medium sensitivity; the IS-mediated ~110 kb deletion it found is a textbook <code>breseq</code> case.</p>
   </footer>
 
