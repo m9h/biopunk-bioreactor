@@ -15,6 +15,7 @@ field-wide comparison plus a build plan.
 |---|---|
 | [`docs/corrections-and-matrix.md`](docs/corrections-and-matrix.md) | A fair-minded errata of the OpenEvo preprint, plus a like-for-like matrix of six open bioreactor platforms with per-device pros/cons and adoption evidence. **The evidence base.** |
 | [`docs/two-instruments.md`](docs/two-instruments.md) | A design proposal: the best characterisation instrument, the best evolution machine, and the argument for sharing a component ecosystem rather than merging into one machine. **The plan.** |
+| [`docs/education.md`](docs/education.md) | The educational materials each platform serves — classroom-validated uses, curricula, and a cross-platform concepts ladder. |
 | [`docs/datasheet-verification.md`](docs/datasheet-verification.md) | A primary-source pass resolving the open items above: confirms the sensor/impedance/platform specs, corrects four (incl. Pioreactor's hardware licence), and answers the "silicon or firmware?" half of Open Question 1. **The receipts.** |
 | `docs/*.html` | Rendered, self-contained versions of the same documents (theme-aware, no external assets). |
 
@@ -64,5 +65,5 @@ Keep the verified/unverified discipline — label the confidence of any new clai
 
 ## Licence
 
-Documents and text: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Documents and text: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — see [`LICENSE`](LICENSE) and [`NOTICE.md`](NOTICE.md).
 Cite the underlying papers directly; see [`SOURCES.md`](SOURCES.md).
