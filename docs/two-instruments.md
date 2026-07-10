@@ -137,7 +137,7 @@ archived evidence (P2).
 | Device | Best for | Corner it owns | Open? | Scale · cost |
 |---|---|---|---|---|
 | Chi.Bio | P1 | In-situ measurement density | HW+SW | 8 / ~$300ea |
-| Pioreactor | P3 | Turnkey reliability + fleet | CERN-OHL + MIT | cluster / $329–389 |
+| Pioreactor | P3 | Turnkey reliability + fleet | CC BY-SA 4.0 + MIT | cluster / $329–389 |
 | eVOLVER | P3 | Max-configurability scale-out | HW+SW | 16 / high |
 | Toprak morbidostat | P2 | Drug-gradient selection | HW+SW | few / mid |
 | EVE | P2 | Low-cost evolution + teaching | HW+SW | few / low |
@@ -151,7 +151,7 @@ vessel — both addable to a Pioreactor; the cluster and ecosystem are not easil
 OpenEvo.
 
 *Correction to the record: OpenEvo states Pioreactor is "available for purchase, but only the
-software is open source." A public `Pioreactor/hardware` repo exists under CERN-OHL. See the
+software is open source." A public `Pioreactor/hardware` repo exists under CC BY-SA 4.0. See the
 [corrections](corrections-and-matrix.md).*
 
 ---
@@ -181,7 +181,7 @@ Bearing on E3 (mixing verification and viable-cell-density). Q1 is load-bearing.
    impedance excitation to 200 kHz, with 80 kHz as the `HSDACCON` low/high-power crossover.
    Was 80 kHz a power/noise/thermal/safety call? Does firmware expose high-power mode, and if
    pushed to 200 kHz, what degrades first — SNR, DFT settling, DAC flatness? The β-dispersion
-   starts at 100 kHz, so this bit decides whether viable-cell-density on yeast (f_c ≈ 1–2 MHz)
+   starts at 100 kHz, so this bit decides whether viable-cell-density on yeast (f_c ≈ 2–3 MHz)
    is reachable.
 2. **Did the 32-electrode Spectra land true tetrapolar drive?** The `EIT_EE` README notes the
    8-electrode board was not tetrapolar. Does it follow AN-1302's 4-wire bioisolated config?
@@ -209,6 +209,9 @@ Bearing on E3 (mixing verification and viable-cell-density). Q1 is load-bearing.
 
 ---
 
-*Not verified against datasheets this session: OpenEIT Spectra, Red Pitaya STEMlab, C12880MA,
-and the AN-1271/AN-1302 register details in Q1–Q2. Confirm before budgeting. See
+*A later datasheet pass — [`datasheet-verification.md`](datasheet-verification.md) — confirmed
+the C12880MA, AS7341, IO Rodeo, Red Pitaya, AD5933, and ADuCM350 specs against manufacturer
+datasheets, and resolved the "silicon or firmware?" half of Q1: the ADuCM350's DFT excitation
+is specified to 200 kHz, and 80 kHz is the `HSDACCON` power-mode register threshold, not a
+silicon ceiling. The ADI PDFs were not re-pulled at page level; confirm before budgeting. See
 [`../SOURCES.md`](../SOURCES.md).*

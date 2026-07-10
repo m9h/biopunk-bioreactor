@@ -1,0 +1,235 @@
+<title>Datasheet Verification Pass</title>
+<style>
+  :root {
+    --ground: #ECEDF0;
+    --surface: #F7F8FA;
+    --surface-2: #E0E2E7;
+    --ink: #15181D;
+    --ink-muted: #5A616C;
+    --ink-faint: #878E99;
+    --rule: #CBCFD6;
+    --accent: #3B5A8C;
+    --accent-soft: #DAE1EE;
+    --good: #2E7350;
+    --good-soft: #D5E7DC;
+    --bad: #9C332E;
+    --bad-soft: #EFD9D7;
+    --warn: #8F6210;
+    --warn-soft: #EEE2C8;
+
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --measure: 68ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+      --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+      --accent: #7FA3D6; --accent-soft: #17293F;
+      --good: #6DB78B; --good-soft: #123326;
+      --bad: #E08880; --bad-soft: #351A18;
+      --warn: #D3A24C; --warn-soft: #33280F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+    --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+    --accent: #7FA3D6; --accent-soft: #17293F;
+    --good: #6DB78B; --good-soft: #123326;
+    --bad: #E08880; --bad-soft: #351A18;
+    --warn: #D3A24C; --warn-soft: #33280F;
+  }
+  :root[data-theme="light"] {
+    --ground: #ECEDF0; --surface: #F7F8FA; --surface-2: #E0E2E7;
+    --ink: #15181D; --ink-muted: #5A616C; --ink-faint: #878E99; --rule: #CBCFD6;
+    --accent: #3B5A8C; --accent-soft: #DAE1EE;
+    --good: #2E7350; --good-soft: #D5E7DC;
+    --bad: #9C332E; --bad-soft: #EFD9D7;
+    --warn: #8F6210; --warn-soft: #EEE2C8;
+  }
+
+  body { background: var(--ground); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 82ch; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; display: flex; flex-direction: column; gap: 3rem; }
+
+  .masthead { display: flex; flex-direction: column; gap: 1.1rem; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+  .standfirst { font-size: 1.15rem; color: var(--ink-muted); max-width: var(--measure); text-wrap: pretty; }
+  .meta { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 0; text-wrap: balance; display: flex; align-items: baseline; gap: 0.7rem; }
+  h2 .num { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); font-weight: 600; flex: none; }
+  h3 { font-size: 1.02rem; font-weight: 700; margin: 0; letter-spacing: -0.005em; }
+  p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  strong { font-weight: 700; }
+  code { font-family: var(--mono); font-size: 0.85em; background: var(--surface-2); padding: 0.08em 0.36em; border-radius: 3px; }
+  ul { margin: 0; padding-left: 1.1rem; max-width: var(--measure); display: flex; flex-direction: column; gap: 0.4rem; }
+  li::marker { color: var(--ink-faint); }
+
+  /* corrections */
+  .correction { border: 1px solid var(--rule); background: var(--surface); border-left-width: 4px; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.65rem; }
+  .correction.err  { border-left-color: var(--bad); }
+  .correction.frame{ border-left-color: var(--warn); }
+  .correction.meth { border-left-color: var(--accent); }
+  .correction .label { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; display: flex; gap: 0.6rem; align-items: center; }
+  .correction.err  .label { color: var(--bad); }
+  .correction.frame .label { color: var(--warn); }
+  .correction.meth .label { color: var(--accent); }
+  .correction p { max-width: none; font-size: 0.96rem; }
+  .quote { font-family: var(--mono); font-size: 0.78rem; line-height: 1.55; background: rgba(127,127,127,0.09); padding: 0.6rem 0.8rem; border-radius: 3px; color: var(--ink); }
+  .sev { font-family: var(--mono); font-size: 0.6rem; padding: 0.15em 0.5em; border-radius: 2px; letter-spacing: 0.06em; }
+  .sev.high { background: var(--bad-soft); color: var(--bad); }
+  .sev.med  { background: var(--warn-soft); color: var(--warn); }
+  .sev.low  { background: var(--accent-soft); color: var(--accent); }
+
+  /* callout */
+  .callout { background: var(--surface); border-left: 3px solid var(--good); padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .callout .eyebrow { color: var(--good); }
+  .callout p { max-width: none; }
+
+  /* tables */
+  .scroller { overflow-x: auto; border: 1px solid var(--rule); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.8rem; min-width: 52rem; }
+  th { text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--ink); white-space: nowrap; vertical-align: bottom; }
+  td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.claim { font-weight: 600; color: var(--ink); min-width: 14rem; }
+  td.src { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-muted); }
+  .cell-good { color: var(--good); font-weight: 600; }
+  .cell-bad  { color: var(--bad); }
+  .cell-warn { color: var(--warn); }
+
+  /* verdict pills */
+  .verdict { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; padding: 0.14em 0.5em; border-radius: 2px; letter-spacing: 0.05em; white-space: nowrap; }
+  .verdict.ok  { background: var(--good-soft); color: var(--good); }
+  .verdict.fix { background: var(--bad-soft); color: var(--bad); }
+  .verdict.note{ background: var(--warn-soft); color: var(--warn); }
+
+  footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; font-size: 0.78rem; color: var(--ink-muted); display: flex; flex-direction: column; gap: 0.7rem; }
+  footer p { max-width: none; font-size: 0.78rem; }
+  .caveat { font-family: var(--mono); font-size: 0.7rem; line-height: 1.55; color: var(--ink-faint); }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Technical Note · Datasheet Audit</div>
+    <h1>Datasheet Verification Pass</h1>
+    <p class="standfirst">A primary-source audit of the specs the companion documents flagged as not-verified-this-session — confirming the ones that held, correcting four that did not, and resolving the load-bearing half of Open Question 1.</p>
+    <div class="meta">
+      <span>2026-07-10</span>
+      <span>Subject: sensor / impedance / platform specs</span>
+      <span>Every row traces to a datasheet, a LICENSE file, or a primary paper</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="callout">
+      <div class="eyebrow">What this pass does</div>
+      <p>The two companion documents end with an explicit verified / not-verified split, and the README named the specs still needing a datasheet pass: the OpenEIT Spectra frequency ceiling, the AD5933 / ADuCM350 registers, the C12880MA range, Red Pitaya limits, eVOLVER cost, and the Toprak morbidostat / Pioreactor specifics. This note closes that gap against manufacturer datasheets, repository <code>LICENSE</code> files, and primary papers — URLs in <a href="../SOURCES.md">SOURCES.md</a>. It confirms what held, <strong>corrects four specs</strong> (one central to this repo's own argument), and answers the "silicon or firmware?" half of Q1.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONFIRMED ============ -->
+
+  <section>
+    <h2><span class="num">01</span> Confirmed against primary sources</h2>
+    <p>Claims that held on a datasheet read. Confidence notes follow the table.</p>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>Claim in this repo</th><th>Verified value</th><th>Primary source</th><th>Verdict</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="claim">C12880MA range 340–850 nm</td><td>340–850 nm; <strong>15 nm max</strong> FWHM; 288-pixel continuous readout</td><td class="src">Hamamatsu KACC1226E</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">AS7341 multi-channel visible sensing</td><td>11 channels (8 VIS + NIR + clear + flicker); 6 parallel ADCs</td><td class="src">ams-OSRAM DS000504</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">IO Rodeo footprint + 730 nm part</td><td>25.4 × 20 × 1.6 mm, dual 4-pin JST-SH; 730 nm board exists</td><td class="src">iorodeo.com + KiCad repo</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">Red Pitaya as impedance analyzer</td><td>STEMlab 125-14: 125 MS/s, 14-bit, DC–60 MHz; Impedance Analyzer 1 Hz–60 MHz</td><td class="src">redpitaya.readthedocs.io</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">ADuCM350 DFT excitation to 200 kHz</td><td>0.1 Hz–200 kHz, ±0.3° phase; 16-bit / 160 kSPS front end</td><td class="src">ADI ADuCM350 + AN-1271</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">AN-1302 covers 4-wire bioisolated</td><td>"…4-Wire, Bioisolated Impedance Measurement Applications"</td><td class="src">ADI AN-1302</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">AD5933 oscillator max ~100 kHz</td><td>1 MSPS, 12-bit; DDS excitation 0.1 Hz–100 kHz</td><td class="src">ADI AD5933 Rev. F</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">OpenEIT Spectra: ADuCM350, 8/16/32 electrodes</td><td>2″ board, 8/16/32 configurable; ADuCM350 front end; <code>8_electrode_flex</code> dir exists</td><td class="src">github.com/OpenEIT/EIT_EE</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">8-electrode board not tetrapolar</td><td>Correct — single-ended; tetrapolar is a later Spectra/firmware addition</td><td class="src">EIT_EE + EIT_Firmware</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">eVOLVER: 16 vials, ~40 mL, open, &lt;$2k</td><td>16 chambers, 40 mL vials, open HW+SW; <strong>&lt;$2k = prototype build cost</strong></td><td class="src">Wong 2018 + docs + JoVE 59652</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">ReacSight integrates Chi.Bio-class arrays</td><td>Enhances arrays (custom or <strong>Chi.Bio</strong>) with cytometry + reactive control</td><td class="src">Bertaux, Nat Commun 2022</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">eVOLVER downstream directed evolution</td><td>ePACE on eVOLVER evolved compact Nme2Cas9 variants</td><td class="src">Huang/Heins, Nat Biotech 2022</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">Toprak morbidostat: titration, protocol not platform</td><td>Continuous drug titration; DIY protocol + MATLAB code</td><td class="src">Toprak, Nat Protocols 2013</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">Pioreactor: MIT software, cluster, no paper</td><td>Software MIT; leader/worker cluster; $329–389; no methods paper</td><td class="src">Pioreactor GitHub + docs</td><td><span class="verdict ok">Confirmed</span></td></tr>
+          <tr><td class="claim">HardwareX e00565 ≠ Pioreactor</td><td>Graham et al., "compressive loading and perfusion flow bioreactor"</td><td class="src">Crossref</td><td><span class="verdict ok">Confirmed</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li><strong>C12880MA FWHM.</strong> The datasheet guarantees <strong>15 nm max</strong> only; the "12 nm typical" figure on reseller pages is not a Hamamatsu spec.</li>
+      <li><strong>eVOLVER cost.</strong> "&lt;$2k" is the <em>prototype build</em> cost the authors report, not a commercial price; FynchBio units cost more.</li>
+      <li><strong>ePACE.</strong> The clearest downstream example (Nme2Cas9) is a Liu-lab × Khalil-lab collaboration. It shows eVOLVER's adoption for continuous directed evolution, but "a group <em>entirely independent</em> of the originators" overstates it — the Khalil lab (eVOLVER's originator) co-authored it.</li>
+    </ul>
+  </section>
+
+  <!-- ============ CORRECTIONS ============ -->
+
+  <section>
+    <h2><span class="num">02</span> Corrections — specs this repo got wrong</h2>
+    <p>Four factual fixes. Three are applied in place across both Markdown and HTML; one is a wording note left as written.</p>
+
+    <div class="correction err">
+      <div class="label"><span>C-1 · Pioreactor hardware licence</span><span class="sev high">High</span><span class="verdict fix">Fixed in place</span></div>
+      <h3>The licence is CC BY-SA 4.0, not CERN-OHL.</h3>
+      <p>This repo's own <strong>Error 2</strong> rebuts OpenEvo's claim that only Pioreactor's <em>software</em> is open, citing the "CERN Open Hardware Licence" as evidence. The rebuttal is right — the hardware is open — but the licence name is wrong. The <code>LICENSE</code> file in <code>Pioreactor/hardware</code> reads:</p>
+      <div class="quote">Hardware © 2024 by Pioreactor Inc. is licensed under <strong>CC BY-SA 4.0</strong>.</div>
+      <p>Fix (applied): CERN-OHL → CC BY-SA 4.0 in <code>corrections-and-matrix.{md,html}</code> (Error 2, matrix, pros/cons, footer), <code>two-instruments.{md,html}</code> (matrix + footnote), and <code>SOURCES.md</code>. The substance of Error 2 is unchanged — Pioreactor hardware <em>is</em> openly licensed, so OpenEvo's dismissal still fails. A document that audits another's licence claim should carry the right licence name itself.</p>
+    </div>
+
+    <div class="correction frame">
+      <div class="label"><span>C-2 · Toprak morbidostat working volume</span><span class="sev low">Low</span><span class="verdict fix">Fixed in place</span></div>
+      <h3>Working volume is 12 mL, not ~10 mL.</h3>
+      <p>The matrix listed ~10 mL. The protocol specifies <strong>V = 12 mL</strong> (ΔV = 1 mL every Δt = 12 min). Fix (applied): ~10 mL → ~12 mL in the matrix, both formats. Source: Toprak et al., <em>Nat Protocols</em> 8:555–567 (2013).</p>
+    </div>
+
+    <div class="correction frame">
+      <div class="label"><span>C-3 · Yeast β-dispersion characteristic frequency</span><span class="sev low">Low</span><span class="verdict fix">Fixed in place</span></div>
+      <h3>Yeast f<sub>c</sub> is ≈2.8 MHz, not 1–2 MHz.</h3>
+      <p>Open Question 1 put the yeast β-dispersion characteristic frequency at f<sub>c</sub> ≈ 1–2 MHz. The commonly cited value for <em>S. cerevisiae</em> is <strong>≈2.8 MHz</strong>, with 2 MHz the default setting on commercial capacitance biomass probes (Aber, Hamilton Incyte). Fix (applied): "1–2 MHz" → "~2–3 MHz". This does not change Q1's logic — the β-dispersion foot sits well above Spectra's band — it widens the gap slightly. Source: "Universal Capacitance Model for Real-Time Biomass," <em>Sensors</em> 15 (2015).</p>
+    </div>
+
+    <div class="correction meth">
+      <div class="label"><span>C-4 · "Module footprint standard" wording</span><span class="sev low">Low</span><span class="verdict note">Noted, not rewritten</span></div>
+      <h3>IO Rodeo ships a consistent board, not a published standard.</h3>
+      <p><code>two-instruments.md</code> proposes adopting "IO Rodeo's 25.4 × 20 mm / dual-JST-SH standard." IO Rodeo ships a <em>consistent</em> board dimension across its LED line but publishes no formal named footprint-standard document. The proposal (adopt it <em>as</em> the ecosystem standard) reads fine; a reader should just not infer that IO Rodeo already publishes one. Two similar naming nuances left in place: Pioreactor's "20 / 40 mL" are model/total-capacity names — working volumes are ~15 / 30 mL; and Pioreactor's ~900 nm OD is stated in its dev-log but not on a fetched spec page, so it stays Medium-confidence.</p>
+    </div>
+  </section>
+
+  <!-- ============ Q1 ============ -->
+
+  <section>
+    <h2><span class="num">03</span> Open Question 1, half resolved</h2>
+    <p>Q1 asked whether Spectra's 80 kHz ceiling is <strong>silicon or firmware</strong>. The primary sources answer the <em>what</em>: it is <strong>firmware / configuration, not silicon</strong>.</p>
+    <ul>
+      <li>The ADuCM350's DFT impedance engine is specified to <strong>0.1 Hz–200 kHz</strong> (±0.3° phase). The silicon does not stop at 80 kHz.</li>
+      <li><strong>80 kHz is the <code>HSDACCON</code> low-power ↔ high-power reconfiguration threshold</strong> — bits [8:1] to <code>0x1B</code> (low-power) for ≤ 80 kHz, <code>0x7</code> (high-power) above, per AN-1271 and the ADI impedance FAQ. A register setting, not a DAC breakpoint.</li>
+    </ul>
+    <p>So the headroom to 200 kHz exists in principle. What remains open for Jean Rintoul is the <em>why</em> — whether Spectra's firmware exposes high-power mode, and what degrades first (SNR, DFT settling, DAC flatness) toward 200 kHz. Q1's other two parts — true tetrapolar drive on the 32-electrode board, and imaging a tube rather than a thorax — are unchanged.</p>
+  </section>
+
+  <!-- ============ STILL OPEN ============ -->
+
+  <section>
+    <h2><span class="num">04</span> Still not verified this session</h2>
+    <p>Kept honest, in the repo's own discipline.</p>
+    <ul>
+      <li><strong>ADI PDFs at page level.</strong> analog.com's PDF host timed out repeatedly. The ADuCM350 200 kHz spec, the AN-1271 / AN-1302 titles, and the 80 kHz <code>HSDACCON</code> detail were taken from ADI landing pages and the ADI EngineerZone FAQ. Re-pull the three PDFs for page-number provenance before quoting them in a grant or paper.</li>
+      <li><strong><code>8_electrode_flex</code> coupling.</strong> The directory exists in <code>EIT_EE</code>, but its README does not state the flex board is <em>capacitively coupled</em>. This repo's Risks section asserts capacitive coupling as a design idea — treat it as an inference, not a documented fact, until a schematic confirms it.</li>
+      <li><strong>Pioreactor 900 nm OD.</strong> Supported by Pioreactor's dev-log but not a fetched spec page.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Companion documents: <a href="corrections-and-matrix.html">OpenEvo Corrections &amp; the Open-Bioreactor Matrix</a> · <a href="two-instruments.html">Two Instruments, One Ecosystem</a>.</p>
+    <p class="caveat">Verified this session against primary sources: all rows in §1 and the corrections in §2, at the confidence noted. Not re-verified at page level: the three ADI PDFs in §4. See <a href="../SOURCES.md">SOURCES.md</a> for URLs.</p>
+  </footer>
+
+</div>

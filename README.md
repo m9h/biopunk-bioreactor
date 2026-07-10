@@ -15,7 +15,8 @@ field-wide comparison plus a build plan.
 |---|---|
 | [`docs/corrections-and-matrix.md`](docs/corrections-and-matrix.md) | A fair-minded errata of the OpenEvo preprint, plus a like-for-like matrix of six open bioreactor platforms with per-device pros/cons and adoption evidence. **The evidence base.** |
 | [`docs/two-instruments.md`](docs/two-instruments.md) | A design proposal: the best characterisation instrument, the best evolution machine, and the argument for sharing a component ecosystem rather than merging into one machine. **The plan.** |
-| `docs/*.html` | Rendered, self-contained versions of the same two documents (theme-aware, no external assets). |
+| [`docs/datasheet-verification.md`](docs/datasheet-verification.md) | A primary-source pass resolving the open items above: confirms the sensor/impedance/platform specs, corrects four (incl. Pioreactor's hardware licence), and answers the "silicon or firmware?" half of Open Question 1. **The receipts.** |
+| `docs/*.html` | Rendered, self-contained versions of the same documents (theme-aware, no external assets). |
 
 ## Core argument, in one paragraph
 
@@ -37,9 +38,13 @@ See the matrix for a like-for-like comparison across 15 attributes.
 This is a **reader's audit**, not peer review, and not all facts carry equal confidence.
 Each document ends with an explicit **verified / not-verified-this-session** split. Before
 using any spec for budgeting, procurement, or a grant, confirm it against the primary
-datasheet or paper. Known items still needing a datasheet pass: OpenEIT Spectra frequency
-ceiling, the AD5933/ADuCM350 register details, C12880MA range, Red Pitaya limits, eVOLVER
-cost, and the Toprak morbidostat and ReacSight/ePACE adoption specifics.
+datasheet or paper. Most items previously flagged as needing a datasheet pass — OpenEIT
+Spectra / ADuCM350 / AD5933 registers, C12880MA range, Red Pitaya limits, eVOLVER cost, the
+Toprak morbidostat, and ReacSight/ePACE adoption — are now confirmed in
+[`docs/datasheet-verification.md`](docs/datasheet-verification.md), which also **corrects
+Pioreactor's hardware licence to CC BY-SA 4.0** (not CERN-OHL). Still open at page level: the
+three Analog Devices PDFs, the flex-electrode coupling detail, and Pioreactor's exact OD
+wavelength.
 
 Corrections to the OpenEvo preprint are stated with the quoted source text and a proposed
 fix, and are grouped as verifiable errors, framing/omissions, and methodological limitations.
