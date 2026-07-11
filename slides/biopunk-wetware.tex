@@ -227,10 +227,12 @@
     \item \textbf{add} DO $+$ pH optodes (read through the wall) $+$ Hamamatsu C12880MA dispersive spectrometer
     \item \textbf{port} to Raspberry Pi (all-I\textsuperscript{2}C behind the \texttt{0x74} mux --- a respin, not a rewrite)
   \end{itemize}
-  \vspace{0.2em}
+  \begin{block}{Benefit}
+  \small The most complete non-contact in-situ characterisation instrument in open hardware --- follow metabolic state (DO, pH) and resolve overlapping reporters instead of inferring them.
+  \end{block}
   \begin{center}\small
   Pi port $\to$ gas vessel $\to$ optodes $\to$ spectrometer $\to$
-  \ac{8 richly-instrumented, gas-controlled, closed reactors on one Pi.}
+  \ac{8 gas-controlled, closed reactors on one Pi.}
   \end{center}
 \end{frame}
 
@@ -243,7 +245,9 @@
     \item WGS $\to$ \texttt{breseq} $\to$ shared causal mutations; revive-ancestor fitness assay
     \item $+$ OpenEvo 3-media fluidics $+$ closed vessel; conductivity; batch-excursion
   \end{itemize}
-  \vspace{0.2em}
+  \begin{block}{Benefit}
+  \small Fills the empty \texttt{devo} slot --- the first open platform that produces \emph{publishable} evolution evidence (causal convergence $+$ measurable fitness), and the substrate for the autopilot.
+  \end{block}
   \begin{center}\small Prove it at n$\,\ge\,$8 with an archived record $=$ the \texttt{devo} champion $\to$ then the AI/CRISPR autopilot.\end{center}
 \end{frame}
 
@@ -254,7 +258,9 @@
     \item \textbf{add-on} eVOLVER Smart Sleeves \emph{only} on the vials that truly need arbitrary per-vial control
     \item stand on its monthly-maintained software $+$ leader/worker cluster
   \end{itemize}
-  \vspace{0.2em}
+  \begin{block}{Benefit}
+  \small Reliable parallel cultivation now, mostly bought not built --- lifted to physiological sensing or per-vial control exactly where a study needs it, nowhere else.
+  \end{block}
   \begin{center}\small Guardrail: don't over-graft --- the value of \texttt{bior} is that you \ac{didn't build it}.\end{center}
 \end{frame}
 
