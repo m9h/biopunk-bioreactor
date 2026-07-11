@@ -249,6 +249,55 @@ whole field. Second, the only platform without a reference paper is Pioreactor, 
 the only pure bior product; its credibility is commercial and community rather than
 bibliographic, a genuine consideration when an instrument must be cited.
 
+\section{Why the evolution slot has no champion}
+\label{sec:devo}
+
+Two of the three purposes have clear champions --- Chi.Bio for \texttt{proto}, Pioreactor and
+eVOLVER for \texttt{bior} --- but the \texttt{devo} slot is conspicuously empty, and OpenEvo,
+the one device built expressly for it, does not fill it. The reason is definitional.
+\texttt{devo} is not ``push a culture through a selection regime'' but ``produce an archived,
+replicated, sequenced record that establishes that adaptation occurred and identifies the
+causal mutation.'' A champion must deliver the purpose's output, and OpenEvo delivers the run,
+not the evidence.
+
+The shortfall is exactly the set of limitations catalogued in Section~\ref{sec:corrections}.
+With a single chamber and $n=1$ there are no replicate lineages and hence no convergence signal,
+so the observed mutations cannot be attributed to selection rather than to drift or hitchhiking
+\cite{blount2012cit}. With no systematic archiving there is no frozen fossil record, and without
+one the ancestor-versus-descendant fitness competition that makes evolution quantitative is
+impossible \cite{barrick2023ltee}. And the single structural variant reported was called with a
+default short-read mapper rather than \code{breseq} \cite{deatherage2014breseq}. OpenEvo is, in
+short, an excellent actuator with no evidentiary apparatus attached --- the best pipette in the
+room with no freezer beside it.
+
+Two further considerations keep the title vacant. The first is adoption: a champion earns
+standing through independent use by groups other than its originators, and the incumbent
+champions have it. Chi.Bio has been taken up by \emph{ReacSight}, a framework that couples open
+bioreactor arrays --- Chi.Bio among them --- to an automated flow cytometer and a liquid-handling
+robot, so that experiments run \emph{reactively}: each measurement feeds back to change the next
+actuation, turning a passive array into a closed-loop platform \cite{fribourg2022reacsight}.
+eVOLVER, for its part, has become a substrate for continuous directed evolution: it has been
+used to host \emph{phage-assisted continuous evolution} (PACE) --- the method of Esvelt,
+Carlson, and Liu in which a desired molecular activity is linked to the propagation of an M13
+bacteriophage, so that proteins evolve tens of generations per day with minimal human
+intervention \cite{esvelt2011pace} --- run across many parallel lagoons rather than the single
+bespoke apparatus of the original, a throughput increase that directly enabled campaigns such as
+the evolution of compact Cas9 variants \cite{huang2022epace}. This automated, eVOLVER-hosted form
+is what the community means by \emph{ePACE}. OpenEvo, days old at this writing, has no independent
+use yet.
+
+The second consideration is more pointed: the remedy does not obviously return to OpenEvo. What
+would constitute a \texttt{devo} champion --- of order eight replicate chambers under one
+coordinating interface, an automated chilled archiver, and a \code{breseq} pipeline --- most
+closely resembles Pioreactor's existing leader/worker cluster with an archiving plug-in, not a
+scaled-up OpenEvo. OpenEvo's durable advantage then narrows to its three-media selection fluidics
+and its closed autoclavable vessel, both of which are graftable onto another chassis.
+
+None of this diminishes what OpenEvo is: the cheapest buildable three-media selection cycler in
+the field, with the best assembly manual among the six platforms, and the leading \emph{candidate}
+for the role. But candidate is not champion, and the distance between them is precisely archiving,
+replication, and correct variant calling. Close those three and the slot is filled.
+
 \section{A two-instrument proposal}
 \label{sec:proposal}
 
@@ -370,6 +419,10 @@ CC~BY~4.0. Corrections with citations are welcome.}}
   laboratory-evolved microbes\dots using breseq. \textit{Methods Mol Biol} 1151:165--188 (2014).
 \bibitem{fribourg2022reacsight} Bertaux F, Aditya C, et al. Enhancing bioreactor arrays\dots
   with ReacSight. \textit{Nature Communications} 13:3363 (2022).
+\bibitem{esvelt2011pace} Esvelt KM, Carlson JC, Liu DR. A system for the continuous directed
+  evolution of biomolecules. \textit{Nature} 472:499--503 (2011).
+\bibitem{huang2022epace} Huang TP, Heins ZJ, et al. High-throughput continuous evolution of
+  compact Cas9 variants (eVOLVER-hosted PACE). \textit{Nature Biotechnology} 40:1918--1930 (2022).
 \end{thebibliography}
 
 \end{document}
