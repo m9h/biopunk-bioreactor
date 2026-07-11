@@ -110,7 +110,8 @@ regimes, unattended, for weeks. Recognising this distinction --- and a third pur
 productised platform such as Pioreactor serves --- reorganises the entire field and changes
 what ``best'' means.
 
-This working paper has four aims. Section~\ref{sec:purposes} sets out the three purposes.
+This working paper has four aims. Section~\ref{sec:purposes} sets out the three purposes and
+Section~\ref{sec:lineages} the founding literature and a landmark demonstration of each.
 Section~\ref{sec:corrections} corrects specific errors in the OpenEvo preprint, fairly and
 with proposed fixes. Section~\ref{sec:matrix} compares six platforms attribute by attribute,
 and Section~\ref{sec:proposal} argues for building two purpose-built instruments rather than
@@ -152,6 +153,62 @@ These purposes pull hardware in opposite directions --- rich-and-few versus chea
 non-contact versus immersed-electrode-tolerant, defined-steady-state versus
 free-to-run-to-stationary. A device optimised for one is measurably worse at another. That
 tension is the organising principle of everything below.
+
+\section{Three lineages: the founding literature of each purpose}
+\label{sec:lineages}
+
+The three tags are not conveniences of this review. Each names a distinct research tradition with
+its own founding literature and its own landmark demonstration, and the traditions grew up
+separately over some seventy years. Setting them side by side makes the central point concrete:
+a single benchtop device now spans programs that were once the province of different laboratories
+and different instruments.
+
+\subsection{\texttt{proto} --- characterisation}
+The characterisation tradition begins with the chemostat as a \emph{measurement} instrument.
+Monod's growth kinetics and the Novick--Szilard chemostat \cite{monod1949,novick1950} made it
+possible to hold a population at a defined, unchanging physiological state and read its properties
+without the confounds of a changing batch environment. The decisive modern extension was to close
+the loop --- to let a computer measure a living culture and act on it in real time; its founding
+demonstration is Milias-Argeitis and colleagues' \emph{in silico} feedback, in which a controller
+regulated a gene-expression circuit in vivo by continuously measuring output and adjusting an
+input \cite{milias2011}. Chi.Bio \cite{steel2020chibio} later folded sensing, actuation, and
+control into a single low-cost reactor.
+\emph{Landmark demonstration:} automated optogenetic feedback control that held both gene
+expression and growth rate at prescribed set-points in continuous \emph{E.~coli} culture, tracking
+dynamic reference profiles and rejecting nutrient and temperature perturbations --- a bioreactor
+regulating a cell's internal state the way a controller regulates an industrial plant
+\cite{milias2016}.
+
+\subsection{\texttt{devo} --- evolution}
+The evolution tradition begins where continuous culture was first turned on selection: Novick and
+Szilard used their chemostat not only to hold cells at steady state but to watch spontaneous
+mutations sweep a bacterial population \cite{novick1950b}. It was systematised into experimental
+evolution by Lenski's Long-Term Evolution Experiment, whose founding paper followed twelve
+\emph{E.~coli} populations through their first 2{,}000 generations and established the discipline's
+central apparatus --- replicate lineages and a frozen archive \cite{lenski1991}. For molecules
+rather than whole organisms, the parallel founding is phage-assisted continuous evolution
+\cite{esvelt2011pace}.
+\emph{Landmark demonstration:} after roughly 31{,}500 generations one LTEE population evolved the
+aerobic use of citrate --- a trait so unusual it helps define the species --- a result that could
+be established, and its historical contingency proven by ``replaying'' the tape from frozen
+ancestors, only because the lineages had been replicated and archived \cite{blount2012cit}.
+
+\subsection{\texttt{bior} --- scale-out}
+The scale-out tradition begins with continuous culture recast as a \emph{production} technology.
+Herbert, Elsworth, and Telling's 1956 theoretical-and-experimental study established the
+quantitative basis for running continuous culture as an industrial process and described an
+operating pilot plant \cite{herbert1956}. Its modern form is parallelisation --- many small
+reactors run at once --- from multiplexed chemostat arrays for high-throughput strain
+characterisation \cite{miller2013} to the open, automated sixteen-vial eVOLVER
+\cite{wong2018evolver}.
+\emph{Landmark demonstration:} eVOLVER-hosted phage-assisted continuous evolution, in which
+running many lagoons in parallel --- the throughput that scale-out exists to provide --- enabled
+the evolution of compact Cas9 variants with new PAM specificities \cite{huang2022epace}.
+
+These three lineages --- physiological measurement, experimental evolution, and production ---
+matured in different laboratories with different apparatus. What is new is not any one of them but
+that a device costing a few hundred dollars can now, in principle, serve all three at once; the
+argument of this paper is precisely that it should not try to.
 
 \section{Corrections to the OpenEvo preprint}
 \label{sec:corrections}
@@ -515,6 +572,21 @@ CC~BY~4.0. Corrections with citations are welcome.}}
   \textit{Annual Review of Microbiology} 3:371--394 (1949).
 \bibitem{goffeau1996} Goffeau A, Barrell BG, Bussey H, et al. Life with 6000 genes.
   \textit{Science} 274:546--567 (1996).
+\bibitem{milias2011} Milias-Argeitis A, Summers S, Stewart-Ornstein J, Zuleta I, Pincus D,
+  El-Samad H, Khammash M, Lygeros J. In silico feedback for in vivo regulation of a gene
+  expression circuit. \textit{Nature Biotechnology} 29:1114--1116 (2011).
+\bibitem{milias2016} Milias-Argeitis A, Rullan M, Aoki SK, Buchmann P, Khammash M. Automated
+  optogenetic feedback control for precise and robust regulation of gene expression and cell
+  growth. \textit{Nature Communications} 7:12546 (2016).
+\bibitem{novick1950b} Novick A, Szilard L. Experiments with the Chemostat on spontaneous
+  mutations of bacteria. \textit{PNAS} 36(12):708--719 (1950).
+\bibitem{lenski1991} Lenski RE, Rose MR, Simpson SC, Tadler SC. Long-term experimental evolution
+  in \textit{Escherichia coli}. I. Adaptation and divergence during 2,000 generations.
+  \textit{The American Naturalist} 138(6):1315--1341 (1991).
+\bibitem{herbert1956} Herbert D, Elsworth R, Telling RC. The continuous culture of bacteria: a
+  theoretical and experimental study. \textit{Journal of General Microbiology} 14(3):601--622 (1956).
+\bibitem{miller2013} Miller AW, Befort C, Kerr EO, Dunham MJ. Design and use of multiplexed
+  chemostat arrays. \textit{Journal of Visualized Experiments} (72):e50262 (2013).
 \end{thebibliography}
 
 \end{document}
