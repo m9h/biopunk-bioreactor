@@ -109,7 +109,8 @@ intervals would strengthen future runs.
 
 ## 2. The matrix — six platforms, like for like
 
-Purpose codes: **proto** characterise · **devo** evolve · **bior** scale-out.
+Purpose codes are lifecycle stages — **proto** (prototype/characterise) → **devo** (evolve) →
+**bior** (produce at scale) — not a ranking.
 Confidence markers in cells: ✓ strength, ✗ weakness, ~ qualified.
 
 | Attribute | Chi.Bio | OpenEvo | Pioreactor | eVOLVER | EVE | Morbidostat |

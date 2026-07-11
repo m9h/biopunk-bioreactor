@@ -41,7 +41,8 @@ firmware framework, and a calibration reference.
 
 ## Platforms compared
 
-Purpose codes: **proto** characterise · **devo** evolve · **bior** scale-out.
+Purpose codes are stages of a lifecycle — **proto** (prototype/characterise) → **devo**
+(evolve) → **bior** (produce at scale) — not a ranking.
 
 | Platform | Purpose | Reference | Working vol. | Cost / unit | Build effort | Maintenance (2026-07) | Best for |
 |---|---|---|---|---|---|---|---|
