@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>biopunk-bioreactor</title>
+<style>
+  :root{--bg:#ECEDF0;--surface:#F7F8FA;--ink:#15181D;--muted:#5A616C;--rule:#CBCFD6;--accent:#0B6E75}
+  @media (prefers-color-scheme:dark){:root{--bg:#0F1216;--surface:#161A20;--ink:#E3E6EA;--muted:#98A0AB;--rule:#2A313A;--accent:#45B4BA}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Charter,"Iowan Old Style",Georgia,serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:60ch;margin:0 auto;padding:4rem 1.5rem 6rem}
+  h1{font-size:2.2rem;letter-spacing:-.02em;margin:0 0 .3em}
+  .lead{color:var(--muted);font-size:1.15rem;margin:0 0 2.5rem}
+  .eyebrow{font:600 .7rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+  a.card{display:block;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:2px;padding:1.1rem 1.3rem;margin-bottom:.9rem;transition:border-color .15s}
+  a.card:hover{border-left-color:var(--ink)}
+  a.card .t{font-weight:700;font-size:1.05rem}
+  a.card .d{color:var(--muted);font-size:.9rem;margin-top:.2rem}
+  .pdf{border-left-color:#6E56CF}
+  footer{margin-top:2.5rem;color:var(--muted);font-size:.82rem;border-top:1px solid var(--rule);padding-top:1.2rem}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Open Hardware · Evidence-based review</div>
+  <h1>biopunk-bioreactor</h1>
+  <p class="lead">What open-source continuous-culture bioreactors are actually <em>for</em>,
+  where the OpenEvo preprint goes wrong, and how to build the best instrument for each purpose.</p>
+
+  <a class="card" href="corrections-and-matrix.html"><div class="t">Corrections &amp; the Matrix</div><div class="d">A fair-minded errata of the OpenEvo preprint + a like-for-like comparison of six platforms. The evidence base.</div></a>
+  <a class="card" href="two-instruments.html"><div class="t">Two Instruments, One Ecosystem</div><div class="d">The build proposal: best characterisation instrument, best evolution machine, and why to share parts not merge. The plan.</div></a>
+  <a class="card" href="datasheet-verification.html"><div class="t">Datasheet Verification</div><div class="d">A primary-source pass confirming the specs and correcting four, incl. Pioreactor's hardware licence. The receipts.</div></a>
+  <a class="card" href="education.md"><div class="t">Educational Materials</div><div class="d">Classroom-validated uses, curricula, and a cross-platform concepts ladder.</div></a>
+
+  <a class="card pdf" href="../manuscript/biopunk-bioreactor.pdf"><div class="t">Article (PDF)</div><div class="d">The full write-up as a typeset LaTeX article, built with tectonic.</div></a>
+  <a class="card pdf" href="../slides/biopunk-wetware.pdf"><div class="t">Slides (PDF)</div><div class="d">Beamer deck for the Biopunk Wetware Meeting.</div></a>
+
+  <footer>Source, data, and citations at <a href="https://github.com/m9h/biopunk-bioreactor">github.com/m9h/biopunk-bioreactor</a> · CC BY 4.0</footer>
+</div>
+</body>
+</html>
