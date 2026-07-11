@@ -298,6 +298,60 @@ the field, with the best assembly manual among the six platforms, and the leadin
 for the role. But candidate is not champion, and the distance between them is precisely archiving,
 replication, and correct variant calling. Close those three and the slot is filled.
 
+\subsection{What the actuator must be connected to}
+\label{sec:apparatus}
+
+The corollary of defining \texttt{devo} by evidence is that a champion is not a better actuator
+but an actuator wired into an evidentiary pipeline. OpenEvo already performs the
+actuation --- controlled dilution, three-media selection, unattended runs of thousands of
+hours. What it lacks is everything \emph{downstream} of the culture vessel. Five connections
+turn the actuator into a champion, and only one of them is new hardware.
+
+\textbf{1. A replicate manifold.} The actuator must be one of many identical chambers under a
+single coordinating controller, so that a campaign runs of order eight or more independent
+lineages in parallel rather than one. Convergence across those lineages --- the same locus
+mutated repeatedly --- is the signal that a mutation was selected rather than drifting
+\cite{blount2012cit}, and it cannot be reconstructed after the fact from a single run. This
+connection is a fleet interface, and the reference implementation already exists as Pioreactor's
+leader/worker cluster; the actuator connects \emph{to} it rather than reinventing it.
+
+\textbf{2. A cold archive.} The vessel's outflow --- which already carries culture out on every
+dilution --- must connect to an automated chilled fraction collector that banks a glycerol stock
+at programmed generation intervals. This is the frozen fossil record, the single component whose
+absence most distinguishes every current open platform from the Long-Term Evolution Experiment
+\cite{barrick2023ltee}, and the one genuinely new module the champion requires. It is
+inexpensive: a refrigerated carousel and a diverter valve on an existing pump line.
+
+\textbf{3. A sequencing and variant-calling pipeline.} Archived samples must flow to
+whole-genome sequencing and be called with \code{breseq} \cite{deatherage2014breseq}, whose
+handling of insertion-sequence--mediated structural variation is exactly what a default mapper
+lacks. This connection is off-instrument --- a sample-submission workflow and a compute
+pipeline --- but it is part of the apparatus, because an evolved strain whose mutations are
+miscalled is not evidence.
+
+\textbf{4. A fitness-measurement loop.} The archive closes back onto the actuator: reviving a
+banked ancestor and competing it head-to-head against a descendant, read out through the same
+optical-density hardware, is what converts ``the population changed'' into a measured selection
+coefficient. Without the archive there is nothing to revive; with it, the actuator's own sensors
+become the fitness assay, and no new instrument is needed.
+
+\textbf{5. A selection-design layer.} Finally, the actuator must be connected to a principled
+choice of selection pressure. Naive growth selection on a production strain evolves the mutant
+that deletes the costly pathway \cite{sandberg2019ale}; the champion couples product formation
+to growth --- or deploys OpenEvo's negative-selection media line as counterselection --- before
+the run begins. This connection is upstream and computational, a genome-scale design step, but it
+determines whether the evidence the apparatus so carefully collects is evidence of anything worth
+having.
+
+The shape of the argument is therefore that the \texttt{devo} champion is mostly
+\emph{connective tissue}: one new hardware module (the archiver), one borrowed fleet interface,
+one off-instrument pipeline (sequencing plus \code{breseq}), one feedback loop that reuses
+existing sensors, and one upstream design step. The actuator itself stays cheap and
+simple --- OpenEvo's genuine strength --- and the championship is earned by what surrounds it,
+not by loading the vessel with sensors. This is the same conclusion the two-instrument proposal
+reaches from the opposite direction (Section~\ref{sec:proposal}): resist instrumenting the
+chamber, and invest in the apparatus around it.
+
 \section{A two-instrument proposal}
 \label{sec:proposal}
 
