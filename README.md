@@ -41,16 +41,16 @@ firmware framework, and a calibration reference.
 
 ## Platforms compared
 
-Purpose codes: **P1** characterise · **P2** evolve · **P3** scale-out.
+Purpose codes: **proto** characterise · **devo** evolve · **bior** scale-out.
 
 | Platform | Purpose | Reference | Working vol. | Cost / unit | Build effort | Maintenance (2026-07) | Best for |
 |---|---|---|---|---|---|---|---|
-| **Chi.Bio** | P1 | PLOS Biol 2020 | 12–25 mL | ~$300 +PCB | PCB fab | light, no releases | In-situ measurement density |
-| **OpenEvo** | P2 | bioRxiv 2026 | ~20 mL | ~$300 | guided manual build | new, low | Cheapest buildable selection cycler |
-| **Pioreactor** | P3 | *no paper* | 20 / 40 mL | $329–389 | buy turnkey | **monthly releases** | Turnkey fleet + active ecosystem |
-| **eVOLVER** | P3 | Nat Biotech 2018 | ~40 mL | <$2k / 16 | machine shop | dormant since '24 | Max-config research fleet |
-| **EVE** | P2 | eLife 2022 | ~12 mL | $115–200 | moderate | frozen '19 | Low-cost evolution + teaching |
-| **Toprak morbidostat** | P2 | Nat Protoc 2013 | ~12 mL | mid | bespoke | protocol | Drug-gradient selection |
+| **Chi.Bio** | proto | PLOS Biol 2020 | 12–25 mL | ~$300 +PCB | PCB fab | light, no releases | In-situ measurement density |
+| **OpenEvo** | devo | bioRxiv 2026 | ~20 mL | ~$300 | guided manual build | new, low | Cheapest buildable selection cycler |
+| **Pioreactor** | bior | *no paper* | 20 / 40 mL | $329–389 | buy turnkey | **monthly releases** | Turnkey fleet + active ecosystem |
+| **eVOLVER** | bior | Nat Biotech 2018 | ~40 mL | <$2k / 16 | machine shop | dormant since '24 | Max-config research fleet |
+| **EVE** | devo | eLife 2022 | ~12 mL | $115–200 | moderate | frozen '19 | Low-cost evolution + teaching |
+| **Toprak morbidostat** | devo | Nat Protoc 2013 | ~12 mL | mid | bespoke | protocol | Drug-gradient selection |
 
 *Headline attributes only — see [`docs/corrections-and-matrix.md`](docs/corrections-and-matrix.md)
 for the full like-for-like matrix across 15 attributes with per-device pros/cons, and

@@ -109,12 +109,12 @@ intervals would strengthen future runs.
 
 ## 2. The matrix — six platforms, like for like
 
-Purpose codes: **P1** characterise · **P2** evolve · **P3** scale-out.
+Purpose codes: **proto** characterise · **devo** evolve · **bior** scale-out.
 Confidence markers in cells: ✓ strength, ✗ weakness, ~ qualified.
 
 | Attribute | Chi.Bio | OpenEvo | Pioreactor | eVOLVER | EVE | Morbidostat |
 |---|---|---|---|---|---|---|
-| Primary purpose | P1 | P2 | P3 | P3 | P2 | P2 |
+| Primary purpose | proto | devo | bior | bior | devo | devo |
 | Reference | PLOS Biol 2020 | bioRxiv 2026 | ✗ none | Nat Biotech 2018 | eLife 2022 | Nat Protoc 2013 |
 | Parallelism | ✓ 8 / 1 computer | ✗ 1 chamber | ✓ cluster (N) | ✓ 16 vials | ≥3 replicates | few |
 | Working volume | 12–25 mL | ~20 mL | 20 / 40 mL | ~40 mL | ~12 mL | ~12 mL |
@@ -141,7 +141,7 @@ year, maintained plugin org; eVOLVER `FYNCH-BIO/evolver`: last release 2022, las
 
 ## 3. Pros and cons, per platform
 
-**Chi.Bio** — *P1 · in-situ measurement density* · PLOS Biol 2020 · ~$300 +PCB · 8-way
+**Chi.Bio** — *proto · in-situ measurement density* · PLOS Biol 2020 · ~$300 +PCB · 8-way
 - ✓ Only platform with a real in-situ spectrometer + 7-colour actuation
 - ✓ Non-contact; tubes hot-swap, sterilisation trivial
 - ✓ PID + MPC; OD held ~2% of setpoint
@@ -149,7 +149,7 @@ year, maintained plugin org; eVOLVER `FYNCH-BIO/evolver`: last release 2022, las
 - ✗ Needs PCB fabrication; not a from-manual build
 - ✗ No archiving; no DO/pH
 
-**OpenEvo** — *P2 · cheap buildable selection cycler* · bioRxiv 2026 · ~$300 · 1 chamber
+**OpenEvo** — *devo · cheap buildable selection cycler* · bioRxiv 2026 · ~$300 · 1 chamber
 - ✓ Three-media selection cycling, native
 - ✓ Closed autoclavable vessel; standalone firmware
 - ✓ Best assembly manual in the field
@@ -157,7 +157,7 @@ year, maintained plugin org; eVOLVER `FYNCH-BIO/evolver`: last release 2022, las
 - ✗ No archiving; no rich sensing
 - ✗ Validation is n = 1
 
-**Pioreactor** — *P3 · turnkey fleet operation* · no paper · $329–389 · cluster
+**Pioreactor** — *bior · turnkey fleet operation* · no paper · $329–389 · cluster
 - ✓ Buy and run — no build, supported, maintained
 - ✓ Leader/worker cluster + plugin ecosystem
 - ✓ CC BY-SA 4.0 hardware, MIT software
@@ -165,7 +165,7 @@ year, maintained plugin org; eVOLVER `FYNCH-BIO/evolver`: last release 2022, las
 - ✗ Rich sensing only via plugins
 - ✗ Not evolution- or characterisation-optimised
 
-**eVOLVER** — *P3 · max-config research fleet* · Nat Biotech 2018 · <$2k / 16 · 16 vials
+**eVOLVER** — *bior · max-config research fleet* · Nat Biotech 2018 · <$2k / 16 · 16 vials
 - ✓ 16 vials, arbitrary per-vial control
 - ✓ Proven base for independent work (ePACE)
 - ✓ Modular, deeply extensible
@@ -173,7 +173,7 @@ year, maintained plugin org; eVOLVER `FYNCH-BIO/evolver`: last release 2022, las
 - ✗ Highest setup/cleanup burden
 - ✗ Overkill for small or simple studies
 
-**EVE** — *P2 · low-cost evolution + teaching* · eLife 2022 · $115–200 · ≥3
+**EVE** — *devo · low-cost evolution + teaching* · eLife 2022 · $115–200 · ≥3
 - ✓ Cheapest replicate-capable system
 - ✓ Morbidostat / chemostat / turbidostat modes
 - ✓ Explicit educational design + full build docs
@@ -181,7 +181,7 @@ year, maintained plugin org; eVOLVER `FYNCH-BIO/evolver`: last release 2022, las
 - ✗ 3D-printed vessel; modest sterility
 - ✗ No archiving
 
-**Toprak morbidostat** — *P2 · drug-gradient selection* · Nat Protoc 2013 · mid · few
+**Toprak morbidostat** — *devo · drug-gradient selection* · Nat Protoc 2013 · mid · few
 - ✓ The canonical antibiotic-resistance device
 - ✓ Continuous drug titration to constant inhibition
 - ✓ Widely adapted and cited

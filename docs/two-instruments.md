@@ -13,10 +13,10 @@ Companion evidence base: [`corrections-and-matrix.md`](corrections-and-matrix.md
 
 ## The two purposes, stated cleanly
 
-- **Purpose 1 — Characterisation.** Hold a culture in a defined, unchanging state and measure
+- **`proto` — Characterisation.** Hold a culture in a defined, unchanging state and measure
   it richly, in situ, in real time, while closing feedback loops. You want *signal density per
   reactor* and a handful of reactors running different conditions in parallel. Chi.Bio's purpose.
-- **Purpose 2 — Evolution.** Push a culture through selection regimes unattended for weeks, and
+- **`devo` — Evolution.** Push a culture through selection regimes unattended for weeks, and
   produce *evidence* that adaptation occurred and which mutation caused it. You want cheap
   chambers in numbers, archiving, and long-run robustness. OpenEvo's purpose.
 
@@ -130,21 +130,21 @@ sensing onto it is waste. When in doubt: two machines, shared parts.
 
 ## Part 4 — The wider landscape, and a third purpose
 
-Two purposes is an undercount. **Purpose 3 — Scale-out operation:** run N reliable reactors
-now, minimal build effort, maintained platform, support. Orthogonal to signal density (P1) and
-archived evidence (P2).
+Two purposes is an undercount. **`bior` — Scale-out operation:** run N reliable reactors
+now, minimal build effort, maintained platform, support. Orthogonal to signal density (proto) and
+archived evidence (devo).
 
 | Device | Best for | Corner it owns | Open? | Scale · cost |
 |---|---|---|---|---|
-| Chi.Bio | P1 | In-situ measurement density | HW+SW | 8 / ~$300ea |
-| Pioreactor | P3 | Turnkey reliability + fleet | CC BY-SA 4.0 + MIT | cluster / $329–389 |
-| eVOLVER | P3 | Max-configurability scale-out | HW+SW | 16 / high |
-| Toprak morbidostat | P2 | Drug-gradient selection | HW+SW | few / mid |
-| EVE | P2 | Low-cost evolution + teaching | HW+SW | few / low |
-| OpenEvo | P2 | Cheapest buildable selection cycler | HW+SW | 1 / ~$300 |
+| Chi.Bio | proto | In-situ measurement density | HW+SW | 8 / ~$300ea |
+| Pioreactor | bior | Turnkey reliability + fleet | CC BY-SA 4.0 + MIT | cluster / $329–389 |
+| eVOLVER | bior | Max-configurability scale-out | HW+SW | 16 / high |
+| Toprak morbidostat | devo | Drug-gradient selection | HW+SW | few / mid |
+| EVE | devo | Low-cost evolution + teaching | HW+SW | few / low |
+| OpenEvo | devo | Cheapest buildable selection cycler | HW+SW | 1 / ~$300 |
 
 **Uncomfortable implication:** Part 2's fix — "eight cheap chambers under one interface" — is
-a description of **Pioreactor's leader/worker cluster**, already productised. The best P2
+a description of **Pioreactor's leader/worker cluster**, already productised. The best devo
 machine may be *Pioreactor + an archiving plugin + a batch-excursion automation*, not a
 scaled-up OpenEvo. OpenEvo's remaining edge shrinks to the three-media fluidics and the closed
 vessel — both addable to a Pioreactor; the cluster and ecosystem are not easily addable to an

@@ -94,7 +94,7 @@ source and what was not.
 Treating all continuous-culture devices as interchangeable obscures that they optimise for
 incompatible objectives.
 
-\textbf{Purpose 1 --- Characterisation.} Hold a culture in a defined, unchanging state and
+\textbf{\texttt{proto} --- Characterisation.} Hold a culture in a defined, unchanging state and
 measure it richly, in situ, in real time, closing feedback loops around it. The figure of
 merit is \emph{signal density per reactor}, with a handful of reactors running different
 conditions in parallel. Chi.Bio is the exemplar: a chip spectrometer, a seven-colour LED for
@@ -102,13 +102,13 @@ optogenetic actuation and fluorophore excitation, non-contact infrared thermomet
 proportional-integral-derivative plus model-predictive control that holds OD within about 2\%
 of set-point \cite{steel2020chibio}.
 
-\textbf{Purpose 2 --- Evolution.} Push a culture through selection regimes unattended for
+\textbf{\texttt{devo} --- Evolution.} Push a culture through selection regimes unattended for
 weeks, and produce \emph{evidence} that adaptation occurred and which mutation caused it. The
 figures of merit are cheap chambers in numbers, systematic archiving, and long-run
 robustness. This is OpenEvo's target, and --- as Section~\ref{sec:corrections} argues --- the
 half it does not yet fully reach.
 
-\textbf{Purpose 3 --- Scale-out operation.} Run many reliable reactors now, with minimal build
+\textbf{\texttt{bior} --- Scale-out operation.} Run many reliable reactors now, with minimal build
 effort, a maintained software platform, cluster management, and support. The value is
 reproducibility and uptime, not measurement richness or archived evidence. Pioreactor
 (turnkey) and eVOLVER (maximally configurable) own this axis, which is orthogonal to the other
@@ -199,7 +199,7 @@ describes, is impossible without a time-series archive.
 \label{sec:matrix}
 
 Table~\ref{tab:matrix} places six platforms across fifteen attributes. Purpose codes are
-P1~(characterise), P2~(evolve), P3~(scale-out). Cells reflect each platform as published or
+proto~(characterise), devo~(evolve), bior~(scale-out). Cells reflect each platform as published or
 shipped, not what a motivated builder could add; ``independent use'' means peer-reviewed work
 by groups other than the originators.
 
@@ -215,7 +215,7 @@ by groups other than the originators.
 \toprule
 \textbf{Attribute} & \textbf{Chi.Bio} & \textbf{OpenEvo} & \textbf{Pioreactor} & \textbf{eVOLVER} & \textbf{EVE} \\
 \midrule
-Primary purpose & P1 & P2 & P3 & P3 & P2 \\
+Primary purpose & proto & devo & bior & bior & devo \\
 Reference & PLoS Biol '20 & bioRxiv '26 & \textcolor{bad}{none} & Nat Biot '18 & eLife '22 \\
 Parallelism & \textcolor{good}{8 / computer} & \textcolor{bad}{1 chamber} & \textcolor{good}{cluster} & \textcolor{good}{16 vials} & $\ge$3 reps \\
 Working vol. & 12--25 mL & $\sim$20 mL & 15--30 mL & $\sim$40 mL & $\sim$12 mL \\
@@ -235,14 +235,14 @@ Independent use & ReacSight & \textcolor{warn}{too new} & \textcolor{warn}{commu
 \end{table}
 
 The Toprak morbidostat \cite{toprak2013morbidostat} is omitted from the table for width but
-belongs to purpose P2: it is the canonical antibiotic-resistance device (working volume
+belongs to purpose devo: it is the canonical antibiotic-resistance device (working volume
 $\sim$12\,mL), titrating a drug to constant inhibition, widely adapted but a dated bespoke
 build rather than a maintained platform.
 
 Two patterns are worth naming. First, \emph{every platform lacks archiving} --- the single
 most important capability for turning an evolution run into evidence, and a clear gap for the
 whole field. Second, the only platform without a reference paper is Pioreactor, which is also
-the only pure Purpose-3 product; its credibility is commercial and community rather than
+the only pure bior product; its credibility is commercial and community rather than
 bibliographic, a genuine consideration when an instrument must be cited.
 
 \section{A two-instrument proposal}

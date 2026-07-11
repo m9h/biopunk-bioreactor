@@ -371,8 +371,8 @@
   <section>
     <div class="callout">
       <div class="eyebrow">The two purposes, stated cleanly</div>
-      <p><strong>Purpose 1 — Characterisation.</strong> Hold a culture in a defined, unchanging state and measure it richly, in situ, in real time, while closing feedback loops around it. You want <em>signal density per reactor</em> and a handful of reactors running different conditions in parallel. This is Chi.Bio's purpose.</p>
-      <p><strong>Purpose 2 — Evolution.</strong> Push a culture through selection regimes unattended for weeks, and produce <em>evidence</em> that adaptation occurred and which mutation caused it. You want cheap chambers in numbers, archiving, and long-run robustness. This is OpenEvo's purpose.</p>
+      <p><strong><code>proto</code> — Characterisation.</strong> Hold a culture in a defined, unchanging state and measure it richly, in situ, in real time, while closing feedback loops around it. You want <em>signal density per reactor</em> and a handful of reactors running different conditions in parallel. This is Chi.Bio's purpose.</p>
+      <p><strong><code>devo</code> — Evolution.</strong> Push a culture through selection regimes unattended for weeks, and produce <em>evidence</em> that adaptation occurred and which mutation caused it. You want cheap chambers in numbers, archiving, and long-run robustness. This is OpenEvo's purpose.</p>
       <p>These purposes pull hardware in opposite directions. A machine optimised for one is actively worse at the other — which is the whole reason Part 3 is a real question and not a foregone conclusion.</p>
     </div>
   </section>
@@ -563,7 +563,7 @@
       <p>Two purposes turn out to be an undercount. Pioreactor is best-of-breed, but for neither of them — it owns a third axis that Chi.Bio and OpenEvo, both build-it-yourself research artifacts, never optimise for: <strong>reliability and fleet operation as a product</strong>.</p>
     </div>
 
-    <div class="purpose"><b>Purpose 3 — Scale-out operation.</b> Run N reliable reactors <em>now</em>, with minimal build effort, a maintained software platform, cluster management, and support. The value is not signal density (Purpose 1) or archived evidence (Purpose 2) — it is reproducibility, uptime, and not having to build anything. This axis is orthogonal to the other two.</p></div>
+    <div class="purpose"><b><code>bior</code> — Scale-out operation.</b> Run N reliable reactors <em>now</em>, with minimal build effort, a maintained software platform, cluster management, and support. The value is not signal density (<code>proto</code>) or archived evidence (<code>devo</code>) — it is reproducibility, uptime, and not having to build anything. This axis is orthogonal to the other two.</p></div>
 
     <div class="scroller">
       <table>
@@ -571,43 +571,43 @@
         <tbody>
           <tr>
             <td><strong>Chi.Bio</strong></td>
-            <td class="num-col" style="color:var(--accent)">P1</td>
+            <td class="num-col" style="color:var(--accent)">proto</td>
             <td>In-situ measurement density. Spectrometer + seven-colour LED + MPC, all non-contact. The characterisation champion.</td>
             <td class="src">HW + SW</td>
             <td class="num-col">8 / ~$300ea</td>
           </tr>
           <tr>
             <td><strong>Pioreactor</strong></td>
-            <td class="num-col" style="color:var(--amber)">P3</td>
+            <td class="num-col" style="color:var(--amber)">bior</td>
             <td>Turnkey reliability + fleet. Leader/worker cluster, plugin marketplace, distributor, support. The one you buy, not build.</td>
             <td class="src">CC BY-SA 4.0 + MIT</td>
             <td class="num-col">cluster / $329–389</td>
           </tr>
           <tr>
             <td><strong>eVOLVER</strong></td>
-            <td class="num-col" style="color:var(--amber)">P3</td>
+            <td class="num-col" style="color:var(--amber)">bior</td>
             <td>Maximal-configurability scale-out. 16 vials, arbitrary per-vial control via "sleeves." The research-grade fleet — powerful, costly, complex to build and run.</td>
             <td class="src">HW + SW</td>
             <td class="num-col">16 / high</td>
           </tr>
           <tr>
             <td><strong>Toprak morbidostat</strong></td>
-            <td class="num-col" style="color:var(--violet)">P2</td>
+            <td class="num-col" style="color:var(--violet)">devo</td>
             <td>Drug-gradient selection. The canonical device for antibiotic-resistance evolution; titrates inhibitor to hold constant growth suppression. Older, harder to build.</td>
             <td class="src">HW + SW</td>
             <td class="num-col">few / mid</td>
           </tr>
           <tr>
             <td><strong>EVE</strong></td>
-            <td class="num-col" style="color:var(--violet)">P2</td>
+            <td class="num-col" style="color:var(--violet)">devo</td>
             <td>Low-cost evolution + teaching. Morbidostat/chemostat/turbidostat modes; OpenEvo's closest direct comparator, published with an explicit educational remit.</td>
             <td class="src">HW + SW</td>
             <td class="num-col">few / low</td>
           </tr>
           <tr>
             <td><strong>OpenEvo</strong></td>
-            <td class="num-col" style="color:var(--violet)">P2</td>
-            <td>Cheapest buildable selection cycler. Three-media fluidics + closed autoclavable vessel + illustrated manual. Aspires to P2; missing the archiving and replicates that make it evidence (see Part 2).</td>
+            <td class="num-col" style="color:var(--violet)">devo</td>
+            <td>Cheapest buildable selection cycler. Three-media fluidics + closed autoclavable vessel + illustrated manual. Aspires to devo; missing the archiving and replicates that make it evidence (see Part 2).</td>
             <td class="src">HW + SW</td>
             <td class="num-col">1 / ~$300</td>
           </tr>
@@ -617,7 +617,7 @@
 
     <div class="callout violet">
       <div class="eyebrow v">The uncomfortable implication for the evolution machine</div>
-      <p>Part 2's fix for OpenEvo's n = 1 problem — "eight cheap chambers under one coordinating interface" — is a description of <strong>Pioreactor's leader/worker cluster</strong>, already productised. So the best P2 machine may be <em>Pioreactor + an archiving plugin + a batch-excursion automation</em>, not a scaled-up OpenEvo. OpenEvo's genuine remaining edge shrinks to two things Pioreactor lacks: the three-media selection fluidics and the closed autoclavable vessel. Both are addable to a Pioreactor; the cluster, the platform, and the plugin ecosystem are not easily addable to an OpenEvo.</p>
+      <p>Part 2's fix for OpenEvo's n = 1 problem — "eight cheap chambers under one coordinating interface" — is a description of <strong>Pioreactor's leader/worker cluster</strong>, already productised. So the best devo machine may be <em>Pioreactor + an archiving plugin + a batch-excursion automation</em>, not a scaled-up OpenEvo. OpenEvo's genuine remaining edge shrinks to two things Pioreactor lacks: the three-media selection fluidics and the closed autoclavable vessel. Both are addable to a Pioreactor; the cluster, the platform, and the plugin ecosystem are not easily addable to an OpenEvo.</p>
     </div>
 
     <p class="caveat">Correction to the record: OpenEvo's introduction states Pioreactor is "available for purchase, but only the software is open source." A public <code>Pioreactor/hardware</code> repository exists and the hardware is under CC BY-SA 4.0 (per its <code>LICENSE</code> file) — openly licensed. The dismissal is not accurate, and it is the same paper that never cites Chi.Bio and under-uses <code>breseq</code>. Weigh its competitive framing accordingly.</p>

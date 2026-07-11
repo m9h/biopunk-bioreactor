@@ -130,7 +130,7 @@
   </section>
 
   <section>
-    <h2><span class="num">01</span> P1 — Characterisation: Chi.Bio core in an OpenEvo body</h2>
+    <h2><span class="num">01</span> proto — Characterisation: Chi.Bio core in an OpenEvo body</h2>
     <p><strong>Chassis: Chi.Bio.</strong> Nothing else has the non-contact in-situ optics (AS7341 + 650 nm laser OD + seven-colour excitation, read through the wall) or the PID/MPC control holding OD to ~2% of setpoint. Its one real weakness is the open-to-atmosphere tube — the hybrid fixes that by borrowing OpenEvo's body.</p>
     <div class="scroller">
       <table>
@@ -148,7 +148,7 @@
   </section>
 
   <section>
-    <h2><span class="num">02</span> P2 — Evolution: Pioreactor cluster, OpenEvo fluidics, and the archiver</h2>
+    <h2><span class="num">02</span> devo — Evolution: Pioreactor cluster, OpenEvo fluidics, and the archiver</h2>
     <p><strong>Chassis: Pioreactor — not a scaled-up OpenEvo.</strong> The evolution machine's first requirement is "eight cheap chambers under one coordinating interface," which is a description of Pioreactor's leader/worker cluster — already productised and Pi-native. The choice turns on what is addable in which direction:</p>
     <ul>
       <li>OpenEvo's real edge is its <strong>three-media selection fluidics</strong> and <strong>closed autoclavable vessel</strong> — both <strong>addable to a Pioreactor</strong>.</li>
@@ -177,8 +177,8 @@
   </section>
 
   <section>
-    <h2><span class="num">03</span> P3 — Scale-out: buy Pioreactor, graft an eVOLVER sleeve only if you must</h2>
-    <p>P3 barely wants hybridizing; turnkey reliability <em>is</em> the product. <strong>Buy a Pioreactor cluster.</strong> The one graft worth considering: drop <strong>eVOLVER Smart Sleeves</strong> (Arduino motorboards giving arbitrary per-vial temperature / stir / OD setpoints) onto the specific vials that need eVOLVER-grade configurability, while the rest of the fleet runs standard. Reach for that only when a study genuinely needs arbitrary per-vial control at scale — otherwise it is cost and build burden (eVOLVER wants a machine shop) for capability you will not use.</p>
+    <h2><span class="num">03</span> bior — Scale-out: buy Pioreactor, graft an eVOLVER sleeve only if you must</h2>
+    <p>bior barely wants hybridizing; turnkey reliability <em>is</em> the product. <strong>Buy a Pioreactor cluster.</strong> The one graft worth considering: drop <strong>eVOLVER Smart Sleeves</strong> (Arduino motorboards giving arbitrary per-vial temperature / stir / OD setpoints) onto the specific vials that need eVOLVER-grade configurability, while the rest of the fleet runs standard. Reach for that only when a study genuinely needs arbitrary per-vial control at scale — otherwise it is cost and build burden (eVOLVER wants a machine shop) for capability you will not use.</p>
   </section>
 
   <section>
@@ -187,9 +187,9 @@
       <table>
         <thead><tr><th>Purpose</th><th>Chassis</th><th>Grafts from</th><th>The one new build</th></tr></thead>
         <tbody>
-          <tr><td class="rowlabel">P1 · Characterise</td><td class="chassis">Chi.Bio</td><td>OpenEvo vessel + gas; optode DO/pH; C12880MA; Pi compute</td><td>—</td></tr>
-          <tr><td class="rowlabel">P2 · Evolve</td><td class="chassis">Pioreactor</td><td>OpenEvo fluidics + vessel; conductivity; <code>breseq</code></td><td class="cell-new">Automated chilled archiver</td></tr>
-          <tr><td class="rowlabel">P3 · Scale-out</td><td class="chassis">Pioreactor</td><td>(opt.) eVOLVER Smart Sleeve</td><td>—</td></tr>
+          <tr><td class="rowlabel">proto · Characterise</td><td class="chassis">Chi.Bio</td><td>OpenEvo vessel + gas; optode DO/pH; C12880MA; Pi compute</td><td>—</td></tr>
+          <tr><td class="rowlabel">devo · Evolve</td><td class="chassis">Pioreactor</td><td>OpenEvo fluidics + vessel; conductivity; <code>breseq</code></td><td class="cell-new">Automated chilled archiver</td></tr>
+          <tr><td class="rowlabel">bior · Scale-out</td><td class="chassis">Pioreactor</td><td>(opt.) eVOLVER Smart Sleeve</td><td>—</td></tr>
         </tbody>
       </table>
     </div>
@@ -204,7 +204,7 @@
       <li><strong>Sensor-module designs</strong> — a DO/pH optode reader is the same board on either machine.</li>
       <li><strong>Calibration reference</strong> — one open colorimeter cross-calibrating the 650 nm (Chi.Bio) and 940 nm (OpenEvo-lineage) OD paths across OD₆₀₀ 0.2–6.0, so both agree before either forks.</li>
     </ul>
-    <p><strong>The one honest exception, unchanged from the thesis:</strong> if you only ever do ALE-with-fitness and never pure characterisation, the P2 machine stands alone, and bolting characterisation optics onto it is waste. When in doubt: two machines, shared parts.</p>
+    <p><strong>The one honest exception, unchanged from the thesis:</strong> if you only ever do ALE-with-fitness and never pure characterisation, the devo machine stands alone, and bolting characterisation optics onto it is waste. When in doubt: two machines, shared parts.</p>
   </section>
 
   <footer>

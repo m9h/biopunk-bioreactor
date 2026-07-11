@@ -39,7 +39,7 @@ control code actually be shared instead of merely analogous.
 
 ---
 
-## P1 — The characterisation instrument: Chi.Bio core in an OpenEvo body
+## proto — The characterisation instrument: Chi.Bio core in an OpenEvo body
 
 **Chassis: Chi.Bio.** Nothing else has the non-contact in-situ optics (AS7341 spectral sensor +
 650 nm laser OD + seven-colour excitation, all read through the vessel wall) or the PID/MPC
@@ -60,7 +60,7 @@ gas-controlled, closed reactors on one Pi**, running eight conditions in paralle
 
 ---
 
-## P2 — The evolution machine: Pioreactor cluster, OpenEvo fluidics, and the archiver
+## devo — The evolution machine: Pioreactor cluster, OpenEvo fluidics, and the archiver
 
 This is the contested chassis choice, so state it plainly.
 
@@ -108,9 +108,9 @@ measurable ancestor-vs-descendant fitness assay.
 
 ---
 
-## P3 — Scale-out: buy Pioreactor, graft an eVOLVER sleeve only if you must
+## bior — Scale-out: buy Pioreactor, graft an eVOLVER sleeve only if you must
 
-P3 barely wants hybridizing; turnkey reliability *is* the product. **Buy a Pioreactor cluster.**
+bior barely wants hybridizing; turnkey reliability *is* the product. **Buy a Pioreactor cluster.**
 The one graft worth considering: drop **eVOLVER Smart Sleeves** (Arduino motorboards giving
 arbitrary per-vial temperature / stir / OD setpoints) onto the specific vials that need
 eVOLVER-grade configurability, while the rest of the fleet runs standard. Reach for that only
@@ -123,9 +123,9 @@ build burden (eVOLVER wants a machine shop) for capability you will not use.
 
 | Purpose | Chassis | Grafts from | The one new build |
 |---|---|---|---|
-| **P1 · Characterise** | Chi.Bio | OpenEvo vessel + gas; optode DO/pH; C12880MA; Pi compute | — |
-| **P2 · Evolve** | Pioreactor | OpenEvo fluidics + vessel; conductivity; `breseq` | **Automated chilled archiver** |
-| **P3 · Scale-out** | Pioreactor | (opt.) eVOLVER Smart Sleeve | — |
+| **proto · Characterise** | Chi.Bio | OpenEvo vessel + gas; optode DO/pH; C12880MA; Pi compute | — |
+| **devo · Evolve** | Pioreactor | OpenEvo fluidics + vessel; conductivity; `breseq` | **Automated chilled archiver** |
+| **bior · Scale-out** | Pioreactor | (opt.) eVOLVER Smart Sleeve | — |
 
 ---
 
@@ -143,7 +143,7 @@ Combine at the platform level, not the product level:
   either forks.
 
 **The one honest exception, unchanged from the thesis:** if you only ever do ALE-with-fitness and
-never pure characterisation, the P2 machine stands alone, and bolting characterisation optics
+never pure characterisation, the devo machine stands alone, and bolting characterisation optics
 onto it is waste. When in doubt: two machines, shared parts.
 
 ---
