@@ -116,8 +116,9 @@ Section~\ref{sec:corrections} corrects specific errors in the OpenEvo preprint, 
 with proposed fixes. Section~\ref{sec:matrix} compares six platforms attribute by attribute,
 and Section~\ref{sec:proposal} argues for building two purpose-built instruments rather than
 one compromise machine. Section~\ref{sec:education} documents the educational materials these
-platforms already serve. We are explicit throughout about what was verified against a primary
-source and what was not.
+platforms already serve, and Section~\ref{sec:aidirected} sets out the goal the whole programme
+points toward --- AI-directed continuous evolution, motivated by OpenEvo's own pitch. We are
+explicit throughout about what was verified against a primary source and what was not.
 
 \section{Three purposes, not one}
 \label{sec:purposes}
@@ -517,6 +518,61 @@ Notably, the teaching materials inherit the research blind spots: archiving, rep
 inference, and carrying capacity are as under-taught as they are under-implemented --- an
 opportunity for a device-agnostic curriculum.
 
+\section{Toward AI-directed continuous evolution}
+\label{sec:aidirected}
+
+OpenEvo closes its discussion with an ambition it does not build toward: its automation, the
+authors write, ``opens the door to implementing AI-directed evolution experiments, enabling AI to
+supervise the evolution, increasing the speed, or pushing the limits on the qualities/functions
+that can be evolved,'' with a UV-mutagenesis ``feedback system that detects when the culture fails
+to evolve quickly and then induces mutations'' as the one concrete mechanism. We take this as the
+goal --- and observe that the preprint pitches only the actuator half of it.
+
+AI-directed evolution is a closed-loop optimisation problem: a controller must \emph{observe} the
+state of an evolving population and \emph{act} on the pressures that shape it. OpenEvo can
+act --- dilution, media, light --- but produces no learnable signal, because it has no replicates,
+no archive, and no sequencing feedback; a controller cannot steer what it cannot see. This is the
+same deficit that leaves the \texttt{devo} slot empty (Section~\ref{sec:devo}), which yields the
+central point of this section: \textbf{the observation layer an AI controller requires is exactly
+the evidentiary apparatus that makes a \texttt{devo} champion.} Championship and intelligence are
+different axes --- the apparatus produces evidence, the controller consumes it to search --- and
+the first is the prerequisite for the second. Building AI-directed evolution therefore necessarily
+builds the champion as its substrate; a fixed-schedule version of the same apparatus is already
+the champion, and the controller only makes it a better one. The correct build order is the inverse
+of OpenEvo's pitch: build the apparatus first, prove it produces evidence, then add the autopilot.
+
+The loop reuses what this paper has already specified. The controller's \emph{state} is the
+apparatus's output --- real-time growth rate, conductivity, and dissolved oxygen and pH from the
+shared optode modules, together with periodic whole-genome sequencing (via \code{breseq}) and
+fitness coefficients from revived-ancestor competitions. Its \emph{actions} are the actuator's
+knobs --- selection-media scheduling and blended gradients, optogenetic light dose, dilution
+set-point, temperature, and mutation supply. Its \emph{policy} escalates as data
+accumulate: rule-based control first, then Bayesian optimisation over the selection-regime space,
+then reinforcement or active learning, all running on the leader node of the replicate fleet, which
+supplies the parallel arms an explore--exploit search requires. This differs from established
+machine-learning-guided directed evolution \cite{yang2019ml}, an offline design--build--test cycle
+over protein sequences; here the learner sits inside a live, continuous culture.
+
+CRISPR sharpens every layer, turning blunt knobs into precise ones. For \emph{mutation supply},
+CRISPR-guided DNA polymerases such as EvolvR diversify a chosen locus at tunable rates up to
+millions of fold over background \cite{halperin2018evolvr}, giving the controller a targeted
+diversification dial in place of genome-wide UV. For \emph{observation}, CRISPR molecular recorders
+that write stimulus history into a cell's own genome --- such as the base-editing CAMERA system
+\cite{tang2018camera} --- offer a cheap, high-frequency in-cell readout of the population's
+trajectory between sequencing runs. For \emph{selection}, coupling Cas activity to survival lets the
+controller compose arbitrary, programmable pressures. A concrete project assembled from these pieces
+is set out in the repository (\code{docs/ai-crispr-evolution-project.md}).
+
+Two guardrails, both raised earlier, become control-theoretic constraints here. A controller that
+raises mutation supply whenever adaptation stalls will hill-climb into mutational meltdown --- the
+hypermutator failure mode of six of the twelve LTEE populations \cite{blount2012cit} --- unless it
+optimises against a model of mutation load rather than a bare threshold. And because selection
+rewards growth, product formation must be growth-coupled before the run, or the controller will
+efficiently find the pathway-deletion mutant \cite{sandberg2019ale}. The demonstration that would
+establish the program is a head-to-head: AI-directed selection against a fixed schedule, on a
+defined target and across a replicate fleet, showing the controller reaches the phenotype faster
+or reaches one the fixed schedule cannot.
+
 \section{Discussion and limitations}
 \label{sec:discussion}
 
@@ -615,6 +671,13 @@ CC~BY~4.0. Corrections with citations are welcome.}}
 \bibitem{mcgeachy2019} McGeachy AM, Meacham ZA, Ingolia NT. An accessible continuous-culture
   turbidostat for pooled analysis of complex libraries. \textit{ACS Synthetic Biology}
   8(4):844--856 (2019).
+\bibitem{yang2019ml} Yang KK, Wu Z, Arnold FH. Machine-learning-guided directed evolution for
+  protein engineering. \textit{Nature Methods} 16:687--694 (2019).
+\bibitem{halperin2018evolvr} Halperin SO, Tou CJ, Wong EB, Modavi C, Schaffer DV, Dueber JW.
+  CRISPR-guided DNA polymerases enable diversification of all nucleotides in a tunable window.
+  \textit{Nature} 560:248--252 (2018).
+\bibitem{tang2018camera} Tang W, Liu DR. Rewritable multi-event analog recording in bacterial and
+  mammalian cells. \textit{Science} 360:eaap8992 (2018).
 \end{thebibliography}
 
 \end{document}
