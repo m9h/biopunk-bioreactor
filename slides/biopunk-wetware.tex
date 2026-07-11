@@ -95,6 +95,23 @@
   \end{center}
 \end{frame}
 
+\begin{frame}{Three lineages, one bench}
+  \small
+  \begin{center}
+  \begin{tabular}{@{}p{1.5cm} p{5.2cm} p{4.9cm}@{}}
+    \toprule
+    \textbf{Purpose} & \textbf{Founding lineage} & \textbf{Landmark demo} \\
+    \midrule
+    \textcolor{accent}{\textbf{proto}} & chemostat as instrument $+$ closed-loop control (Monod; Novick--Szilard; Milias-Argeitis '11) & optogenetic feedback holding expression $+$ growth ('16) \\
+    \textcolor{violet}{\textbf{devo}} & chemostat selection $\to$ LTEE $\to$ PACE (Novick--Szilard '50; Lenski '91; Esvelt '11) & aerobic citrate use in the LTEE ('12) \\
+    \textcolor{warn}{\textbf{bior}} & continuous culture for production $\to$ arrays $\to$ eVOLVER (Herbert '56; Miller '13; Wong '18) & eVOLVER ePACE: compact Cas9 ('22) \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \vspace{0.3em}
+  \begin{center}\small Three traditions, seventy years --- now one \$300 device.\end{center}
+\end{frame}
+
 \begin{frame}{OpenEvo: credit where due}
   A real contribution --- these are genuine strengths:
   \begin{itemize}
@@ -137,6 +154,21 @@
   \begin{center}
   \emph{OpenEvo cites Barrick's ``\dots Archiving Populations, and Measuring Fitness'' --- then implements neither.}
   \end{center}
+\end{frame}
+
+\begin{frame}{\texttt{devo} has no champion --- yet}
+  OpenEvo is the best \emph{actuator}, not the champion: \ac{devo is defined by evidence, not actuation.}
+  \vspace{0.3em}
+  \begin{block}{What the actuator must connect to (only one is new hardware)}
+  \begin{itemize}\small
+    \item \textbf{replicate manifold} (borrow Pioreactor's cluster) $\to$ convergence
+    \item \textbf{automated chilled archive} --- \emph{the one new module} $\to$ fossil record
+    \item \textbf{sequencing $+$ \texttt{breseq}} $\to$ correct variant calls
+    \item \textbf{fitness loop} (reuses the OD hardware) $\to$ selection coefficients
+    \item \textbf{selection design} (growth-coupling) $\to$ dodge the ALE trap
+  \end{itemize}
+  \end{block}
+  \begin{center}\small Champion $=$ mostly connective tissue. Keep the actuator cheap.\end{center}
 \end{frame}
 
 \begin{frame}{The matrix (abridged)}
@@ -201,6 +233,16 @@
   \emph{But the teaching inherits the research blind spots} --- archiving, replicates, and
   carrying capacity are as under-taught as they are under-built.
   \end{center}
+\end{frame}
+
+\begin{frame}{Where this meets CRISPR}
+  \begin{itemize}
+    \item These tools \ac{evolve} CRISPR --- xCas9, base editors, compact Cas9, all PACE / eVOLVER (Hu '18; Thuronyi '19; Huang '22).
+    \item CRISPR runs \ac{inside} these tools --- pooled screens in continuous culture; Cas-based growth-coupled selection.
+    \item CRISPR may \ac{close the archiving gap} --- in-cell molecular recorders instead of the freezer.
+  \end{itemize}
+  \vspace{0.5em}
+  \begin{center}\small The \texttt{bior} landmark is itself a CRISPR result --- the intersection is already here.\end{center}
 \end{frame}
 
 \begin{frame}{Take-aways / call to build}
