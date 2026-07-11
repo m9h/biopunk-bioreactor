@@ -493,9 +493,9 @@
             <td><span class="chip defer">Research</span></td>
           </tr>
           <tr>
-            <td>Viable cell density</td><td class="src">Spectra, high-power</td>
-            <td>The β-dispersion modality Part 1 could not have. It belongs here, on the machine that already tolerates immersed electrodes. Gated on Q1.</td>
-            <td><span class="chip defer">Research</span></td>
+            <td>Viable cell density (β-dispersion)</td><td class="src">MHz-class RF front end</td>
+            <td>The yeast β-dispersion peak (f<sub>c</sub> ≈ 2.8 MHz) sits <strong>above</strong> Spectra's ≤200 kHz band — out of reach for the <span class="part">ADuCM350</span>. Needs Red Pitaya (→60 MHz) or a dedicated capacitance probe, not this chip.</td>
+            <td><span class="chip reject">Separate track</span></td>
           </tr>
           <tr>
             <td>Rich spectrometry / DO / pH</td><td class="src">—</td>
@@ -655,7 +655,7 @@
       </div>
       <div class="phase">
         <div class="phase-id e">E3</div>
-        <div class="phase-body"><h3>Evolution · ERT, then viable-cell-density (research)</h3><p>Spectra for mixing/biofilm at 80 kHz, gated to the settle window; then β-dispersion viable biomass, gated entirely on Q1.</p></div>
+        <div class="phase-body"><h3>Evolution · ERT + conductivity-band impedance (research)</h3><p>Spectra at ≤200 kHz for mixing, media-transition, and biofilm, gated to the settle window. Quantitative yeast viable-cell-density is <em>not</em> on this track — its β-dispersion (f<sub>c</sub> ≈ 2.8 MHz) sits above the ADuCM350's band and needs a separate MHz-class RF front end.</p></div>
       </div>
     </div>
   </section>
@@ -664,10 +664,10 @@
 
   <section>
     <h2><span class="num">06</span> Open questions for Jean Rintoul</h2>
-    <p>These bear on the evolution machine's E3 research tier — mixing verification and viable-cell-density. Q1 is load-bearing; nothing else on the page depends on it.</p>
+    <p>These bear on the evolution machine's E3 research tier — mixing verification and conductivity-band impedance. Q1 refines the usable band; it does <strong>not</strong> unlock yeast VCD (that needs an MHz-class RF front end — see Q1).</p>
 
     <ol class="qlist">
-      <li><div><strong>Is Spectra's 80 kHz ceiling silicon or firmware?</strong> AN-1271 specs the <span class="part">ADuCM350</span>'s DFT impedance excitation to 200 kHz, with 80 kHz being the <code>HSDACCON</code> low-power/high-power crossover — which reads as configuration, not hardware. Was 80 kHz a power, noise, thermal, or patient-safety call? Does firmware expose high-power mode, and if pushed to 200 kHz, what degrades first — SNR, DFT settling, or excitation-DAC flatness? The β-dispersion starts at exactly 100 kHz, so this bit is the difference between "off the curve" and "on its lower foot" — and viable-cell-density on yeast (f<sub>c</sub> ≈ 2–3 MHz) becomes real if it clears.</div></li>
+      <li><div><strong>Is Spectra's 80 kHz ceiling silicon or firmware?</strong> AN-1271 specs the <span class="part">ADuCM350</span>'s DFT impedance excitation to 200 kHz, with 80 kHz being the <code>HSDACCON</code> low-power/high-power crossover — which reads as configuration, not hardware. Was 80 kHz a power, noise, thermal, or patient-safety call? Does firmware expose high-power mode, and if pushed to 200 kHz, what degrades first — SNR, DFT settling, or excitation-DAC flatness? Reaching 200 kHz sharpens the conductivity and media-transition band, but it does <strong>not</strong> reach yeast viable-cell-density: the β-dispersion peak (f<sub>c</sub> ≈ 2.8 MHz) sits ~14× above the ceiling, so quantitative VCD needs an MHz-class RF front end (Red Pitaya →60 MHz, or a dedicated capacitance probe) regardless. This register question is about conductivity-band precision, not unlocking VCD.</div></li>
       <li><div><strong>Did the 32-electrode Spectra land true tetrapolar drive?</strong> The <code>EIT_EE</code> README notes the 8-electrode board was not tetrapolar and that tetrapolar differential was intended. Is "differential referencing" narrower than that? Does it follow AN-1302's 4-wire bioisolated config? We would measure into archaeal media at 12–18% w/v salt, where electrode polarisation is brutal at the low end of the band.</div></li>
       <li><div><strong>Has Spectra ever imaged a vessel rather than a body?</strong> A ~2.5 cm glass tube of brine is not a thorax; GREIT's priors assume a thorax-shaped domain and physiological conductivity. Does reconstruction hold at that geometry, and is 32 electrodes around that circumference over- or under-determined?</div></li>
     </ol>

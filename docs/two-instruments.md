@@ -84,7 +84,7 @@ chamber is a dollar not spent on the second chamber.
 | Conductivity | 2–4 electrode cell | Verifies the media switch (OpenEvo's media differ by salt); electrodes fine in a closed vessel | Adopt |
 | Variant-calling pipeline | `breseq` | The IS-mediated ~110 kb deletion needs it; the default mapper does not | Adopt |
 | Electrical resistance tomography | OpenEIT Spectra | Mixing verification + wall-biofilm; gated to the stirring-off settle window | Research |
-| Viable cell density | Spectra, high-power | The β-dispersion modality Part 1 could not have; belongs here | Research (gated on Q1) |
+| Viable cell density (β-dispersion) | MHz-class RF front end | Yeast peak f_c ≈ 2.8 MHz sits **above** Spectra's ≤200 kHz band — out of reach for the ADuCM350. Needs Red Pitaya (→60 MHz) or a dedicated capacitance probe | Separate track |
 | Rich spectrometry / DO / pH | — | Characterisation sensing here is cost without purpose; borrow the shared optode only if a run needs DO | Resist |
 
 **The ALE trap:** ALE selects for growth, and making product costs growth. Naive selection on
@@ -168,21 +168,27 @@ software is open source." A public `Pioreactor/hardware` repo exists under CC BY
   verification; firmware-and-cheap-hardware.
 - **E2 — Evolution · eight-chamber replicate array + `breseq`.** Replicates under one
   interface; the variant-calling pipeline that makes convergence legible.
-- **E3 — Evolution · ERT then viable-cell-density (research).** 80 kHz for mixing/biofilm;
-  then β-dispersion, gated on Q1.
+- **E3 — Evolution · ERT + conductivity-band impedance (research).** ≤200 kHz for mixing,
+  media-transition, and biofilm via OpenEIT Spectra. Quantitative yeast viable-cell-density is
+  *not* on this track — its β-dispersion (f_c ≈ 2.8 MHz) sits above the ADuCM350's band and
+  needs a separate MHz-class RF front end.
 
 ---
 
 ## Open questions for Jean Rintoul (OpenEIT / Mindseye)
 
-Bearing on E3 (mixing verification and viable-cell-density). Q1 is load-bearing.
+Bearing on E3 (mixing verification and conductivity-band impedance). Q1 refines the usable
+band; it does **not** unlock yeast VCD — that needs an MHz-class RF front end (see Q1 below).
 
 1. **Is Spectra's 80 kHz ceiling silicon or firmware?** AN-1271 specs the ADuCM350's DFT
    impedance excitation to 200 kHz, with 80 kHz as the `HSDACCON` low/high-power crossover.
    Was 80 kHz a power/noise/thermal/safety call? Does firmware expose high-power mode, and if
-   pushed to 200 kHz, what degrades first — SNR, DFT settling, DAC flatness? The β-dispersion
-   starts at 100 kHz, so this bit decides whether viable-cell-density on yeast (f_c ≈ 2–3 MHz)
-   is reachable.
+   pushed to 200 kHz, what degrades first — SNR, DFT settling, DAC flatness? Reaching 200 kHz
+   sharpens the conductivity and media-transition band, but it does **not** reach yeast
+   viable-cell-density: the β-dispersion peak (f_c ≈ 2.8 MHz) sits ~14× above the ceiling, so
+   quantitative VCD needs an MHz-class RF front end (Red Pitaya →60 MHz, or a dedicated
+   capacitance probe) regardless. This register question is about conductivity-band precision,
+   not unlocking VCD.
 2. **Did the 32-electrode Spectra land true tetrapolar drive?** The `EIT_EE` README notes the
    8-electrode board was not tetrapolar. Does it follow AN-1302's 4-wire bioisolated config?
    We would measure into archaeal media at 12–18% w/v salt, where electrode polarisation is
