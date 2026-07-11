@@ -1,13 +1,19 @@
 # biopunk-bioreactor
 
-An open, evidence-based review of low-cost open-source continuous-culture platforms
-(turbidostats / chemostats / morbidostats), and a design proposal for building
-best-in-class instruments for two distinct purposes: **characterisation** and **evolution**.
+An open, evidence-based **review of low-cost open-source bioreactors** — the continuous-culture
+platforms (turbidostats / chemostats / morbidostats) the field has produced — synthesized into a
+series of **upgrade paths that compose best-of-breed solutions for specific applications**:
+characterisation, evolution, and turnkey scale-out.
 
-The work started as a reading of two papers —
-[Chi.Bio](https://doi.org/10.1371/journal.pbio.3000794) (PLOS Biology 2020) and
-[OpenEvo](https://doi.org/10.64898/2026.07.06.735356) (bioRxiv 2026) — and grew into a
-field-wide comparison plus a build plan.
+The review covers six platforms, each traced to its primary source:
+[Chi.Bio](https://doi.org/10.1371/journal.pbio.3000794) (PLOS Biology 2020),
+[OpenEvo](https://doi.org/10.64898/2026.07.06.735356) (bioRxiv 2026),
+[Pioreactor](https://pioreactor.com) (no methods paper),
+[eVOLVER](https://doi.org/10.1038/nbt.4151) (Nature Biotechnology 2018),
+[EVE](https://doi.org/10.7554/eLife.83067) (eLife 2022), and the
+[Toprak morbidostat](https://doi.org/10.1038/nprot.2013.021) (Nature Protocols 2013).
+From there it builds a like-for-like comparison and a set of concrete upgrade paths — the best
+instrument to assemble for each purpose by recombining proven subsystems across the field.
 
 ## What's here
 
