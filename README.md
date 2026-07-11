@@ -30,6 +30,7 @@ instrument to assemble for each purpose by recombining proven subsystems across 
 | `docs/*.html` | Rendered, self-contained versions of the same documents (theme-aware, no external assets). |
 | [`manuscript/biopunk-bioreactor.pdf`](manuscript/biopunk-bioreactor.pdf) | The full write-up as a typeset article (LaTeX, built with tectonic). Source: [`.tex`](manuscript/biopunk-bioreactor.tex). |
 | [`slides/biopunk-wetware.pdf`](slides/biopunk-wetware.pdf) | Beamer deck for the Biopunk Wetware Meeting. Source: [`.tex`](slides/biopunk-wetware.tex). |
+| [`poster/biopunk-poster.pdf`](poster/biopunk-poster.pdf) | A0 landscape conference poster — the whole argument on one sheet (tectonic / tikzposter). Source: [`.tex`](poster/biopunk-poster.tex). |
 
 ## Core argument, in one paragraph
 
