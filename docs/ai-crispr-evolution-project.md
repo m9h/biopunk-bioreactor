@@ -1,8 +1,9 @@
 # Project: AI-directed continuous evolution with a CRISPR-driven loop
 
 *Proposal — 2026-07-10. A concrete build assembled from the components this repository outlines.*
-*Companion: the paper's "Toward AI-directed continuous evolution" section
-([two-instruments.md](two-instruments.md) is the instrument; this is the campaign).*
+*Companion: the paper's "Toward AI-directed continuous evolution" section. The `devo`
+champion this builds on is [build-plans.md](build-plans.md) → devo (M0–M4); this project is its
+autopilot. See [two-instruments.md](two-instruments.md) for the instrument thesis.*
 
 ## Goal in one sentence
 
