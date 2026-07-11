@@ -27,6 +27,11 @@ a claim was taken from a secondary source or product page rather than a primary 
   *Nature Biotechnology* 36:614–623 (2018). https://doi.org/10.1038/nbt.4151
   Docs: https://khalil-lab.gitbook.io/evolver — specs (16 vials, 40 mL, <$2k, open) from
   paper + docs + Rice/FynchBio pages.
+  Architecture (verified 2026-07-10 from the eVOLVER docs wiki `khalillab/evolver-docs`):
+  **Raspberry-Pi server** (`FYNCH-BIO/evolver`) + **Arduino "SmartSleeve" motorboards**
+  (`FYNCH-BIO/evolver-arduino`) + a Data Processing Unit (`FYNCH-BIO/dpu`) + an Electron GUI
+  (`FYNCH-BIO/evolver-electron`); hardware (PCB, 3D-printed parts) at `FYNCH-BIO/hardware`.
+  Note: mature 2018-lineage platform, not the frontier.
 
 - **EVE** — Gopalakrishnan V, et al. "A low-cost, open-source evolutionary bioreactor and its
   educational use." *eLife* 11:e83067 (2022). https://doi.org/10.7554/eLife.83067
@@ -94,6 +99,22 @@ a claim was taken from a secondary source or product page rather than a primary 
 - **β-dispersion / viable-cell-density** — "Universal Capacitance Model for Real-Time Biomass,"
   *Sensors* 15 (2015). https://pmc.ncbi.nlm.nih.gov/articles/PMC4610510/ · yeast f_c ≈ 2.8 MHz;
   commercial probes: Aber Instruments, Hamilton Incyte.
+
+## Project maintenance / activity (GitHub, as of 2026-07-10)
+
+Snapshot behind the matrix "Maintenance" row and the best-hybrids chassis argument. From the
+GitHub REST API (repos, releases, commits since 2025-07-01):
+
+- **Pioreactor** `Pioreactor/pioreactor` — pushed 2026-07-10; latest release **v26.6.0**
+  (2026-06-29, monthly CalVer); 100+ commits in the past year; maintained org (`docs.pioreactor`,
+  many plugins, `hardware`). https://github.com/pioreactor
+- **Chi.Bio** `HarrisonSteel/ChiBio` — pushed 2026-02-10; **no releases**; ~2 commits since
+  2025-07. Lightly maintained.
+- **OpenEvo** `Binomica-Labs/OpenEVO` — pushed 2026-06-17 (firmware 2026-06-04); no releases;
+  new (2026), minimal engagement.
+- **eVOLVER** `FYNCH-BIO/evolver` — pushed **2024-05-28**; latest release **v2.0.1 (2022-08-31)**;
+  **0 commits** since 2025-07. Server repo effectively dormant (`FYNCH-BIO/dpu` pushed 2025-08).
+- **EVE** `vishhvaan/eve-pi` — functional; last release **v1.0 (2019)**.
 
 ## Confidence key
 

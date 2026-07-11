@@ -1,0 +1,215 @@
+<title>Best Hybrids — One Instrument per Purpose</title>
+<style>
+  :root {
+    --ground: #ECEDF0;
+    --surface: #F7F8FA;
+    --surface-2: #E0E2E7;
+    --ink: #15181D;
+    --ink-muted: #5A616C;
+    --ink-faint: #878E99;
+    --rule: #CBCFD6;
+    --accent: #3B5A8C;
+    --accent-soft: #DAE1EE;
+    --good: #2E7350;
+    --good-soft: #D5E7DC;
+    --bad: #9C332E;
+    --bad-soft: #EFD9D7;
+    --warn: #8F6210;
+    --warn-soft: #EEE2C8;
+
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --measure: 68ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+      --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+      --accent: #7FA3D6; --accent-soft: #17293F;
+      --good: #6DB78B; --good-soft: #123326;
+      --bad: #E08880; --bad-soft: #351A18;
+      --warn: #D3A24C; --warn-soft: #33280F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+    --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+    --accent: #7FA3D6; --accent-soft: #17293F;
+    --good: #6DB78B; --good-soft: #123326;
+    --bad: #E08880; --bad-soft: #351A18;
+    --warn: #D3A24C; --warn-soft: #33280F;
+  }
+  :root[data-theme="light"] {
+    --ground: #ECEDF0; --surface: #F7F8FA; --surface-2: #E0E2E7;
+    --ink: #15181D; --ink-muted: #5A616C; --ink-faint: #878E99; --rule: #CBCFD6;
+    --accent: #3B5A8C; --accent-soft: #DAE1EE;
+    --good: #2E7350; --good-soft: #D5E7DC;
+    --bad: #9C332E; --bad-soft: #EFD9D7;
+    --warn: #8F6210; --warn-soft: #EEE2C8;
+  }
+
+  body { background: var(--ground); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 82ch; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; display: flex; flex-direction: column; gap: 3rem; }
+
+  .masthead { display: flex; flex-direction: column; gap: 1.1rem; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+  .standfirst { font-size: 1.15rem; color: var(--ink-muted); max-width: var(--measure); text-wrap: pretty; }
+  .meta { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 0; text-wrap: balance; display: flex; align-items: baseline; gap: 0.7rem; }
+  h2 .num { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); font-weight: 600; flex: none; }
+  h3 { font-size: 1.02rem; font-weight: 700; margin: 0; letter-spacing: -0.005em; }
+  p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+  code { font-family: var(--mono); font-size: 0.85em; background: var(--surface-2); padding: 0.08em 0.36em; border-radius: 3px; }
+  ul { margin: 0; padding-left: 1.1rem; max-width: var(--measure); display: flex; flex-direction: column; gap: 0.4rem; }
+  li::marker { color: var(--ink-faint); }
+
+  /* callout */
+  .callout { background: var(--surface); border-left: 3px solid var(--good); padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .callout .eyebrow { color: var(--good); }
+  .callout p { max-width: none; }
+  .callout.accent { border-left-color: var(--accent); }
+  .callout.accent .eyebrow { color: var(--accent); }
+  .callout.warn { border-left-color: var(--warn); }
+  .callout.warn .eyebrow { color: var(--warn); }
+
+  /* tables */
+  .scroller { overflow-x: auto; border: 1px solid var(--rule); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.8rem; min-width: 46rem; }
+  th { text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--ink); white-space: nowrap; vertical-align: bottom; }
+  td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.rowlabel { font-weight: 600; color: var(--ink); }
+  td.chassis { font-weight: 700; color: var(--accent); }
+  .cell-new { color: var(--bad); font-weight: 600; }
+
+  footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; font-size: 0.78rem; color: var(--ink-muted); display: flex; flex-direction: column; gap: 0.7rem; }
+  footer p { max-width: none; font-size: 0.78rem; }
+  .caveat { font-family: var(--mono); font-size: 0.7rem; line-height: 1.55; color: var(--ink-faint); }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Design Synthesis · Rev. A</div>
+    <h1>Best Hybrids — One Instrument per Purpose</h1>
+    <p class="standfirst">For each purpose, the best instrument to build by recombining proven subsystems: which existing platform is the right chassis, and which parts you graft on from the others — a bill of best-of-breed parts, not a new platform.</p>
+    <div class="meta">
+      <span>2026-07-10</span>
+      <span>Builds on two-instruments + corrections + chibio-upgrades + datasheet-verification</span>
+      <span>A synthesis note; confirm specs before budgeting</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="callout warn">
+      <div class="eyebrow">What these platforms are</div>
+      <p>Chi.Bio (2020), OpenEvo (2026), Pioreactor, eVOLVER (2018), EVE (2022), and the Toprak morbidostat (2013) are <strong>mature, proven designs</strong>, not the frontier. The value of a hybrid is exactly that: it recombines subsystems that already work, so the risk is integration, not invention. Only one genuinely new build appears below — the automated archiver — and it is called out as such.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">00</span> The compute convergence — why "share the firmware" is not aspirational</h2>
+    <div class="callout accent">
+      <div class="eyebrow">The load-bearing decision</div>
+      <p>The two-instruments thesis asks the two machines to share a firmware/interface framework. That is now grounded, not hoped-for, because <strong>three of the field's platforms already sit — or can sit — on one Raspberry Pi compute family.</strong></p>
+    </div>
+    <ul>
+      <li><strong>Pioreactor</strong> is a Raspberry Pi platform (a leader/worker cluster of Pis).</li>
+      <li><strong>eVOLVER</strong>'s server runs on a <strong>Raspberry Pi</strong> (RPi server + Arduino "SmartSleeve" motorboards + a Data Processing Unit + an Electron GUI).</li>
+      <li><strong>Chi.Bio</strong> ports to a Pi at medium effort — the <a href="chibio-upgrades.html">Pi-migration analysis</a> shows it is all-I²C behind a <code>0x74</code> mux, so the move is a carrier respin plus a small software port, not a rewrite.</li>
+    </ul>
+    <p>So both hybrids below stand on the same substrate: <strong>Raspberry Pi + one Python/web/cluster codebase, with per-instrument hardware profiles.</strong> This is the single most leveraged decision in the plan — it is what lets the sensor-module designs, the calibration reference, and the control code actually be shared rather than merely analogous.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">01</span> P1 — Characterisation: Chi.Bio core in an OpenEvo body</h2>
+    <p><strong>Chassis: Chi.Bio.</strong> Nothing else has the non-contact in-situ optics (AS7341 + 650 nm laser OD + seven-colour excitation, read through the wall) or the PID/MPC control holding OD to ~2% of setpoint. Its one real weakness is the open-to-atmosphere tube — the hybrid fixes that by borrowing OpenEvo's body.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Subsystem</th><th>Source</th><th>What it contributes</th></tr></thead>
+        <tbody>
+          <tr><td class="rowlabel">Optical core + control</td><td class="chassis">Chi.Bio (chassis)</td><td>Non-contact AS7341 + laser OD + 7-colour excitation; PID/MPC</td></tr>
+          <tr><td class="rowlabel">Closed, autoclavable, gas-capable vessel</td><td>OpenEvo graft</td><td>Fixes the open-atmosphere gap; makes O₂/CO₂ a controlled variable</td></tr>
+          <tr><td class="rowlabel">Dissolved O₂ + pH</td><td>Optode spots</td><td>Ratiometric fluorescence read <strong>through the wall</strong> — non-contact, core physiology</td></tr>
+          <tr><td class="rowlabel">Dispersive spectrometry</td><td>Hamamatsu C12880MA</td><td>Continuous 340–850 nm replaces the eight fixed AS7341 bands; keep AS7341 for fast ratios</td></tr>
+          <tr><td class="rowlabel">Compute</td><td>Raspberry Pi</td><td>WiFi + quad-core for the dense real-time logging this instrument produces</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Design law held: everything added is optical / through-wall.</strong> No immersed electrodes — the moment you add one, you have built the other machine. Result: <strong>eight richly-instrumented, gas-controlled, closed reactors on one Pi</strong>, running eight conditions in parallel.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span> P2 — Evolution: Pioreactor cluster, OpenEvo fluidics, and the archiver</h2>
+    <p><strong>Chassis: Pioreactor — not a scaled-up OpenEvo.</strong> The evolution machine's first requirement is "eight cheap chambers under one coordinating interface," which is a description of Pioreactor's leader/worker cluster — already productised and Pi-native. The choice turns on what is addable in which direction:</p>
+    <ul>
+      <li>OpenEvo's real edge is its <strong>three-media selection fluidics</strong> and <strong>closed autoclavable vessel</strong> — both <strong>addable to a Pioreactor</strong>.</li>
+      <li>Pioreactor's edge is the <strong>cluster + plugin ecosystem</strong> — <strong>not</strong> easily addable to an OpenEvo.</li>
+    </ul>
+    <p>The asymmetry decides it: graft OpenEvo's vessel onto Pioreactor, not the reverse.</p>
+    <p><strong>And you would be building on living ground.</strong> Chassis choice is also a bet on maintenance, and the platforms are ageing very differently (GitHub, as of 2026-07-10): Pioreactor ships a <strong>monthly release</strong> (<code>26.6.0</code>, 2026-06-29) with 100+ commits in the past year and a maintained org of plugins and docs; <strong>eVOLVER's server is dormant</strong> — last release 2022, last commit May 2024, zero in the past year; Chi.Bio is lightly maintained (a couple of commits a year, no releases). Grafting onto eVOLVER means forking a codebase nobody has touched since 2024; grafting onto Pioreactor means building on something that still ships. A second, independent reason the evolution chassis is Pioreactor — see the maintenance row in <a href="corrections-and-matrix.html">corrections-and-matrix</a>.</p>
+    <div class="callout warn">
+      <div class="eyebrow">The honest alternative</div>
+      <p>If cost, openness, or a single autoclavable closed vessel dominate over fleet coordination — teaching, a shoestring lab, a one-off campaign — an <strong>OpenEvo base</strong> (or EVE, for replicate-capable teaching at $115–200) is right, and this section inverts. The Pioreactor choice is for <em>best-in-class rigorous ALE</em>, where the cluster and plugin path carry their weight.</p>
+    </div>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Subsystem</th><th>Source</th><th>What it contributes</th></tr></thead>
+        <tbody>
+          <tr><td class="rowlabel">Cluster chassis + plugins</td><td class="chassis">Pioreactor (chassis)</td><td>"Many cheap chambers, one interface"; Pi-native; supported</td></tr>
+          <tr><td class="rowlabel">3-media fluidics + closed vessel</td><td>OpenEvo graft</td><td>Native selection cycling; sterility for weeks-long unattended runs</td></tr>
+          <tr><td class="rowlabel">Automated chilled archiver</td><td class="cell-new">New build</td><td>Generation-scheduled glycerol fraction collector on the waste line — the LTEE's freezer, the field's missing piece; turns a claim into a fitness assay</td></tr>
+          <tr><td class="rowlabel">Batch-excursion mode</td><td>Firmware</td><td>Recovers carrying-capacity phenotypes a turbidostat cannot see (how the LTEE caught Cit⁺)</td></tr>
+          <tr><td class="rowlabel">Variant calling</td><td><code>breseq</code> pipeline</td><td>The IS-mediated ~110 kb deletions OpenEvo mis-called need it; a default mapper does not</td></tr>
+          <tr><td class="rowlabel">Media-switch verification</td><td>Conductivity electrodes</td><td>The media differ by salt; electrodes are fine in a closed vessel</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Design law held: cheap × many, resist sensing bloat.</strong> The output is an <em>archived, sequenced, replicated</em> record, not a dense time series. Every dollar on one chamber is a dollar not spent on the second. The archiver is the highest-value addition because, as far as we can find, <strong>nobody has built an automated one</strong> — it is the difference between an anecdote and a measurable ancestor-vs-descendant fitness assay.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span> P3 — Scale-out: buy Pioreactor, graft an eVOLVER sleeve only if you must</h2>
+    <p>P3 barely wants hybridizing; turnkey reliability <em>is</em> the product. <strong>Buy a Pioreactor cluster.</strong> The one graft worth considering: drop <strong>eVOLVER Smart Sleeves</strong> (Arduino motorboards giving arbitrary per-vial temperature / stir / OD setpoints) onto the specific vials that need eVOLVER-grade configurability, while the rest of the fleet runs standard. Reach for that only when a study genuinely needs arbitrary per-vial control at scale — otherwise it is cost and build burden (eVOLVER wants a machine shop) for capability you will not use.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span> The bill of grafts</h2>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Purpose</th><th>Chassis</th><th>Grafts from</th><th>The one new build</th></tr></thead>
+        <tbody>
+          <tr><td class="rowlabel">P1 · Characterise</td><td class="chassis">Chi.Bio</td><td>OpenEvo vessel + gas; optode DO/pH; C12880MA; Pi compute</td><td>—</td></tr>
+          <tr><td class="rowlabel">P2 · Evolve</td><td class="chassis">Pioreactor</td><td>OpenEvo fluidics + vessel; conductivity; <code>breseq</code></td><td class="cell-new">Automated chilled archiver</td></tr>
+          <tr><td class="rowlabel">P3 · Scale-out</td><td class="chassis">Pioreactor</td><td>(opt.) eVOLVER Smart Sleeve</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span> What the instruments share — the ecosystem</h2>
+    <p>Combine at the platform level, not the product level:</p>
+    <ul>
+      <li><strong>Compute/firmware family</strong> — Raspberry Pi + one codebase, per-instrument profiles (the convergence in §00; the reason the rest of this list is achievable at all).</li>
+      <li><strong>Module footprint</strong> — the IO Rodeo 25.4 × 20 mm / dual-JST-SH board size for sensor modules on both chassis.</li>
+      <li><strong>Sensor-module designs</strong> — a DO/pH optode reader is the same board on either machine.</li>
+      <li><strong>Calibration reference</strong> — one open colorimeter cross-calibrating the 650 nm (Chi.Bio) and 940 nm (OpenEvo-lineage) OD paths across OD₆₀₀ 0.2–6.0, so both agree before either forks.</li>
+    </ul>
+    <p><strong>The one honest exception, unchanged from the thesis:</strong> if you only ever do ALE-with-fitness and never pure characterisation, the P2 machine stands alone, and bolting characterisation optics onto it is waste. When in doubt: two machines, shared parts.</p>
+  </section>
+
+  <footer>
+    <p>Companion documents: <a href="two-instruments.html">Two Instruments, One Ecosystem</a> · <a href="corrections-and-matrix.html">OpenEvo Corrections &amp; the Open-Bioreactor Matrix</a> · <a href="chibio-upgrades.html">Chi.Bio — Platform-Modernisation Upgrades</a> · <a href="datasheet-verification.html">Datasheet Verification Pass</a>.</p>
+    <p class="caveat"><strong>Verified this session:</strong> the platform baselines these grafts draw on — Chi.Bio's all-I²C non-contact optics and Pi-portability (from <code>app.py</code>); OpenEvo's closed vessel + 3-media fluidics; Pioreactor's Pi cluster + CC BY-SA 4.0 hardware; eVOLVER's Raspberry-Pi server + Arduino SmartSleeve architecture (eVOLVER docs wiki); the C12880MA / optode / <code>breseq</code> specs. <strong>Design proposal, not built:</strong> every hybrid here is a composition on paper; the integration risk (shared-Pi I²C timing, optode/LED cross-talk, archiver fraction fidelity, conductivity in high-salt media) is real and unbudgeted. <strong>Highest-risk, genuinely novel:</strong> the automated chilled archiver — no prior art found; prototype it first. See <a href="../SOURCES.md">SOURCES.md</a>.</p>
+  </footer>
+
+</div>

@@ -129,9 +129,13 @@ Confidence markers in cells: ✓ strength, ✗ weakness, ~ qualified.
 | Cost / unit | ~$300 +PCB | ~$300 | $329–389 | ~ <$2k (16) | ✓ $115–200 | mid |
 | Build effort | ~ PCB fab | ✓ manual, guided | ✓ buy turnkey | ✗ machine shop | moderate | ~ bespoke |
 | Independent use | ReacSight, others | ~ too new | ~ community only | ✓ ePACE, base editors | teaching | ✓ widely adapted |
+| Maintenance (2026-07) | ~ light, no releases | ~ new, low | ✓ monthly releases | ✗ dormant since '24 | ✗ frozen '19 | protocol |
 
 *Cells reflect the platform as published/shipped, not what a motivated builder could add.
-"Independent use" = peer-reviewed work by groups other than the originators.*
+"Independent use" = peer-reviewed work by groups other than the originators. "Maintenance" =
+GitHub release/commit activity as of 2026-07-10 (Pioreactor: v26.6.0, 100+ commits in the past
+year, maintained plugin org; eVOLVER `FYNCH-BIO/evolver`: last release 2022, last commit May
+2024; Chi.Bio: ~2 commits/year, no releases; EVE `vishhvaan/eve-pi`: last release 2019).*
 
 ---
 

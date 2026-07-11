@@ -18,6 +18,7 @@ field-wide comparison plus a build plan.
 | [`docs/education.md`](docs/education.md) | The educational materials each platform serves — classroom-validated uses, curricula, and a cross-platform concepts ladder. |
 | [`docs/datasheet-verification.md`](docs/datasheet-verification.md) | A primary-source pass resolving the open items above: confirms the sensor/impedance/platform specs, corrects four (incl. Pioreactor's hardware licence), and answers the "silicon or firmware?" half of Open Question 1. **The receipts.** |
 | [`docs/chibio-upgrades.md`](docs/chibio-upgrades.md) | A platform-modernisation note for Chi.Bio: base-platform upgrades (compute, connectivity, pumps, thermal, software architecture) anchored to the verified BOM/code baseline — including a correction that Chi.Bio *already* ships the AS7341. Complements `two-instruments.md` Part 1 (sensing). |
+| [`docs/best-hybrids.md`](docs/best-hybrids.md) | The best instrument to *build* for each purpose by recombining proven subsystems: chassis + grafts per purpose, the Raspberry-Pi compute convergence that makes a shared firmware framework real, and a bill of grafts. **The build.** |
 | `docs/*.html` | Rendered, self-contained versions of the same documents (theme-aware, no external assets). |
 
 ## Core argument, in one paragraph
@@ -30,10 +31,23 @@ eVOLVER, neither of which optimises for the first two. The right move is not one
 machine but two purpose-built instruments sharing a module standard, sensor designs, a
 firmware framework, and a calibration reference.
 
-## Platforms covered
+## Platforms compared
 
-Chi.Bio · OpenEvo · Pioreactor · eVOLVER · EVE · Toprak morbidostat.
-See the matrix for a like-for-like comparison across 15 attributes.
+Purpose codes: **P1** characterise · **P2** evolve · **P3** scale-out.
+
+| Platform | Purpose | Reference | Working vol. | Cost / unit | Build effort | Maintenance (2026-07) | Best for |
+|---|---|---|---|---|---|---|---|
+| **Chi.Bio** | P1 | PLOS Biol 2020 | 12–25 mL | ~$300 +PCB | PCB fab | light, no releases | In-situ measurement density |
+| **OpenEvo** | P2 | bioRxiv 2026 | ~20 mL | ~$300 | guided manual build | new, low | Cheapest buildable selection cycler |
+| **Pioreactor** | P3 | *no paper* | 20 / 40 mL | $329–389 | buy turnkey | **monthly releases** | Turnkey fleet + active ecosystem |
+| **eVOLVER** | P3 | Nat Biotech 2018 | ~40 mL | <$2k / 16 | machine shop | dormant since '24 | Max-config research fleet |
+| **EVE** | P2 | eLife 2022 | ~12 mL | $115–200 | moderate | frozen '19 | Low-cost evolution + teaching |
+| **Toprak morbidostat** | P2 | Nat Protoc 2013 | ~12 mL | mid | bespoke | protocol | Drug-gradient selection |
+
+*Headline attributes only — see [`docs/corrections-and-matrix.md`](docs/corrections-and-matrix.md)
+for the full like-for-like matrix across 15 attributes with per-device pros/cons, and
+[`docs/best-hybrids.md`](docs/best-hybrids.md) for which to build per purpose. Maintenance =
+GitHub release/commit activity; see [`SOURCES.md`](SOURCES.md).*
 
 ## Status & epistemics
 
