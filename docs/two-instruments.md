@@ -8,6 +8,9 @@ for each purpose first — and only then ask whether one machine can do both. Th
 **build two, share the parts.**
 
 Companion evidence base: [`corrections-and-matrix.md`](corrections-and-matrix.md).
+Where this leads: the evolution machine here is the substrate for AI-directed continuous
+evolution — [`ai-crispr-evolution-project.md`](ai-crispr-evolution-project.md) (the apparatus is
+the `devo` champion; the AI is the autopilot you can only fly once it exists).
 
 ---
 
