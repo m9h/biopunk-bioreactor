@@ -3,3 +3,14 @@
 
 # scratch
 *.tmp
+
+# LaTeX intermediates
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.bbl
+*.blg
+*.synctex.gz

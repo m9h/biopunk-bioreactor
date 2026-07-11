@@ -1,0 +1,215 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% --- Tectonic-safe: no fontspec / Fira; use a standard theme with custom colours ---
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+\usetheme{default}
+\usecolortheme{default}
+\useinnertheme{rectangles}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[circle]
+
+% Palette: biopunk teal / violet / signal
+\definecolor{ink}{RGB}{20,24,29}
+\definecolor{paper}{RGB}{247,248,250}
+\definecolor{accent}{RGB}{13,140,148}
+\definecolor{violet}{RGB}{110,86,207}
+\definecolor{good}{RGB}{46,140,95}
+\definecolor{bad}{RGB}{176,60,54}
+\definecolor{warn}{RGB}{176,120,20}
+
+\setbeamercolor{background canvas}{bg=paper}
+\setbeamercolor{frametitle}{fg=paper,bg=accent}
+\setbeamercolor{title}{fg=accent}
+\setbeamercolor{structure}{fg=accent}
+\setbeamercolor{normal text}{fg=ink}
+\setbeamercolor{block title}{fg=paper,bg=violet}
+\setbeamercolor{block body}{bg=violet!8}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{title}{series=\bfseries}
+
+\newcommand{\gd}[1]{\textcolor{good}{#1}}
+\newcommand{\bd}[1]{\textcolor{bad}{#1}}
+\newcommand{\wn}[1]{\textcolor{warn}{#1}}
+\newcommand{\ac}[1]{\textcolor{accent}{\textbf{#1}}}
+
+\title{\textbf{Two Instruments, One Ecosystem}}
+\subtitle{Open-source bioreactors: what they're \emph{for}, and where OpenEvo goes wrong}
+\author{Morgan Hough}
+\institute{\small Biopunk Wetware Meeting \quad\textbullet\quad \texttt{github.com/m9h/biopunk-bioreactor}}
+\date{10 July 2026}
+
+\begin{document}
+
+{\setbeamercolor{background canvas}{bg=ink}
+\setbeamercolor{title}{fg=paper}
+\setbeamercolor{subtitle}{fg=accent}
+\setbeamercolor{author}{fg=paper}
+\setbeamercolor{institute}{fg=paper}
+\setbeamercolor{date}{fg=paper}
+\begin{frame}[plain]
+  \titlepage
+\end{frame}}
+
+\begin{frame}{The one-slide thesis}
+  \begin{block}{Chi.Bio and OpenEvo look like competitors. They aren't.}
+  \begin{itemize}
+    \item \ac{Chi.Bio is an instrument} --- measures a culture richly, in situ, while holding it in a defined state.
+    \item \ac{OpenEvo is an actuator} --- pushes a culture through selection, unattended, for weeks.
+  \end{itemize}
+  \end{block}
+  \vspace{0.5em}
+  Both cost $\sim$\$300. Both are open. But a machine built for one purpose is
+  \emph{measurably worse} at the other. \\[0.4em]
+  \textbf{The field serves three purposes, not one contest.}
+\end{frame}
+
+\begin{frame}{Three purposes}
+  \begin{columns}[T]
+    \column{0.33\textwidth}
+      \textbf{\textcolor{accent}{P1 -- Characterise}}\\[0.3em]
+      Hold a defined state; measure richly in situ; close feedback loops.\\[0.4em]
+      \emph{Champion:} \ac{Chi.Bio}
+    \column{0.33\textwidth}
+      \textbf{\textcolor{violet}{P2 -- Evolve}}\\[0.3em]
+      Weeks of unattended selection; produce \emph{archived, replicated} evidence.\\[0.4em]
+      \emph{Champion:} \bd{none yet}
+    \column{0.33\textwidth}
+      \textbf{\textcolor{warn}{P3 -- Scale out}}\\[0.3em]
+      Many reliable reactors now; turnkey; supported.\\[0.4em]
+      \emph{Champions:} Pioreactor, eVOLVER
+  \end{columns}
+  \vspace{1em}
+  \begin{center}\small
+  Rich-\&-few vs.\ cheap-\&-many \quad$|$\quad non-contact vs.\ electrodes-OK \quad$|$\quad
+  steady-state vs.\ run-to-stationary
+  \end{center}
+\end{frame}
+
+\begin{frame}{OpenEvo: credit where due}
+  A real contribution --- these are genuine strengths:
+  \begin{itemize}
+    \item \gd{Peak-to-peak growth readout} tied to hardware dilution events (no local-maxima noise).
+    \item \gd{940\,nm OD} avoids optogenetic \& ambient overlap; $R^2\!\ge\!0.98$ to $\mathrm{OD}_{600}=6$.
+    \item \gd{Closed autoclavable vessel} --- better sterility than Chi.Bio's open tube.
+    \item \gd{4{,}000-hour remote run}; controlled from another continent.
+    \item \gd{Assembly manual} validated by an undergrad with no electronics experience.
+  \end{itemize}
+  \vspace{0.3em}
+  The cheapest buildable three-media selection cycler in the field. \\
+  \textbf{The problems below are correctable --- framing and analysis, not hardware.}
+\end{frame}
+
+\begin{frame}{OpenEvo: two verifiable errors}
+  \begin{block}{\bd{Error 1} --- the headline figure contradicts itself}
+  Abstract: ``\bd{55\% faster}.'' \quad Results: ``4.9 vs 7.6 h, a \bd{36\% increase in growth rate}.'' \\
+  Same data. $7.6\!\to\!4.9$\,h is a \emph{36\% shorter doubling time} \textbf{=} a \emph{55\% higher rate}
+  ($1/4.9 \div 1/7.6 = 1.55$). The results sentence mislabels one as the other.
+  \end{block}
+  \begin{block}{\bd{Error 2} --- a false claim about a competitor}
+  ``Pioreactor\dots only the \emph{software} is open source.'' \\
+  False: the hardware is openly licensed (CC~BY-SA~4.0, per its \texttt{LICENSE}). \\
+  \small\emph{(Our own first draft misnamed it CERN-OHL --- a contributor corrected it against the primary file.)}
+  \end{block}
+\end{frame}
+
+\begin{frame}{OpenEvo: the deeper gap --- evidence}
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+      \textbf{\bd{$n=1$}} \\[0.3em]
+      One clone, one population sequenced. No replicates $\Rightarrow$ no convergence $\Rightarrow$
+      \emph{cannot say which mutation caused the adaptation.} The LTEE runs \textbf{twelve} for this reason.
+    \column{0.5\textwidth}
+      \textbf{\bd{No archiving}} \\[0.3em]
+      One hand-taken glycerol stock. The LTEE's real innovation was the \emph{freezer}, not the flask
+      --- revive an ancestor, race it against a descendant. Without it, fitness is unmeasurable.
+  \end{columns}
+  \vspace{0.8em}
+  \begin{center}
+  \emph{OpenEvo cites Barrick's ``\dots Archiving Populations, and Measuring Fitness'' --- then implements neither.}
+  \end{center}
+\end{frame}
+
+\begin{frame}{The matrix (abridged)}
+  \small
+  \renewcommand{\arraystretch}{1.2}
+  \begin{center}
+  \begin{tabular}{@{}lccccc@{}}
+    \toprule
+    & \textbf{Chi.Bio} & \textbf{OpenEvo} & \textbf{Pioreactor} & \textbf{eVOLVER} & \textbf{EVE} \\
+    \midrule
+    Purpose      & \textcolor{accent}{P1} & \textcolor{violet}{P2} & \textcolor{warn}{P3} & \textcolor{warn}{P3} & \textcolor{violet}{P2} \\
+    Paper        & \gd{yes} & \gd{yes} & \bd{none} & \gd{yes} & \gd{yes} \\
+    Parallelism  & \gd{8} & \bd{1} & \gd{cluster} & \gd{16} & 3+ \\
+    Rich sensing & \gd{spectro.} & \bd{OD} & plugin & config. & \bd{OD} \\
+    Archiving    & \bd{no} & \bd{no} & \bd{no} & \bd{no} & \bd{no} \\
+    Cost         & \$300 & \$300 & \$329 & \wn{$<$\$2k/16} & \gd{\$115} \\
+    Build        & \wn{PCB} & \gd{guided} & \gd{buy} & \bd{shop} & mod. \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \vspace{0.6em}
+  Two patterns: \bd{nobody archives} (the field's blind spot) $\cdot$
+  the only paperless platform is the only pure product.
+\end{frame}
+
+\begin{frame}{The proposal: build two, share the parts}
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+      \textbf{\textcolor{accent}{Characterisation machine}} \\
+      \emph{Non-contact is inviolable.}
+      \begin{itemize}\small
+        \item + optode DO / pH (read through wall)
+        \item + dispersive spectrometer 340--850\,nm
+        \item + sealed gas-controlled lid
+      \end{itemize}
+    \column{0.5\textwidth}
+      \textbf{\textcolor{violet}{Evolution machine}} \\
+      \emph{Cheap $\times$ many; resist sensing bloat.}
+      \begin{itemize}\small
+        \item + 8 replicate chambers, one interface
+        \item + \textbf{automated chilled archive} (nobody has built this)
+        \item + batch-excursion mode; \texttt{breseq}
+      \end{itemize}
+  \end{columns}
+  \vspace{0.7em}
+  \begin{block}{Why two? The sensors sort themselves by contact.}
+  Optical (DO/pH/spectrometry) $\to$ characterisation. Electrode (conductivity/ERT/viable-cell) $\to$ evolution.
+  \emph{Share} the module footprint, sensor designs, firmware, calibration --- not the vessel.
+  \end{block}
+\end{frame}
+
+\begin{frame}{These are teaching instruments too}
+  \begin{itemize}
+    \item \ac{EVE} --- eLife paper is literally ``\dots and its educational use''; $<$\$200; validated
+      in a \emph{real classroom} evolving \emph{E.~coli} under chloramphenicol.
+    \item \ac{Pioreactor} --- educators portal; one device teaches micro + EE + CS at once.
+    \item \ac{OpenEvo} --- the manual \emph{is} a course; anchored a global hackathon.
+    \item \ac{Chi.Bio} --- ``remove the lid, observe fluorescence by eye.''
+  \end{itemize}
+  \vspace{0.6em}
+  \begin{center}
+  \emph{But the teaching inherits the research blind spots} --- archiving, replicates, and
+  carrying capacity are as under-taught as they are under-built.
+  \end{center}
+\end{frame}
+
+\begin{frame}{Take-aways / call to build}
+  \begin{enumerate}
+    \item Stop comparing these as one contest --- \ac{three purposes}, different winners.
+    \item Evolution has \bd{no champion}: nobody archives or replicates. \emph{That's the opening.}
+    \item The killer feature nobody has shipped: an \ac{automated chilled fraction collector}.
+    \item OpenEvo's errors are real but \gd{fixable} --- and we filed them, fairly, with fixes.
+  \end{enumerate}
+  \vspace{0.8em}
+  \begin{center}
+  \textbf{Public, CC~BY~4.0, corrections welcome --- a PR already landed and fixed one of \emph{my} errors.}\\[0.4em]
+  \ac{github.com/m9h/biopunk-bioreactor}
+  \end{center}
+\end{frame}
+
+\end{document}

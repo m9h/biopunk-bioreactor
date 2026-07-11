@@ -26,6 +26,8 @@ instrument to assemble for each purpose by recombining proven subsystems across 
 | [`docs/chibio-upgrades.md`](docs/chibio-upgrades.md) | A platform-modernisation note for Chi.Bio: base-platform upgrades (compute, connectivity, pumps, thermal, software architecture) anchored to the verified BOM/code baseline — including a correction that Chi.Bio *already* ships the AS7341. Complements `two-instruments.md` Part 1 (sensing). |
 | [`docs/best-hybrids.md`](docs/best-hybrids.md) | The best instrument to *build* for each purpose by recombining proven subsystems: chassis + grafts per purpose, the Raspberry-Pi compute convergence that makes a shared firmware framework real, and a bill of grafts. **The build.** |
 | `docs/*.html` | Rendered, self-contained versions of the same documents (theme-aware, no external assets). |
+| [`manuscript/biopunk-bioreactor.pdf`](manuscript/biopunk-bioreactor.pdf) | The full write-up as a typeset article (LaTeX, built with tectonic). Source: [`.tex`](manuscript/biopunk-bioreactor.tex). |
+| [`slides/biopunk-wetware.pdf`](slides/biopunk-wetware.pdf) | Beamer deck for the Biopunk Wetware Meeting. Source: [`.tex`](slides/biopunk-wetware.tex). |
 
 ## Core argument, in one paragraph
 

@@ -1,0 +1,371 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Tectonic / XeTeX-safe preamble (no fontspec, no pandoc, no shell-escape) ---
+\usepackage[margin=1in]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[colorlinks=true,linkcolor=teal!70!black,citecolor=teal!70!black,urlcolor=teal!70!black]{hyperref}
+
+\definecolor{ink}{RGB}{21,24,29}
+\definecolor{accent}{RGB}{11,110,117}
+\definecolor{good}{RGB}{46,115,80}
+\definecolor{bad}{RGB}{156,51,46}
+\definecolor{warn}{RGB}{143,98,16}
+
+\titleformat{\section}{\Large\bfseries\color{ink}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{ink}}{\thesubsection}{0.6em}{}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+\newcommand{\code}[1]{\texttt{\small #1}}
+
+\newcommand{\err}{\textcolor{bad}{\textbf{[error]}}}
+\newcommand{\frm}{\textcolor{warn}{\textbf{[framing]}}}
+\newcommand{\mth}{\textcolor{accent}{\textbf{[method]}}}
+
+\title{\textbf{Open-Source Continuous-Culture Bioreactors:\\
+A Correction, a Comparison, and a Two-Instrument Proposal}}
+\author{Morgan Hough\\[2pt]
+  \small Prepared with AI assistance (Claude, Anthropic).\\
+  \small Source repository: \url{https://github.com/m9h/biopunk-bioreactor}}
+\date{10 July 2026 \quad\textbullet\quad \small Working paper --- a reader's audit, not peer review}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Low-cost open-source continuous-culture devices --- turbidostats, chemostats, and
+morbidostats --- have proliferated, but they are frequently compared as though they compete
+for a single role. They do not. We argue that the field serves \emph{three} distinct
+purposes: in-situ \emph{characterisation} of a culture held in a defined state; automated
+\emph{evolution} that must produce archived, replicated evidence; and turnkey
+\emph{scale-out} operation. We first correct a set of verifiable errors and overstatements in
+the recent OpenEvo preprint \cite{cocioba2026openevo}, including a self-contradictory
+growth-rate figure and a false claim about a competitor's licensing. We then place six
+platforms --- Chi.Bio, OpenEvo, Pioreactor, eVOLVER, EVE, and the Toprak morbidostat --- in a
+like-for-like matrix across fifteen attributes, and give per-platform strengths and
+limitations. Finally we propose that the best system is not one merged machine but
+\emph{two} purpose-built instruments sharing a component ecosystem, and we note the strong
+educational role these devices already play. Every factual claim is tagged with its
+confidence level; specifications not verified against a primary source are flagged as such.
+\end{abstract}
+
+\section{Introduction}
+
+The precision of an in-vivo biology experiment depends on isolating the subsystem of interest
+from the drift of a growing culture's environment. Continuous-culture devices address this by
+diluting a culture during growth: a turbidostat holds optical density (OD) at a set-point; a
+chemostat fixes the dilution rate and lets density float; a morbidostat titrates a drug to
+hold growth inhibition constant. Over the past decade a wave of open-source, low-cost
+instruments has made these techniques broadly accessible, and two in particular frame the
+present analysis: \textbf{Chi.Bio} \cite{steel2020chibio}, an all-in-one platform for in-situ
+measurement and manipulation, and \textbf{OpenEvo} \cite{cocioba2026openevo}, a recent
+preprint describing a cheap, buildable device for automated directed evolution.
+
+These two are often read as competitors --- both cost roughly \$300, both are open --- but
+they are optimised for opposite halves of the problem. Chi.Bio is fundamentally an
+\emph{instrument}: it exists to measure a culture richly while holding it in a defined state.
+OpenEvo is fundamentally an \emph{actuator}: it exists to push a culture through selection
+regimes, unattended, for weeks. Recognising this distinction --- and a third purpose that a
+productised platform such as Pioreactor serves --- reorganises the entire field and changes
+what ``best'' means.
+
+This working paper has four aims. Section~\ref{sec:purposes} sets out the three purposes.
+Section~\ref{sec:corrections} corrects specific errors in the OpenEvo preprint, fairly and
+with proposed fixes. Section~\ref{sec:matrix} compares six platforms attribute by attribute,
+and Section~\ref{sec:proposal} argues for building two purpose-built instruments rather than
+one compromise machine. Section~\ref{sec:education} documents the educational materials these
+platforms already serve. We are explicit throughout about what was verified against a primary
+source and what was not.
+
+\section{Three purposes, not one}
+\label{sec:purposes}
+
+Treating all continuous-culture devices as interchangeable obscures that they optimise for
+incompatible objectives.
+
+\textbf{Purpose 1 --- Characterisation.} Hold a culture in a defined, unchanging state and
+measure it richly, in situ, in real time, closing feedback loops around it. The figure of
+merit is \emph{signal density per reactor}, with a handful of reactors running different
+conditions in parallel. Chi.Bio is the exemplar: a chip spectrometer, a seven-colour LED for
+optogenetic actuation and fluorophore excitation, non-contact infrared thermometry, and
+proportional-integral-derivative plus model-predictive control that holds OD within about 2\%
+of set-point \cite{steel2020chibio}.
+
+\textbf{Purpose 2 --- Evolution.} Push a culture through selection regimes unattended for
+weeks, and produce \emph{evidence} that adaptation occurred and which mutation caused it. The
+figures of merit are cheap chambers in numbers, systematic archiving, and long-run
+robustness. This is OpenEvo's target, and --- as Section~\ref{sec:corrections} argues --- the
+half it does not yet fully reach.
+
+\textbf{Purpose 3 --- Scale-out operation.} Run many reliable reactors now, with minimal build
+effort, a maintained software platform, cluster management, and support. The value is
+reproducibility and uptime, not measurement richness or archived evidence. Pioreactor
+(turnkey) and eVOLVER (maximally configurable) own this axis, which is orthogonal to the other
+two.
+
+These purposes pull hardware in opposite directions --- rich-and-few versus cheap-and-many,
+non-contact versus immersed-electrode-tolerant, defined-steady-state versus
+free-to-run-to-stationary. A device optimised for one is measurably worse at another. That
+tension is the organising principle of everything below.
+
+\section{Corrections to the OpenEvo preprint}
+\label{sec:corrections}
+
+OpenEvo is a genuine contribution and the corrections here are not a dismissal. Its real
+strengths include a peak-to-peak growth readout tied to hardware dilution events (which
+sidesteps local-maxima noise); a 940\,nm OD path that avoids optogenetic and ambient overlap,
+with an inverse model holding $R^2 \ge 0.98$ out to $\mathrm{OD}_{600}=6.0$; a closed
+autoclavable vessel with better sterility than Chi.Bio's open tube; a 4{,}000-hour remote run
+demonstrating robustness; and an illustrated assembly manual validated by having an
+inexperienced undergraduate build a working unit. It is the cheapest buildable three-media
+selection cycler in the field. The issues below are correctable and concern framing and
+analysis more than hardware.
+
+\subsection{Verifiable errors}
+
+\err\ \textbf{The headline growth-rate figure contradicts itself.} The abstract states
+evolved cells ``grew 55\% faster than wild-type at 12\% salt''; the results state ``a doubling
+time of 4.9 hours versus 7.6 hours (a 36\% increase in growth rate).'' Both describe the same
+data, but the two numbers are different quantities. A doubling time of $7.6 \to 4.9$\,h is a
+36\% \emph{reduction in doubling time} yet a 55\% \emph{increase in growth rate}, since rate
+$\propto 1/(\text{doubling time})$ and $(1/4.9)/(1/7.6) = 1.55$. The abstract's 55\% is the
+correct growth-rate figure; the results sentence mislabels the 36\% doubling-time reduction as
+a growth-rate increase. \emph{Fix:} state both explicitly --- ``36\% shorter doubling time,
+equivalently 55\% higher growth rate.''
+
+\err\ \textbf{A false claim about a competitor.} The preprint states that Pioreactor is
+``available for purchase, but only the software is open source.'' A public
+\code{Pioreactor/hardware} repository exists and the hardware is openly licensed under
+CC~BY-SA~4.0 (per its \code{LICENSE} file) \cite{pioreactor}. The claim is used to clear
+competitive space and is false. \emph{Fix:} describe Pioreactor accurately as
+open-hardware-and-software, distinguished not by openness but by being a supported product
+with a fleet platform. (We note in passing that an earlier draft of this document itself
+misnamed the licence as CERN-OHL; a contributor corrected it against the primary
+\code{LICENSE} file --- an illustration of the citation discipline this repository aims for.)
+
+\subsection{Framing and omission}
+
+\frm\ \textbf{The nearest prior art is uncited.} Chi.Bio \cite{steel2020chibio} is open
+hardware and software, roughly the same \$300, performs in-situ measurement and continuous
+culture, and predates OpenEvo by six years. The preprint surveys eVOLVER, the Toprak
+morbidostat, and Pioreactor, then frames an unfilled gap while omitting the system that most
+directly occupies it, which makes the gap look larger than it is.
+
+\frm\ \textbf{An unsupported superlative.} ``The most affordable modern continuous growth
+system available'' is not established: Pioreactor ships turnkey at \$329 with no build, and EVE
+builds a triplicate system for \$115--200 \cite{gopalakrishnan2022eve}. \emph{Fix:} qualify to
+``among the lowest-cost \emph{buildable} systems with three-media selection.''
+
+\frm\ \textbf{The success is overstated.} The 9\% salt step did not partially adapt --- growth
+ceased, OD flat-lined, and the run terminated at cycle 152. The adaptation claim rests on a
+single hand-picked glycerol stock at cycle 145, assayed offline. The result is real, but the
+framing should foreground one successful selection step with a failed extension, not a ladder.
+
+\subsection{Methodological limitations}
+
+\mth\ \textbf{$n=1$ forecloses causal attribution.} A single clone from a single population was
+sequenced. Without independent replicate lineages there is no convergence signal, and the
+reported single-nucleotide polymorphisms and two large deletions cannot be attributed to the
+low-salt adaptation. This is the field's central inference requirement --- the Long-Term
+Evolution Experiment runs twelve populations for exactly this reason
+\cite{blount2012cit} --- and it is the most consequential limitation.
+
+\mth\ \textbf{The wrong variant caller.} Structural variants were called with ``Geneious's
+default mapper with low-medium sensitivity for 5 iterations.'' The key finding --- a
+$\sim$110\,kb pHV4 deletion with ``primarily transposon-associated elements'' --- is
+IS-mediated rearrangement, precisely the case a default short-read mapper handles worst.
+\code{breseq} exists for microbial-evolution resequencing including IS mobilisation
+\cite{deatherage2014breseq}, and its author is cited five times in the preprint. \emph{Fix:}
+re-call with \code{breseq} and confirm the pHV4 structure with long reads.
+
+\mth\ \textbf{No systematic archiving.} The preprint cites Barrick et al.\ ---
+``\dots Archiving Populations, and Measuring Fitness\dots'' \cite{barrick2023ltee} --- as
+motivation, then implements neither archiving nor fitness measurement in the automated system.
+Head-to-head ancestor-versus-descendant competition, the gold standard the cited work
+describes, is impossible without a time-series archive.
+
+\section{A like-for-like comparison}
+\label{sec:matrix}
+
+Table~\ref{tab:matrix} places six platforms across fifteen attributes. Purpose codes are
+P1~(characterise), P2~(evolve), P3~(scale-out). Cells reflect each platform as published or
+shipped, not what a motivated builder could add; ``independent use'' means peer-reviewed work
+by groups other than the originators.
+
+\begin{table}[t]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\caption{Six open continuous-culture platforms, attribute by attribute.
+\textcolor{good}{Green} marks a notable strength, \textcolor{bad}{red} a notable weakness,
+\textcolor{warn}{amber} a qualified case.}
+\label{tab:matrix}
+\begin{tabular}{@{}>{\RaggedRight}p{2.4cm} p{1.85cm} p{1.85cm} p{1.85cm} p{1.85cm} p{1.65cm}@{}}
+\toprule
+\textbf{Attribute} & \textbf{Chi.Bio} & \textbf{OpenEvo} & \textbf{Pioreactor} & \textbf{eVOLVER} & \textbf{EVE} \\
+\midrule
+Primary purpose & P1 & P2 & P3 & P3 & P2 \\
+Reference & PLoS Biol '20 & bioRxiv '26 & \textcolor{bad}{none} & Nat Biot '18 & eLife '22 \\
+Parallelism & \textcolor{good}{8 / computer} & \textcolor{bad}{1 chamber} & \textcolor{good}{cluster} & \textcolor{good}{16 vials} & $\ge$3 reps \\
+Working vol. & 12--25 mL & $\sim$20 mL & 15--30 mL & $\sim$40 mL & $\sim$12 mL \\
+OD source & 650 nm laser & 940 nm IR & 900 nm IR & LED/PD & LED/PD \\
+Rich sensing & \textcolor{good}{spectrometer} & \textcolor{bad}{OD only} & plugin & config. & \textcolor{bad}{OD only} \\
+Contact & \textcolor{good}{non-contact} & closed & contact & contact & contact \\
+Sterility & \textcolor{warn}{open air} & \textcolor{good}{closed, autocl.} & autocl. vial & autocl. vial & 3D-print \\
+Selection & 2+2 pumps & \textcolor{good}{3 media+waste} & pumps & \textcolor{good}{config.} & drug line \\
+Control law & \textcolor{good}{PID + MPC} & threshold & Kalman GR & config. & threshold \\
+Archiving & \textcolor{bad}{none} & \textcolor{bad}{manual 1$\times$} & \textcolor{bad}{none} & \textcolor{bad}{none} & \textcolor{bad}{none} \\
+Open HW/SW & \textcolor{good}{both} & \textcolor{good}{both} & \textcolor{good}{both} & \textcolor{good}{both} & \textcolor{good}{both} \\
+Cost/unit & \$300+PCB & $\sim$\$300 & \$329--389 & \textcolor{warn}{$<$\$2k/16} & \textcolor{good}{\$115--200} \\
+Build effort & \textcolor{warn}{PCB fab} & \textcolor{good}{guided} & \textcolor{good}{turnkey} & \textcolor{bad}{machine shop} & moderate \\
+Independent use & ReacSight & \textcolor{warn}{too new} & \textcolor{warn}{community} & \textcolor{good}{ePACE} & teaching \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The Toprak morbidostat \cite{toprak2013morbidostat} is omitted from the table for width but
+belongs to purpose P2: it is the canonical antibiotic-resistance device (working volume
+$\sim$12\,mL), titrating a drug to constant inhibition, widely adapted but a dated bespoke
+build rather than a maintained platform.
+
+Two patterns are worth naming. First, \emph{every platform lacks archiving} --- the single
+most important capability for turning an evolution run into evidence, and a clear gap for the
+whole field. Second, the only platform without a reference paper is Pioreactor, which is also
+the only pure Purpose-3 product; its credibility is commercial and community rather than
+bibliographic, a genuine consideration when an instrument must be cited.
+
+\section{A two-instrument proposal}
+\label{sec:proposal}
+
+Because the three purposes pull hardware in opposite directions, the strongest system is not
+one merged machine but two purpose-built instruments that share a component ecosystem.
+
+\subsection{The best characterisation instrument}
+Start from Chi.Bio; its architecture is already correct. The governing constraint is that
+\emph{non-contact measurement is inviolable} --- every subsystem but the heat plate reads
+through the vessel wall, which is why tubes hot-swap and sterilisation is trivial. Upgrades
+that respect this: dissolved-oxygen and pH optode spots read optically through the wall; a
+dispersive micro-spectrometer replacing eight fixed filter bands with a continuous
+340--850\,nm trace; and a sealed, gas-controlled lid to close Chi.Bio's open-to-atmosphere
+gap. Viable-cell-density by dielectric spectroscopy is explicitly \emph{excluded} here because
+it requires immersed electrodes --- it belongs on the other machine.
+
+\subsection{The best evolution machine}
+Start from OpenEvo; its virtues (cheap, closed, buildable, standalone) fit long unattended
+runs. But its two missing capabilities are not sensors. First, \emph{replicate populations}:
+$n=1$ is a failure of causal inference, so the build is eight cheap chambers under one
+coordinating interface, not one richly instrumented reactor. Second, \emph{archiving}: an
+automated chilled fraction collector on the existing waste line, diverting a programmable
+fraction on a generation-count schedule into a chilled glycerol archive --- the capability
+that makes fitness measurable, and, as far as we can determine, one nobody has built. A
+\emph{batch-excursion} firmware mode --- periodically suspending dilution to run to stationary
+phase --- would additionally recover carrying capacity, a phenotype a turbidostat structurally
+cannot observe, and the very axis on which the OpenEvo cycle-145 population differed. The
+adaptive-laboratory-evolution literature adds a crucial caution: selection is for growth, and
+product formation costs growth, so growth-coupled strain design must precede selection
+\cite{sandberg2019ale}.
+
+\subsection{Why two, not one}
+The sensor modalities sort themselves by contact. Optode DO/pH and dispersive spectrometry are
+optical and non-contact, and land on the characterisation instrument; conductivity, electrical
+resistance tomography, and dielectric viable-cell-density need immersed electrodes and land on
+the evolution machine, whose closed autoclavable vessel welcomes them. Almost no sensor is
+wanted by both and available to only one --- the clearest evidence these are two instruments.
+What they \emph{share} is an ecosystem: a common module footprint, reusable sensor-module
+designs, one firmware framework, and a shared calibration reference. Combine at the platform
+level, not the product level.
+
+\section{Educational role}
+\label{sec:education}
+
+These platforms are teaching instruments as much as research tools, and because one device
+spans microbiology, electronics, firmware, control theory, and data analysis, a single unit
+serves biology, engineering, and computing classes at once. EVE is the education-first
+exemplar: its paper is explicitly titled ``\dots and its educational use,'' it builds for under
+\$200, and it was validated in a real classroom evolving replicate \emph{E.~coli} under
+chloramphenicol \cite{gopalakrishnan2022eve}. Pioreactor maintains an educators portal and
+lesson concepts spanning OD-by-scattering through evolution. OpenEvo's assembly manual doubles
+as a build-it-yourself course and anchored an international hackathon in which students
+remotely controlled a device on another continent. Chi.Bio's own documentation offers its core
+features as a stand-alone teaching platform on which students can observe fluorescence by eye.
+Notably, the teaching materials inherit the research blind spots: archiving, replicate-based
+inference, and carrying capacity are as under-taught as they are under-implemented --- an
+opportunity for a device-agnostic curriculum.
+
+\section{Discussion and limitations}
+\label{sec:discussion}
+
+This is a reader's audit, not peer review, and confidence is uneven. Full texts of Chi.Bio and
+OpenEvo were read directly. Pioreactor specifications, pricing, hardware licensing
+(CC~BY-SA~4.0, verified against the primary \code{LICENSE} file), and the absence of a
+reference paper were confirmed from primary or product sources, as were the headline
+specifications of eVOLVER and EVE and the working volume of the Toprak morbidostat. Component
+datasheets underpinning the proposed evolution machine (spectrometer, spectral sensor, and
+impedance front-ends) were verified in a companion pass. Some adoption specifics and a small
+number of vendor register-level details remain unverified at page level and are flagged as
+such in the repository's \code{SOURCES.md}. No claim here should be budgeted against without
+confirmation at its primary source.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+The open-bioreactor field is best understood as serving three purposes, not one contest.
+Chi.Bio owns characterisation; Pioreactor and eVOLVER own scale-out; and evolution --- the
+purpose with the most devices chasing it --- has no clear champion, because no platform yet
+archives or replicates as the science requires. OpenEvo's real contribution is the cheapest
+buildable selection cycler with a genuinely excellent manual; its preprint's errors of framing
+and analysis are correctable and worth correcting. The best path forward is two purpose-built
+instruments sharing a parts ecosystem, with archiving and replication treated as
+first-class --- and with the educational mission, already strong, extended by a curriculum that
+teaches the methodological rigour the hardware has so far left out.
+
+\vspace{1em}
+\hrule
+\vspace{0.5em}
+{\small\textit{Source data, the full comparison matrix, per-platform pros and cons, a
+datasheet-verification pass, an educational-materials guide, and this document's \LaTeX{}
+sources are maintained at} \url{https://github.com/m9h/biopunk-bioreactor} \textit{under
+CC~BY~4.0. Corrections with citations are welcome.}}
+
+\begin{thebibliography}{10}\small
+\bibitem{steel2020chibio} Steel H, Habgood R, Kelly CL, Papachristodoulou A.
+  In situ characterisation and manipulation of biological systems with Chi.Bio.
+  \textit{PLoS Biology} 18(7):e3000794 (2020).
+\bibitem{cocioba2026openevo} Cocioba SS, Huang P-C, Mallon J, Chan Z, Geremew AW, Bisson A,
+  Kyriakakis P. OpenEvo: An Open-Source Platform for Automated Evolution and Analysis.
+  \textit{bioRxiv} 2026.07.06.735356 (2026). Preprint.
+\bibitem{wong2018evolver} Wong BG, Mancuso CP, Kiriakov S, Bashor CJ, Khalil AS.
+  Precise, automated control of conditions for high-throughput growth of yeast and bacteria
+  with eVOLVER. \textit{Nature Biotechnology} 36(7):614--623 (2018).
+\bibitem{gopalakrishnan2022eve} Gopalakrishnan V, et al., Scott JG.
+  A low-cost, open-source evolutionary bioreactor and its educational use.
+  \textit{eLife} 11:e83067 (2022).
+\bibitem{toprak2013morbidostat} Toprak E, Veres A, Yildiz S, Pedraza JM, Chait R, Paulsson J,
+  Kishony R. Building a morbidostat. \textit{Nature Protocols} 8(3):555--567 (2013).
+\bibitem{pioreactor} Davidson-Pilon C. Pioreactor: an accessible, extensible bioreactor
+  platform. \url{https://pioreactor.com} (2023). CC~BY-SA~4.0 hardware, MIT software; no
+  reference paper.
+\bibitem{barrick2023ltee} Barrick JE, et al. Daily Transfers, Archiving Populations, and
+  Measuring Fitness in the LTEE with \textit{E. coli}. \textit{J Vis Exp} (2023).
+\bibitem{blount2012cit} Blount ZD, Barrick JE, Davidson CJ, Lenski RE. Genomic analysis of a
+  key innovation in an experimental \textit{E. coli} population. \textit{Nature} 489:513--518 (2012).
+\bibitem{sandberg2019ale} Sandberg TE, Salazar MJ, Weng LL, Palsson BO, Feist AM. The emergence
+  of adaptive laboratory evolution\dots \textit{Metabolic Engineering} 56:1--16 (2019).
+\bibitem{deatherage2014breseq} Deatherage DE, Barrick JE. Identification of mutations in
+  laboratory-evolved microbes\dots using breseq. \textit{Methods Mol Biol} 1151:165--188 (2014).
+\bibitem{fribourg2022reacsight} Bertaux F, Aditya C, et al. Enhancing bioreactor arrays\dots
+  with ReacSight. \textit{Nature Communications} 13:3363 (2022).
+\end{thebibliography}
+
+\end{document}
