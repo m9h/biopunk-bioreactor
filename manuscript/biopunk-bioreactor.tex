@@ -62,6 +62,36 @@ confidence level; specifications not verified against a primary source are flagg
 
 \section{Introduction}
 
+Few organisms have shaped biology as thoroughly as brewer's yeast. The controlled fermentation
+of \emph{Saccharomyces cerevisiae} is among the oldest of human technologies --- beer, bread,
+and wine predate writing --- and for most of that history it was practised as a continuous or
+serially propagated production process: a culture kept alive and productive across generations.
+When that ancient craft finally met experimental science it did not merely benefit from biology;
+it repeatedly \emph{founded} it. Pasteur's demonstration in the 1850s that fermentation is the
+work of living yeast rather than spontaneous chemistry established microbiology and dealt the
+decisive blow to spontaneous generation \cite{pasteur1857}. Four decades later, Buchner's finding
+that a cell-free yeast extract still ferments sugar --- that the transformation is catalysed by
+molecules, not a vital force --- founded biochemistry. The glycolytic pathway, the spine of
+central metabolism, was mapped largely through fermentation; the first eukaryotic genome ever
+sequenced was that of \emph{S.~cerevisiae} \cite{goffeau1996}; and the genetics of the cell
+cycle, of protein secretion, and of homologous recombination were worked out in the same yeast
+that raises bread.
+
+Two threads of that history bear directly on this paper. The first is \emph{continuous culture}:
+the mid-twentieth-century formalisation of steady-state growth --- Monod's growth kinetics
+\cite{monod1949} and the chemostat of Novick and Szilard \cite{novick1950} --- turned the
+fermentation vat into a scientific instrument,
+a way to hold a population in a defined, unchanging environment and, crucially, to watch it mutate
+and adapt under sustained selection. The second is \emph{production}: yeast
+remains the workhorse eukaryotic cell factory, from industrial ethanol to the first recombinant
+vaccine, and engineering better production strains is now a central problem of biotechnology.
+Continuous culture and directed evolution are where these two threads meet --- an evolving
+population, held in continuous culture, pushed toward a phenotype it did not begin with. The
+open-source bioreactors reviewed here are the latest and cheapest instruments for exactly that
+meeting, democratising a program that once demanded Pasteur's laboratory or an industrial
+fermentation hall. It is fitting that OpenEvo's own optogenetic demonstration, and much of the
+continuous-evolution work discussed below, is again carried out in yeast.
+
 The precision of an in-vivo biology experiment depends on isolating the subsystem of interest
 from the drift of a growing culture's environment. Continuous-culture devices address this by
 diluting a culture during growth: a turbidostat holds optical density (OD) at a set-point; a
@@ -477,6 +507,14 @@ CC~BY~4.0. Corrections with citations are welcome.}}
   evolution of biomolecules. \textit{Nature} 472:499--503 (2011).
 \bibitem{huang2022epace} Huang TP, Heins ZJ, et al. High-throughput continuous evolution of
   compact Cas9 variants (eVOLVER-hosted PACE). \textit{Nature Biotechnology} 40:1918--1930 (2022).
+\bibitem{pasteur1857} Pasteur L. M\'emoire sur la fermentation alcoolique.
+  \textit{Comptes Rendus de l'Acad\'emie des Sciences} 45:1032--1036 (1857).
+\bibitem{novick1950} Novick A, Szilard L. Description of the chemostat.
+  \textit{Science} 112:715--716 (1950).
+\bibitem{monod1949} Monod J. The growth of bacterial cultures.
+  \textit{Annual Review of Microbiology} 3:371--394 (1949).
+\bibitem{goffeau1996} Goffeau A, Barrell BG, Bussey H, et al. Life with 6000 genes.
+  \textit{Science} 274:546--567 (1996).
 \end{thebibliography}
 
 \end{document}
