@@ -220,6 +220,44 @@
   \end{block}
 \end{frame}
 
+\begin{frame}{Biopunk build I --- \textcolor{accent}{proto}: an updated Chi.Bio}
+  \textbf{Chassis: Chi.Bio.} \emph{Design law: everything through the wall --- no immersed electrodes.}
+  \begin{itemize}\small
+    \item \textbf{graft} OpenEvo's closed, gas-capable vessel --- fixes the open-atmosphere gap
+    \item \textbf{add} DO $+$ pH optodes (read through the wall) $+$ Hamamatsu C12880MA dispersive spectrometer
+    \item \textbf{port} to Raspberry Pi (all-I\textsuperscript{2}C behind the \texttt{0x74} mux --- a respin, not a rewrite)
+  \end{itemize}
+  \vspace{0.2em}
+  \begin{center}\small
+  Pi port $\to$ gas vessel $\to$ optodes $\to$ spectrometer $\to$
+  \ac{8 richly-instrumented, gas-controlled, closed reactors on one Pi.}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Biopunk build II --- \textcolor{violet}{devo}: evolution machine $+$ evidence}
+  \textbf{Chassis: Pioreactor cluster} (or an OpenEvo base for teaching / shoestring). \\
+  The champion-maker is the \emph{evidence apparatus} --- chassis-agnostic:
+  \begin{itemize}\small
+    \item \textbf{replicate fleet} ($\ge$8 lineages) $\to$ convergence
+    \item \textbf{automated chilled archiver} --- \ac{the field's missing freezer; build it first}
+    \item WGS $\to$ \texttt{breseq} $\to$ shared causal mutations; revive-ancestor fitness assay
+    \item $+$ OpenEvo 3-media fluidics $+$ closed vessel; conductivity; batch-excursion
+  \end{itemize}
+  \vspace{0.2em}
+  \begin{center}\small Prove it at n$\,\ge\,$8 with an archived record $=$ the \texttt{devo} champion $\to$ then the AI/CRISPR autopilot.\end{center}
+\end{frame}
+
+\begin{frame}{Biopunk build III --- \textcolor{warn}{bior}: Pioreactor $+$ add-ons}
+  \textbf{Chassis: buy Pioreactor.} For \texttt{bior}, turnkey reliability \emph{is} the product --- mostly configuration, not fabrication.
+  \begin{itemize}\small
+    \item \textbf{add-on} the shared DO/pH optode module via the plugin path (same footprint --- no new board)
+    \item \textbf{add-on} eVOLVER Smart Sleeves \emph{only} on the vials that truly need arbitrary per-vial control
+    \item stand on its monthly-maintained software $+$ leader/worker cluster
+  \end{itemize}
+  \vspace{0.2em}
+  \begin{center}\small Guardrail: don't over-graft --- the value of \texttt{bior} is that you \ac{didn't build it}.\end{center}
+\end{frame}
+
 \begin{frame}{These are teaching instruments too}
   \begin{itemize}
     \item \ac{EVE} --- eLife paper is literally ``\dots and its educational use''; $<$\$200; validated
