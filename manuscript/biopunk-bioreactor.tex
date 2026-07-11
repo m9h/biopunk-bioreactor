@@ -115,9 +115,10 @@ Section~\ref{sec:lineages} the founding literature and a landmark demonstration 
 Section~\ref{sec:corrections} corrects specific errors in the OpenEvo preprint, fairly and
 with proposed fixes. Section~\ref{sec:matrix} compares six platforms attribute by attribute,
 and Section~\ref{sec:proposal} argues for building two purpose-built instruments rather than
-one compromise machine. Section~\ref{sec:education} documents the educational materials these
-platforms already serve, and Section~\ref{sec:aidirected} sets out the goal the whole programme
-points toward --- AI-directed continuous evolution, motivated by OpenEvo's own pitch. We are
+one compromise machine, and Section~\ref{sec:builds} gives the three concrete builds it implies
+and the benefit each delivers. Section~\ref{sec:education} documents the educational materials
+these platforms already serve, and Section~\ref{sec:aidirected} sets out the goal the whole
+programme points toward --- AI-directed continuous evolution, motivated by OpenEvo's own pitch. We are
 explicit throughout about what was verified against a primary source and what was not.
 
 \section{Three purposes, not one}
@@ -500,6 +501,57 @@ wanted by both and available to only one --- the clearest evidence these are two
 What they \emph{share} is an ecosystem: a common module footprint, reusable sensor-module
 designs, one firmware framework, and a shared calibration reference. Combine at the platform
 level, not the product level.
+
+\section{Three concrete builds and their benefits}
+\label{sec:builds}
+
+The proposal above is a design argument; here are the three buildable instruments it implies ---
+the biopunk variants of each champion --- stated with the benefit each delivers over its base
+platform. The milestoned engineering detail is in the repository
+(\code{docs/build-plans.md} and \code{docs/best-hybrids.md}); what follows is what each variant
+\emph{buys} you.
+
+\textbf{The \texttt{proto} variant --- an updated Chi.Bio.} Keep Chi.Bio's non-contact optical core
+and MPC, graft OpenEvo's closed, gas-capable vessel, add dissolved-oxygen and pH optodes read
+through the wall, add a dispersive C12880MA spectrometer alongside the AS7341, and port the compute
+to a Raspberry Pi. \emph{Benefit:} it closes Chi.Bio's one real weakness --- the open-to-atmosphere
+tube --- turning gas into a controlled variable, and it adds the two physiological readouts (DO,
+pH) and the continuous spectrum that let a user follow a culture's metabolic state and resolve
+overlapping reporters rather than infer them. The result is the most complete non-contact in-situ
+characterisation instrument in open hardware: eight gas-controlled, richly-instrumented, closed
+reactors on one computer, with no loss of the hot-swappable, contamination-resistant discipline
+that made Chi.Bio worth building on.
+
+\textbf{The \texttt{devo} variant --- the evolution machine with an evidence apparatus.} Build on a
+Pioreactor cluster (or an OpenEvo base for teaching and shoestring use), graft OpenEvo's three-media
+fluidics and closed vessel, and add the evidence apparatus: a replicate manifold of at least eight
+lineages, an automated chilled archiver on the waste line, a \code{breseq} variant-calling pipeline,
+and an automated revive-ancestor fitness assay. \emph{Benefit:} this is the variant that fills the
+empty \texttt{devo} slot. Replicates convert an anecdote into causal evidence through convergence;
+the archiver --- the field's missing freezer, and the one genuinely new module --- makes
+ancestor-versus-descendant fitness measurable rather than merely asserted; \code{breseq} calls the
+insertion-sequence structural variants a default mapper misses; and a batch-excursion mode recovers
+carrying-capacity phenotypes a turbidostat structurally cannot see. Together they make it the first
+open platform that produces \emph{publishable} evolution evidence --- and, as
+Section~\ref{sec:aidirected} argues, the substrate on which AI-directed evolution can finally be
+built.
+
+\textbf{The \texttt{bior} variant --- Pioreactor plus add-ons.} Buy a Pioreactor cluster and, rather
+than fabricate, add capability through its plugin path: the same optode DO/pH module the
+\texttt{proto} variant uses (identical footprint, no new board), and eVOLVER Smart Sleeves on only
+those vials that genuinely need arbitrary per-vial control. \emph{Benefit:} reliable parallel
+cultivation available now, with minimal build effort and a maintained software path, optionally
+lifted to physiological sensing or per-vial configurability exactly where a study needs it and
+nowhere else. The value of the \texttt{bior} variant is precisely that most of it is bought, not
+built.
+
+The benefit that ties the three together is the shared ecosystem made concrete. Because all three
+stand on the same Raspberry-Pi compute family, the same module footprint, and one calibration
+reference, a laboratory that builds one variant has most of what the next requires: the optode
+module designed for \texttt{proto} drops onto the \texttt{bior} fleet unchanged, and the calibration
+reference makes every instrument's optical-density reading agree before any of them fork. The
+variants are not three separate products but three configurations of one open platform --- which is
+the whole payoff of refusing to build a single machine that tries to do everything.
 
 \section{Educational role}
 \label{sec:education}
