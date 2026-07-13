@@ -1,0 +1,208 @@
+<title>The Oxidant Morbidostat</title>
+<style>
+  :root {
+    --ground: #ECEDF0;
+    --surface: #F7F8FA;
+    --surface-2: #E0E2E7;
+    --ink: #15181D;
+    --ink-muted: #5A616C;
+    --ink-faint: #878E99;
+    --rule: #CBCFD6;
+    --accent: #3B5A8C;
+    --accent-soft: #DAE1EE;
+    --good: #2E7350;
+    --good-soft: #D5E7DC;
+    --bad: #9C332E;
+    --bad-soft: #EFD9D7;
+    --warn: #8F6210;
+    --warn-soft: #EEE2C8;
+
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --measure: 68ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+      --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+      --accent: #7FA3D6; --accent-soft: #17293F;
+      --good: #6DB78B; --good-soft: #123326;
+      --bad: #E08880; --bad-soft: #351A18;
+      --warn: #D3A24C; --warn-soft: #33280F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1216; --surface: #161A20; --surface-2: #1E232B;
+    --ink: #E3E6EA; --ink-muted: #98A0AB; --ink-faint: #69707B; --rule: #2A313A;
+    --accent: #7FA3D6; --accent-soft: #17293F;
+    --good: #6DB78B; --good-soft: #123326;
+    --bad: #E08880; --bad-soft: #351A18;
+    --warn: #D3A24C; --warn-soft: #33280F;
+  }
+  :root[data-theme="light"] {
+    --ground: #ECEDF0; --surface: #F7F8FA; --surface-2: #E0E2E7;
+    --ink: #15181D; --ink-muted: #5A616C; --ink-faint: #878E99; --rule: #CBCFD6;
+    --accent: #3B5A8C; --accent-soft: #DAE1EE;
+    --good: #2E7350; --good-soft: #D5E7DC;
+    --bad: #9C332E; --bad-soft: #EFD9D7;
+    --warn: #8F6210; --warn-soft: #EEE2C8;
+  }
+
+  body { background: var(--ground); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 82ch; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; display: flex; flex-direction: column; gap: 3rem; }
+
+  .masthead { display: flex; flex-direction: column; gap: 1.1rem; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+  .standfirst { font-size: 1.15rem; color: var(--ink-muted); max-width: var(--measure); text-wrap: pretty; }
+  .meta { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 0; text-wrap: balance; display: flex; align-items: baseline; gap: 0.7rem; }
+  h2 .num { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); font-weight: 600; flex: none; }
+  h3 { font-size: 1.02rem; font-weight: 700; margin: 0; letter-spacing: -0.005em; }
+  p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+  code { font-family: var(--mono); font-size: 0.85em; background: var(--surface-2); padding: 0.08em 0.36em; border-radius: 3px; }
+  ul { margin: 0; padding-left: 1.1rem; max-width: var(--measure); display: flex; flex-direction: column; gap: 0.5rem; }
+  li::marker { color: var(--ink-faint); }
+
+  /* callout */
+  .callout { background: var(--surface); border-left: 3px solid var(--accent); padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .callout .eyebrow { color: var(--accent); }
+  .callout p { max-width: none; }
+  .callout.good { border-left-color: var(--good); }
+  .callout.good .eyebrow { color: var(--good); }
+
+  /* claim cards */
+  .claim { border: 1px solid var(--rule); background: var(--surface); border-left-width: 4px; border-left-color: var(--accent); padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .claim .label { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--accent); display: flex; gap: 0.6rem; align-items: center; }
+  .claim .gap { font-family: var(--mono); font-size: 0.6rem; padding: 0.15em 0.5em; border-radius: 2px; letter-spacing: 0.06em; background: var(--bad-soft); color: var(--bad); }
+  .claim p { max-width: none; font-size: 0.96rem; }
+
+  /* pullquote */
+  .pull { border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 1.4rem 0; }
+  .pull p { max-width: none; font-size: 1.2rem; line-height: 1.4; text-wrap: pretty; }
+
+  /* tables */
+  .scroller { overflow-x: auto; border: 1px solid var(--rule); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.8rem; min-width: 48rem; }
+  th { text-align: left; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--ink); white-space: nowrap; vertical-align: bottom; }
+  td { padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.fn { font-weight: 700; color: var(--accent); white-space: nowrap; }
+  td.src { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-muted); }
+
+  footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; font-size: 0.78rem; color: var(--ink-muted); display: flex; flex-direction: column; gap: 0.7rem; }
+  footer p { max-width: none; font-size: 0.78rem; }
+  .caveat { font-family: var(--mono); font-size: 0.7rem; line-height: 1.55; color: var(--ink-faint); }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Experiment Proposal · a devo application</div>
+    <h1>The Oxidant Morbidostat</h1>
+    <p class="standfirst">Run the evolution machine as an H₂O₂-morbidostat and answer a question nobody has asked: does chemical harmful-algal-bloom control select for resistant cyanobacteria?</p>
+    <div class="meta">
+      <span>2026-07-13</span>
+      <span>Organism: Synechocystis / Microcystis (non-toxigenic)</span>
+      <span>Home: US HAB-Control Technologies Incubator</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="callout">
+      <div class="eyebrow">The thesis</div>
+      <p>Every chemical used to suppress a bloom is a selection pressure. The question a lake manager should ask before committing to a treatment program — <em>does the target adapt to it?</em> — is answered for copper and <strong>unasked for hydrogen peroxide</strong>, the leading selective alternative. This turns the evolution machine (<a href="two-instruments.html">two-instruments</a> Part 2, <a href="best-hybrids.html">best-hybrids</a>) into an H₂O₂-morbidostat and runs the missing experiment: directed evolution of a bloom cyanobacterium under a ramped oxidant, with an automated frozen fossil record and a DuckBot assay layer. It is a <strong>devo</strong> experiment — the one purpose the field has no champion for, because no platform archives or replicates as the science requires. Here, that gap <em>is</em> the experiment.</p>
+      <p><strong>Motivating context.</strong> Lake Wylie (Catawba River, NC/SC) runs an active chelated-copper algaecide program against benthic <em>Lyngbya</em> (<em>Microseira wollei</em>), and its coves have thrown toxin-producing planktonic blooms — microcystin at 8.88 µg/L, above SC's 8 µg/L recreational standard (<a href="https://www.des.sc.gov/news/dhec-issues-recreational-water-advisory-cove-lake-wylie-due-harmful-algae">SC DES advisory</a>). The natural home is the <strong>US HAB-Control Technologies Incubator</strong> (NOAA / UMCES-IMET / Mote), for whom "does this control technology select for resistance?" is a first-order question. <a href="https://imet.usmd.edu/ushabcti">imet.usmd.edu/ushabcti</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">01</span> Three stacked novelty claims</h2>
+    <p>The scoping literature is unusually clean: three separate gaps converge on one experiment.</p>
+
+    <div class="claim">
+      <div class="label"><span>Claim 1 · H₂O₂ resistance evolution</span><span class="gap">Never tested</span></div>
+      <h3>Nobody has tested whether repeated H₂O₂ dosing selects for resistant cyanobacteria.</h3>
+      <p>The copper contrast makes the gap sharp: heritable copper resistance in <em>Microcystis</em> by pre-selective spontaneous mutation is <em>proven</em> by Luria–Delbrück fluctuation analysis (García-Villada et al. 2004, <a href="https://doi.org/10.1016/j.watres.2004.01.036">10.1016/j.watres.2004.01.036</a>; ceiling, Rouco et al. 2014, <a href="https://doi.org/10.1007/s00442-014-2963-1">10.1007/s00442-014-2963-1</a>). For H₂O₂, every account of reduced field efficacy invokes <em>non-heritable</em> mechanisms — pre-existing strain variation (Schuurmans 2018, <a href="https://doi.org/10.1016/j.hal.2018.07.008">10.1016/j.hal.2018.07.008</a>), plasticity of peroxiredoxin defenses (Sandrini 2020, <a href="https://doi.org/10.1016/j.hal.2020.101916">10.1016/j.hal.2020.101916</a>), and <strong>community-level</strong> bacterial detox (most <em>Microcystis</em> lack catalase; in-situ <code>katG</code> is bacterial — Smith 2022, <a href="https://doi.org/10.1128/aem.02544-21">10.1128/aem.02544-21</a>; Weenink 2021, <a href="https://doi.org/10.1111/1462-2920.15429">10.1111/1462-2920.15429</a>). The method exists but was never pointed at H₂O₂: the López-Rodas / Costas ratchet on <em>Microcystis</em> for glyphosate (Costas 2007, <a href="https://doi.org/10.1007/s10682-006-9134-8">10.1007/s10682-006-9134-8</a>).</p>
+    </div>
+
+    <div class="claim">
+      <div class="label"><span>Claim 2 · Automated phototroph ALE</span><span class="gap">Undemonstrated</span></div>
+      <h3>No automated continuous-culture / morbidostat ALE has ever been run on a phototroph.</h3>
+      <p>The morbidostat (Toprak 2012, <a href="https://doi.org/10.1038/ng.1034">10.1038/ng.1034</a>; low-cost build, Liu 2016, <a href="https://doi.org/10.3791/54426">10.3791/54426</a>), eVOLVER (<a href="https://doi.org/10.1038/nbt.4151">10.1038/nbt.4151</a>), and Chi.Bio (<a href="https://doi.org/10.1371/journal.pbio.3000794">10.1371/journal.pbio.3000794</a>) were all demonstrated on <strong>heterotrophs</strong>. The microalgal-ALE review states algal evolution is done by <strong>manual serial transfer</strong>, the automated paradigm "not adopted" (Zhang 2021, <a href="https://doi.org/10.3389/fmicb.2021.737248">10.3389/fmicb.2021.737248</a>). The nearest prior art is <strong>concept-only</strong> — the "Photoinhibistat," a control proposal with no evolutionary run (Mairet &amp; Bernard 2016, <a href="https://doi.org/10.1016/j.ifacol.2016.07.344">10.1016/j.ifacol.2016.07.344</a>). A morbidostat ramping a <em>chemical</em> stressor on a phototroph, with sequencing, would be a first.</p>
+    </div>
+
+    <div class="claim">
+      <div class="label"><span>Claim 3 · Automated phototroph fossil record</span><span class="gap">White space</span></div>
+      <h3>Automated cryo-archiving of a phototroph fossil record has never been assembled.</h3>
+      <p>The <em>design</em> is established — replicate lineages plus a revived-ancestor common-garden competition (Collins &amp; Bell 2004, <a href="https://doi.org/10.1038/nature02945">10.1038/nature02945</a>; Lohbeck 2012, <a href="https://doi.org/10.1038/ngeo1441">10.1038/ngeo1441</a>), the descendant of the LTEE frozen record (Lenski 1991, <a href="https://doi.org/10.1086/285289">10.1086/285289</a>). But the <em>engineering</em> — automated fraction-collection + cryo-archiving in an algal ALE loop — has never been built; the one representative automated phototroph ALE (Barten 2022, <a href="https://doi.org/10.1002/biot.202100659">10.1002/biot.202100659</a>) kept archiving <strong>manual and offline</strong>. This is exactly the automated chilled fraction collector proposed as the evolution machine's one new build.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span> The machine — every piece already specified in this repo</h2>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Function</th><th>Component</th><th>Source in this repo</th></tr></thead>
+        <tbody>
+          <tr><td class="fn">Selection</td><td>Evolution machine as an <strong>H₂O₂-morbidostat</strong> — oxidant titrated to hold constant growth inhibition, ramped over generations (Toprak logic)</td><td class="src">best-hybrids devo machine (Pioreactor chassis + closed vessel)</td></tr>
+          <tr><td class="fn">Replication</td><td>8 parallel chambers under one interface — to separate selection from drift</td><td class="src">the devo design law: cheap × many</td></tr>
+          <tr><td class="fn">Monitoring</td><td><strong>Near-IR OD (850 nm)</strong>, <em>not</em> Chi.Bio's 650 nm — cells are pigmented (allophycocyanin ~650, phycocyanin ~620, chl-a ~680)</td><td class="src">datasheet-verification, the phototroph OD-wavelength result</td></tr>
+          <tr><td class="fn">Fossil record</td><td><strong>Automated chilled fraction collector</strong> on the waste line — a programmed fraction, on a generation schedule, into a glycerol archive</td><td class="src">best-hybrids, the one new build</td></tr>
+          <tr><td class="fn">Assay engine</td><td><strong>DuckBot / Jubilee</strong> — OECD-221-by-accident machinery (plates, top-down imaging, dose series) repurposed for automated H₂O₂ dose-response on archived timepoints; PlanktoScope for colony imaging</td><td class="src">jubilee-tandem; DuckBot, <a href="https://doi.org/10.1371/journal.pone.0296717">10.1371/journal.pone.0296717</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The experiment exercises the <strong>devo</strong> machine, the archiver, the near-IR monitoring fix, and the DuckBot assay layer at once — the whole synthesis, run for evidence.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span> Design and rigor</h2>
+    <ul>
+      <li><strong>Organism (biosafety-first).</strong> Selection on the <strong>non-toxigenic</strong> <em>Synechocystis</em> sp. PCC 6803 or the <em>Microcystis aeruginosa</em> PCC 7806 <strong>ΔmcyB</strong> mutant (Dittmann 1997, <a href="https://doi.org/10.1046/j.1365-2958.1997.6131982.x">10.1046/j.1365-2958.1997.6131982.x</a>). <em>Microcystis</em> is BSL-1; microcystin is <strong>not</strong> a federal Select Agent (saxitoxin is). Escalate to a toxigenic strain only under permit and containment.</li>
+      <li><strong>The morbidostat law.</strong> A feedback loop reads growth from near-IR OD each cycle and doses H₂O₂ to hold inhibition at a set fraction of the untreated rate — ramping the effective dose upward exactly as, and only as, the population adapts. Selectivity holds <strong>below ~5 mg/L</strong> and erodes at high biomass (Weenink 2015, <a href="https://doi.org/10.3389/fmicb.2015.00714">10.3389/fmicb.2015.00714</a>).</li>
+      <li><strong>Separate pre-existing from evolved — the load-bearing control.</strong> Interleave <strong>Luria–Delbrück fluctuation analysis</strong> so a tolerance rise is attributed to selection of standing variants versus induced plasticity. Without it the result is not interpretable — the exact conflation the H₂O₂ literature has never resolved.</li>
+      <li><strong>Revive-and-compete.</strong> From the automated archive, revive ancestor and descendant and run a common-garden H₂O₂ dose-response (the DuckBot assay) to <em>quantify</em> the resistance gain — the Lohbeck design, made automatic.</li>
+      <li><strong>Read the genome.</strong> Whole-genome resequencing of endpoint clones and convergent timepoints; look for oxidative-stress loci (<code>katG</code>/catalase, peroxiredoxin <code>prx</code>, thioredoxin, <code>perR</code>/<code>fur</code>). Convergence across replicate lineages is the causal signal.</li>
+      <li><strong>Watch the toxin.</strong> Any H₂O₂ dose-response releases intracellular microcystin on lysis; measure <em>dissolved</em> toxin, not just cell death, on any toxigenic run.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span> Prior art to differentiate against</h2>
+    <ul>
+      <li><strong>Photoinhibistat</strong> (Mairet &amp; Bernard 2016) — morbidostat logic with <em>light</em>, concept only, no evolution or genomics. The clearest thing to cite and differ from.</li>
+      <li><strong>Copper resistance selection</strong> (García-Villada 2004) — the method template <em>and</em> the proof the concern is real; H₂O₂ is the untested counterpart.</li>
+      <li><strong>Cyanobacterial ALE is mature</strong> — thermotolerance (Tillich 2014, <a href="https://doi.org/10.1186/1472-6750-14-66">10.1186/1472-6750-14-66</a>, the <em>one</em> precedent in an automated turbidostat-mode PBR), high light (Yoshikawa 2021, <a href="https://doi.org/10.1038/s42003-021-01875-y">10.1038/s42003-021-01875-y</a>), cadmium (Xu 2018, <a href="https://doi.org/10.1186/s13068-018-1205-x">10.1186/s13068-018-1205-x</a>). The biology is de-risked; the automation and the stressor are new.</li>
+      <li><strong>Barten 2022</strong> — automated <em>Picochlorum</em> turbidostat with <em>manual</em> archiving; the automated fossil record is what this adds.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span> What this is <em>not</em>, and the honest limits</h2>
+    <ul>
+      <li><strong>Duckweed is not the devo arm.</strong> <em>Lemna</em> reproduces clonally (~3–4 day doubling, rare sex), so the duckweed work is <strong>accession screening / clonal selection</strong>, not mutation-accumulation ALE. DuckBot's value there is <em>phenotyping and dose-response assays</em>, not evolving the organism.</li>
+      <li><strong>ALPHA correction.</strong> The Sartor "heat + ammonia tolerance" selection paper sometimes assumed in the duckweed line <strong>does not exist</strong>: ALPHA (Robinson 2025, <em>Plant Direct</em>, <a href="https://doi.org/10.1002/pld3.70048">10.1002/pld3.70048</a>) is a <strong>salt-tolerance phenotyping</strong> platform; heat/ammonia are breeding <em>goals</em> in press coverage only.</li>
+      <li><strong>Interpretability ceiling.</strong> A community-lab result is a <em>screen</em>, not a regulatory arbiter: lab selection can over- or under-state field evolvability, and single-strain runs miss the community detox that dominates the field. The claim is "resistance is/isn't readily selectable under controlled oxidant ramping" — decision-relevant precisely because it is currently unknown either way.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="pull">
+      <p>If H₂O₂ resistance evolves readily, a peroxide bloom-control program is a treadmill and the money should go to nutrient control; if it does not, H₂O₂ is a more durable tool than copper. Either answer is a first-of-kind result — produced by the one machine the field has been missing: a <strong>devo</strong> instrument that archives and replicates.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Companion documents: <a href="best-hybrids.html">Best Hybrids</a> · <a href="two-instruments.html">Two Instruments, One Ecosystem</a> · <a href="datasheet-verification.html">Datasheet Verification Pass</a> · <a href="chibio-upgrades.html">Chi.Bio Modernisation</a>.</p>
+    <p class="caveat">Verified against Crossref-confirmed DOIs (see <a href="../SOURCES.md">SOURCES.md</a>). Deliberately excluded from the argument (search-only, not page-verified): Hennessey 2025, Piel 2021, and the 2026 Synechocystis fluctuating-light ALE. Lake Wylie microcystin figure per SC DES advisory. A design note — a screen, not a regulatory arbiter; confirm any spec before budgeting.</p>
+  </footer>
+
+</div>
