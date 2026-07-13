@@ -116,6 +116,43 @@ GitHub REST API (repos, releases, commits since 2025-07-01):
   **0 commits** since 2025-07. Server repo effectively dormant (`FYNCH-BIO/dpu` pushed 2025-08).
 - **EVE** `vishhvaan/eve-pi` — functional; last release **v1.0 (2019)**.
 
+## devo experiment — bloom-control resistance evolution (for `docs/oxidant-morbidostat.md`)
+
+Verified 2026-07-13 (Crossref-confirmed DOIs) behind the oxidant-morbidostat proposal:
+
+- **Copper resistance selection (the proven contrast)** — García-Villada et al., "Occurrence of
+  copper-resistant mutants in Microcystis," *Water Research* (2004), doi:10.1016/j.watres.2004.01.036;
+  tolerance ceiling, Rouco et al., *Oecologia* (2014), doi:10.1007/s00442-014-2963-1.
+- **H₂O₂ efficacy is non-heritable (the gap)** — Schuurmans et al., *Harmful Algae* (2018),
+  doi:10.1016/j.hal.2018.07.008; Sandrini et al., *Harmful Algae* (2020), doi:10.1016/j.hal.2020.101916;
+  Smith et al., *AEM* (2022), doi:10.1128/aem.02544-21; Weenink et al., *Environ. Microbiol.* (2021),
+  doi:10.1111/1462-2920.15429; whole-lake trial, Matthijs et al., *Water Research* (2012),
+  doi:10.1016/j.watres.2011.11.016; selectivity window, Weenink et al., *Front. Microbiol.* (2015),
+  doi:10.3389/fmicb.2015.00714.
+- **Fluctuation-analysis / ratchet method template** — Costas et al. (Microcystis glyphosate),
+  *Evol. Ecol.* (2007), doi:10.1007/s10682-006-9134-8.
+- **Morbidostat / automated ALE platforms (heterotroph-only)** — Toprak et al., *Nat. Genet.* (2012),
+  doi:10.1038/ng.1034; Liu et al., *JoVE* (2016), doi:10.3791/54426; eVOLVER, doi:10.1038/nbt.4151;
+  Chi.Bio, doi:10.1371/journal.pbio.3000794. Algal ALE is manual: Zhang et al., *Front. Microbiol.*
+  (2021), doi:10.3389/fmicb.2021.737248. Photoinhibistat (concept), Mairet & Bernard, *IFAC-PapersOnLine*
+  (2016), doi:10.1016/j.ifacol.2016.07.344.
+- **Cyanobacterial ALE is mature** — Tillich et al. (thermotolerance, automated PBR), *BMC Biotechnol.*
+  (2014), doi:10.1186/1472-6750-14-66; Yoshikawa et al. (high light), doi:10.1038/s42003-021-01875-y;
+  Xu et al. (cadmium), doi:10.1186/s13068-018-1205-x.
+- **Fossil-record / revive-and-compete design** — Lenski et al., *Am. Nat.* (1991), doi:10.1086/285289;
+  Collins & Bell (Chlamydomonas), *Nature* (2004), doi:10.1038/nature02945; Lohbeck et al. (E. huxleyi),
+  *Nat. Geosci.* (2012), doi:10.1038/ngeo1441; Barten et al. (Picochlorum turbidostat, manual archiving),
+  *Biotechnol. J.* (2022), doi:10.1002/biot.202100659.
+- **DuckBot** — Subbaraman et al., *PLOS ONE* (2024), doi:10.1371/journal.pone.0296717.
+  **ALPHA** (salt-tolerance phenotyping, NOT heat/ammonia) — Robinson et al., *Plant Direct* (2025),
+  doi:10.1002/pld3.70048. **ΔmcyB pair** — Dittmann et al., *Mol. Microbiol.* (1997),
+  doi:10.1046/j.1365-2958.1997.6131982.x.
+- **Home / funder** — US HAB-Control Technologies Incubator (NOAA / UMCES-IMET / Mote),
+  https://imet.usmd.edu/ushabcti.
+- **Not re-verified at page level** (search-only; excluded from the argument): Hennessey 2025
+  (10.1016/j.envpol.2025.125691), Piel 2021 (10.3390/microorganisms9071495), the 2026 Synechocystis
+  fluctuating-light ALE (10.1038/s41467-026-72689-x).
+
 ## Confidence key
 
 - **Read in full this session:** Chi.Bio, OpenEvo.
